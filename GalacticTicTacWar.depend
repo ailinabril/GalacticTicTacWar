@@ -12,3 +12,19 @@
 
 1777133720 c:\users\bruno\desktop\galactictictacwar\jugador.h
 
+1777144616 source:c:\users\usuario\desktop\galactic\jugador.cpp
+	<iostream>
+	<cstring>
+	"Jugador.h"
+
+1777135933 c:\users\usuario\desktop\galactic\jugador.h
+
+1777128190 source:c:\users\usuario\desktop\galactic\main.cpp
+	<iostream>
+
+1777144616 source:c:\users\usuario\desktop\galactic\fecha.cpp
+	<iostream>
+	"Fecha.h"
+
+1777135933 c:\users\usuario\desktop\galactic\fecha.h
+
