@@ -19,7 +19,7 @@ Partida::Partida(int idPartida, int idJugador1, int idJugador2, int ganador, Fec
     _idJugador2 = idJugador2;
     _ganador = ganador;
     _fecha = fecha;
-    _eliminado = false;
+    _eliminado = false; //es mentira no elimina
 }
 
 void Partida::Cargar(){
