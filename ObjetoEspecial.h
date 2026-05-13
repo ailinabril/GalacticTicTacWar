@@ -9,7 +9,7 @@ protected:
 public:
     //constructores
     ObjetoEspecial();
-    ObjetoEspecial(int costo);
+    ObjetoEspecial(int costo, const char* nombre);
 
     //getters
     int getCostoEnergia();
