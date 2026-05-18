@@ -17,5 +17,7 @@ bool Torre::aplicarEfecto(Tablero &tablero, int fila, int columna, char simboloJ
 
     tablero.setCasillero(fila, columna, '#'); ///bloquea la casille y elimina ficha enemiga en caso de haber///
 
+    tablero.setTurnosBloqueados(fila, columna, 2);
+
     return true;
 }
