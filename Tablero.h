@@ -1,8 +1,7 @@
 
 #pragma once
 
-class Tablero
-{
+class Tablero{
 private:
     //tablero principal
     char _tablero[3][3]; //matriz para representar el tablero de juego

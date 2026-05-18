@@ -1,8 +1,7 @@
 #pragma once
 #include "ObjetoEspecial.h"
 
-class Torre : public ObjetoEspecial
-{
+class Torre : public ObjetoEspecial{
 public:
     //constructores
     Torre(); //constructor por defecto

@@ -1,8 +1,7 @@
 #pragma once
 #include "Tablero.h"
 
-class ObjetoEspecial
-{
+class ObjetoEspecial{
 protected:
     int _costoEnergia; //costo de energia para colocar el objeto especial
     char _nombre[20]; //nombre del objeto especial

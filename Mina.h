@@ -1,8 +1,7 @@
 #pragma once
 #include "ObjetoEspecial.h"
 
-class Mina : public ObjetoEspecial
-{
+class Mina : public ObjetoEspecial{
 public:
     //constructores
     Mina(); //constructor por defecto

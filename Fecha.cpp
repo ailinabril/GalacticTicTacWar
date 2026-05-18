@@ -4,21 +4,30 @@ using namespace std;
 
 //constructor por defecto
 //asignamos una fecha por si no se carga una fecha valida
+<<<<<<< Updated upstream
 Fecha::Fecha()
 {
+=======
+Fecha::Fecha(){
+>>>>>>> Stashed changes
     _dia = 2;
     _mes = 9;
     _anio = 2003;
 }
 
 //constructor con parametros
+<<<<<<< Updated upstream
 Fecha::Fecha(int dia, int mes, int anio)
 {
+=======
+Fecha::Fecha(int dia, int mes, int anio){
+>>>>>>> Stashed changes
     _dia = dia;
     _mes = mes;
     _anio = anio;
 }
 
+<<<<<<< Updated upstream
 //setters
 int Fecha::getDia()
 {
@@ -32,10 +41,23 @@ int Fecha::getMes()
 
 int Fecha::getAnio()
 {
+=======
+//getters
+int Fecha::getDia(){
+    return _dia;
+}
+
+int Fecha::getMes(){
+    return _mes;
+}
+
+int Fecha::getAnio(){
+>>>>>>> Stashed changes
     return _anio;
 }
 
 //getters
+<<<<<<< Updated upstream
 void Fecha::setDia(int dia)
 {
     _dia = dia;
@@ -48,12 +70,27 @@ void Fecha::setMes(int mes)
 
 void Fecha::setAnio(int anio)
 {
+=======
+void Fecha::setDia(int dia){
+    _dia = dia;
+}
+
+void Fecha::setMes(int mes){
+    _mes = mes;
+}
+
+void Fecha::setAnio(int anio){
+>>>>>>> Stashed changes
     _anio = anio;
 }
 
 //validacion de la fecha
+<<<<<<< Updated upstream
 bool Fecha::ValidarFecha()
 {
+=======
+bool Fecha::ValidarFecha(){
+>>>>>>> Stashed changes
     if (_anio > 0 && _mes > 0 && _mes <= 12 && _dia > 0 && _dia <=31)
     {
         //validaciones de meses con 30 dias
@@ -91,8 +128,12 @@ bool Fecha::ValidarFecha()
 }
 
 //cargar datos de la fecha
+<<<<<<< Updated upstream
 void Fecha::Cargar()
 {
+=======
+void Fecha::Cargar(){
+>>>>>>> Stashed changes
     do
     {
         cout<< "Ingrese el dia de hoy: ";
@@ -110,12 +151,22 @@ void Fecha::Cargar()
             system("pause");
             system("cls");
         }
+<<<<<<< Updated upstream
     } while (!ValidarFecha());
+=======
+    }
+    while (!ValidarFecha());
+>>>>>>> Stashed changes
 
 }
 
 //mostrar la fecha en formato dd/mm/aaaa
+<<<<<<< Updated upstream
 void Fecha::Mostrar()
 {
     cout<< _dia << "/" << _mes << "/" << _anio<< endl;
+=======
+void Fecha::Mostrar(){
+    cout<< _dia << "/" << _mes << "/" << _anio;
+>>>>>>> Stashed changes
 }

@@ -1,8 +1,7 @@
 #pragma once
 #include "Fecha.h"
 
-class Partida
-{
+class Partida{
 private:
     int _idPartida;
     int _idJugador1;

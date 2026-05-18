@@ -1,7 +1,6 @@
 #pragma once
 
-class Movimiento
-{
+class Movimiento{
 private:
     int _idMovimiento;
     int _idPartida;

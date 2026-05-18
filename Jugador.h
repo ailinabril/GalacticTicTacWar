@@ -1,7 +1,6 @@
 #pragma once
 
-class Jugador
-{
+class Jugador{
 private:
     int _idJugador;
     char _nombre[30];
