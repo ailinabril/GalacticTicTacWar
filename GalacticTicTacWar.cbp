@@ -39,6 +39,7 @@
 		<Unit filename="Jugador.cpp" />
 		<Unit filename="Jugador.h" />
 		<Unit filename="Mina.h" />
+		<Unit filename="Movimiento.cpp" />
 		<Unit filename="Movimiento.h" />
 		<Unit filename="ObjetoEspecial.h" />
 		<Unit filename="Partida.cpp" />

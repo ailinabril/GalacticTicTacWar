@@ -19,7 +19,7 @@ Fecha::Fecha(int dia, int mes, int anio)
     _anio = anio;
 }
 
-//getters
+//setters
 int Fecha::getDia()
 {
     return _dia;
@@ -117,5 +117,5 @@ void Fecha::Cargar()
 //mostrar la fecha en formato dd/mm/aaaa
 void Fecha::Mostrar()
 {
-    cout<< _dia << "/" << _mes << "/" << _anio;
+    cout<< _dia << "/" << _mes << "/" << _anio<< endl;
 }

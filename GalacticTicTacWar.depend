@@ -12,7 +12,7 @@
 
 1777133720 c:\users\bruno\desktop\galactictictacwar\jugador.h
 
-1777144616 source:c:\users\usuario\desktop\galactic\jugador.cpp
+1777146747 source:c:\users\usuario\desktop\galactic\jugador.cpp
 	<iostream>
 	<cstring>
 	"Jugador.h"
@@ -27,4 +27,11 @@
 	"Fecha.h"
 
 1777135933 c:\users\usuario\desktop\galactic\fecha.h
+
+1778507519 source:c:\users\usuario\desktop\galactic\partida.cpp
+	<iostream>
+	"Partida.h"
+
+1777135933 c:\users\usuario\desktop\galactic\partida.h
+	"Fecha.h"
 
