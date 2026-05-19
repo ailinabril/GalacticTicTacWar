@@ -43,9 +43,12 @@
 		<Unit filename="Movimiento.cpp" />
 		<Unit filename="Movimiento.h" />
 		<Unit filename="ObjetoEspecial.h" />
+		<Unit filename="ObjetoEspecila.cpp" />
 		<Unit filename="Partida.cpp" />
 		<Unit filename="Partida.h" />
+		<Unit filename="Tablero.cpp" />
 		<Unit filename="Tablero.h" />
+		<Unit filename="TableroGrafico.h" />
 		<Unit filename="Torre.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />

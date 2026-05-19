@@ -1,10 +1,10 @@
-
 #pragma once
 
 class Tablero{
 private:
     //tablero principal
     char _tablero[3][3]; //matriz para representar el tablero de juego
+    int _turnosBloqueados [3][3]; //para las torres
 
     //casilla destruida por la bomba
     bool _casillaDestruida[3][3]; //matriz para marcar las casillas destruidas por la bomba
@@ -44,4 +44,9 @@ public:
 
     //para la bomba
     void ActualizarDestruccion(); //libera la casilla destruida despues de 1 turno
+    void ActualizarBloqueo(); //libera el bloqueo de los turnos de torre
+
+    char getCasillero(int fila, int columna); //obtiene lo que hay en una casilla
+    void setCasillero(int fila, int columna, char valor); //sirve para cambiar el contenido
+
 };

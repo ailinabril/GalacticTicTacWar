@@ -17,21 +17,42 @@
 	<cstring>
 	"Jugador.h"
 
-1777135933 c:\users\usuario\desktop\galactic\jugador.h
+1779144764 c:\users\usuario\desktop\galactic\jugador.h
 
 1777128190 source:c:\users\usuario\desktop\galactic\main.cpp
 	<iostream>
 
-1777144616 source:c:\users\usuario\desktop\galactic\fecha.cpp
+1779198338 source:c:\users\usuario\desktop\galactic\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1777135933 c:\users\usuario\desktop\galactic\fecha.h
+1779144764 c:\users\usuario\desktop\galactic\fecha.h
 
 1778507519 source:c:\users\usuario\desktop\galactic\partida.cpp
 	<iostream>
 	"Partida.h"
 
-1777135933 c:\users\usuario\desktop\galactic\partida.h
+1779144764 c:\users\usuario\desktop\galactic\partida.h
 	"Fecha.h"
+
+1779142452 source:c:\users\usuario\desktop\galactic\movimiento.cpp
+	"Movimiento.h"
+	<iostream>
+
+1779144764 c:\users\usuario\desktop\galactic\movimiento.h
+
+1779145313 source:c:\users\usuario\desktop\galactic\bomba.cpp
+	"Bomba.h"
+
+1779144764 c:\users\usuario\desktop\galactic\bomba.h
+	"ObjetoEspecial.h"
+
+1779144764 c:\users\usuario\desktop\galactic\objetoespecial.h
+	"Tablero.h"
+
+1779198087 c:\users\usuario\desktop\galactic\tablero.h
+
+1779199645 source:c:\users\usuario\desktop\galactic\objetoespecila.cpp
+	"ObjetoEspecial.h"
+	<cstring>
 
