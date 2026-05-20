@@ -56,3 +56,7 @@
 	"ObjetoEspecial.h"
 	<cstring>
 
+1779232739 source:c:\users\usuario\desktop\galactic\tablero.cpp
+	"Tablero.h"
+	<iostream>
+
