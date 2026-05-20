@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="SFML/include" />
+			<Add directory="SFML/lib" />
 		</Compiler>
 		<Unit filename="Bomba.cpp" />
 		<Unit filename="Bomba.h" />
@@ -48,9 +50,13 @@
 		<Unit filename="Partida.h" />
 		<Unit filename="Tablero.cpp" />
 		<Unit filename="Tablero.h" />
+		<Unit filename="TableroGrafico.cpp" />
 		<Unit filename="TableroGrafico.h" />
 		<Unit filename="Torre.h" />
+		<Unit filename="Turnos.cpp" />
+		<Unit filename="Turnos.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="mainGrafico.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

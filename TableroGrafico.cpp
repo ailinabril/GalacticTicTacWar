@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Tablero::Tablero()
+TableroGrafico::TableroGrafico()
 {
 
     _esTurnoHumano = true;
@@ -192,7 +192,7 @@ Tablero::Tablero()
 }
 // ACTUALIZAR
 
-void Tablero::actualizar()
+void TableroGrafico::actualizar()
 {
     _posicionNaveX = 1.0f;
 
@@ -225,7 +225,7 @@ void Tablero::actualizar()
 
 }
 
-void Tablero::dibujarTablero(sf::RenderWindow &ventana)
+void TableroGrafico::dibujarTablero(sf::RenderWindow &ventana)
 {
 
     // FONDO
@@ -297,7 +297,7 @@ void Tablero::dibujarTablero(sf::RenderWindow &ventana)
 }
 // CLICK DEL MOUSE
 
-void Tablero::procesarClickDelMouse(
+void TableroGrafico::procesarClickDelMouse(
     const sf::Event &evento,
     sf::RenderWindow &ventana
 )
@@ -445,7 +445,7 @@ void Tablero::procesarClickDelMouse(
 }
 
 
-bool Tablero::verificarVictoria(char simboloJugador)
+bool TableroGrafico::verificarVictoria(char simboloJugador)
 
 {
     // FILAS
@@ -485,7 +485,7 @@ bool Tablero::verificarVictoria(char simboloJugador)
     return false;
 }
 
-bool Tablero::tableroLleno()
+bool TableroGrafico::tableroLleno()
 {
     for (int fila = 0; fila < 3; fila++)
     {
@@ -501,7 +501,7 @@ bool Tablero::tableroLleno()
     return true;
 }
 
-void Tablero::reiniciarTablero()
+void TableroGrafico::reiniciarTablero()
 {
     for (int fila = 0; fila < 3; fila++)
     {
