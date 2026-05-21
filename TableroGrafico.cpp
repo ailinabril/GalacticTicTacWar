@@ -20,7 +20,7 @@ TableroGrafico::TableroGrafico()
     }
 
 
-    float posicionInicialX = 305.f;  //posiicion y tanio
+    float posicionInicialX = 305.f;  // posicion y tanio
 
     float posicionInicialY = 110.f;
 
