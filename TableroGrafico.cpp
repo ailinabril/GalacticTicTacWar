@@ -11,35 +11,6 @@ TableroGrafico::TableroGrafico()
 
     _juegoTerminado = false;
 
-    /*   for (int fila = 0; fila < 3; fila++)
-       {
-           for (int columna = 0; columna < 3; columna++)
-           {
-               _contenidoDelTablero[fila][columna] = ' ';
-           }
-       }
-
-       float posicionInicialX = 280.f;
-
-       float posicionInicialY = 110.f;
-
-       float anchoCasilla = 240.f;
-
-       float altoCasilla = 110.f;
-
-       for (int fila = 0; fila < 3; fila++)
-       {
-           for (int columna = 0; columna < 3; columna++)
-           {
-               _cuadradosDelTablero[fila][columna].setSize(sf::Vector2f(240.f,110.f));
-
-               _cuadradosDelTablero[fila][columna].setPosition(sf::Vector2f(posicionInicialX + columna * anchoCasilla,posicionInicialY + fila * altoCasilla));
-
-               _cuadradosDelTablero[fila][columna].setFillColor(sf::Color(255,0,0,100));
-           }
-       }
-
-       */
     for (int fila = 0; fila < 3; fila++)
     {
         for (int columna = 0; columna < 3; columna++)
