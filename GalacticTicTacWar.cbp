@@ -32,8 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add directory="SFML/include" />
-			<Add directory="SFML/lib" />
 		</Compiler>
+		<Linker>
+			<Add library="SFML/lib/libsfml-graphics.a" />
+			<Add library="SFML/lib/libsfml-system.a" />
+			<Add library="SFML/lib/libsfml-window.a" />
+			<Add directory="SFML/lib" />
+		</Linker>
 		<Unit filename="Bomba.cpp" />
 		<Unit filename="Bomba.h" />
 		<Unit filename="Fecha.cpp" />
