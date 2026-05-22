@@ -43,6 +43,7 @@
 		<Unit filename="Bomba.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
+		<Unit filename="Juego.cpp" />
 		<Unit filename="Juego.h" />
 		<Unit filename="Jugador.cpp" />
 		<Unit filename="Jugador.h" />

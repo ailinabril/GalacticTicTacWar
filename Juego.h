@@ -1,4 +1,3 @@
-
 #pragma once
 #include "Jugador.h"
 #include "Tablero.h"
@@ -26,8 +25,11 @@ private:
     bool _torreUsadaJugador2;
     bool _minaUsadaJugador1;
     bool _minaUsadaJugador2;
-    bool _bombasUsadasJugador1;
-    bool _bombasUsadasJugador2;
+    bool _bombaUsadaJugador1;
+    bool _bombaUsadaJugador2;
+    int _movimientosTotales;
+    bool _empate;
+    bool _juegoTerminado;
 
     //partida actual
     Partida _partida;
