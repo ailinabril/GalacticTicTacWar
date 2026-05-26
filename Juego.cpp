@@ -58,13 +58,53 @@ void Juego::TurnoJugador(){
     _turnoActual++;
 }
 
-void Juego::MostrarEstado(){}
+void Juego::MostrarEstado(){
 
-bool Juego::VerificarGanador(){}
+    //actualiza estados temporales del tablero
+    _tablero.ActualizarBloqueo();
+    _tablero.ActualizarDestruccion();
 
-void Juego::FinalizarPartida(){}
+}
 
 
+bool Juego::VerificarGanador(){
+
+    //gana jugador 1
+    if(_tablero.HayGanador('X') == true){
+
+        _juegoTerminado = true;
+        return true;
+    }
+
+    //gana jugador 2
+    if(_tablero.HayGanador('O') == true){
+
+        _juegoTerminado = true;
+        return true;
+    }
+
+    //empate
+    if(_tablero.HayEmpate() == true){
+
+        _empate = true;
+        _juegoTerminado = true;
+
+        return true;
+    }
+
+    return false;
+}
+
+
+void Juego::FinalizarPartida(){
+
+    //guardar datos de la partida
+    GuardarPartida();
+
+    //actualizar ranking
+    ActualizarRanking();
+
+}
 
 
 
