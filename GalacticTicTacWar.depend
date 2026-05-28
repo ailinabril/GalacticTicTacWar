@@ -59,11 +59,12 @@
 	"Tablero.h"
 	<iostream>
 
-1779318756 source:c:\users\usuario\desktop\galactic\turnos.cpp
+1780000757 source:c:\users\usuario\desktop\galactic\turnos.cpp
 	"Turnos.h"
 	<SFML/Graphics.hpp>
+	<iostream>
 
-1779318644 c:\users\usuario\desktop\galactic\turnos.h
+1780000757 c:\users\usuario\desktop\galactic\turnos.h
 	<SFML/Graphics.hpp>
 
 1779316947 source:c:\users\usuario\desktop\galactic\maingrafico.cpp
@@ -608,13 +609,12 @@
 	<string_view>
 	<cstdint>
 
-1779316921 c:\users\usuario\desktop\galactic\tablerografico.h
+1780000757 c:\users\usuario\desktop\galactic\tablerografico.h
 	<SFML/Graphics.hpp>
 	"Tablero.h"
 	"Turnos.h"
-	<optional>
 
-1779403431 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
+1780000757 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
@@ -2478,6 +2478,33 @@
 	<cstring>
 
 1779931001 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\torre.cpp
+	"Torre.h"
+	<iostream>
+
+1780000844 source:c:\users\usuario\desktop\galactic\juego.cpp
+	"Juego.h"
+
+1780000844 c:\users\usuario\desktop\galactic\juego.h
+	"Jugador.h"
+	"Tablero.h"
+	"Partida.h"
+	"Movimiento.h"
+	"Torre.h"
+	"Mina.h"
+	"Bomba.h"
+
+1780000757 c:\users\usuario\desktop\galactic\torre.h
+	"ObjetoEspecial.h"
+	<SFML/Graphics.hpp>
+
+1779144764 c:\users\usuario\desktop\galactic\mina.h
+	"ObjetoEspecial.h"
+
+1780000757 source:c:\users\usuario\desktop\galactic\objetoespecial.cpp
+	"ObjetoEspecial.h"
+	<cstring>
+
+1780000757 source:c:\users\usuario\desktop\galactic\torre.cpp
 	"Torre.h"
 	<iostream>
 

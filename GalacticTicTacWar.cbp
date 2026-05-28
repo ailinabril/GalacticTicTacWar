@@ -47,6 +47,7 @@
 		<Unit filename="Juego.h" />
 		<Unit filename="Jugador.cpp" />
 		<Unit filename="Jugador.h" />
+		<Unit filename="Menu.h" />
 		<Unit filename="Mina.h" />
 		<Unit filename="Movimiento.cpp" />
 		<Unit filename="Movimiento.h" />
