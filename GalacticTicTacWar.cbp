@@ -50,14 +50,15 @@
 		<Unit filename="Mina.h" />
 		<Unit filename="Movimiento.cpp" />
 		<Unit filename="Movimiento.h" />
+		<Unit filename="ObjetoEspecial.cpp" />
 		<Unit filename="ObjetoEspecial.h" />
-		<Unit filename="ObjetoEspecila.cpp" />
 		<Unit filename="Partida.cpp" />
 		<Unit filename="Partida.h" />
 		<Unit filename="Tablero.cpp" />
 		<Unit filename="Tablero.h" />
 		<Unit filename="TableroGrafico.cpp" />
 		<Unit filename="TableroGrafico.h" />
+		<Unit filename="Torre.cpp" />
 		<Unit filename="Torre.h" />
 		<Unit filename="Turnos.cpp" />
 		<Unit filename="Turnos.h" />

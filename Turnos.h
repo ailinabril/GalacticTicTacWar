@@ -5,6 +5,8 @@ class Turnos {
 private:
     int _turnoActual;
     char _jugadorActual;
+    sf::Font _fuente;
+    sf::Text *_textoTurno;
 
 public:
     //constructores
@@ -16,5 +18,6 @@ public:
 
     int getTurnoActual();
     char getJugadorActual();
+    ~Turnos();
 
 };

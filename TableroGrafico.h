@@ -1,21 +1,27 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+
 #include "Tablero.h"
 #include "Turnos.h"
-#include <optional>
 
 class TableroGrafico
 {
 private:
 
+    // LOGICA
+
     Tablero _tablero;
 
     Turnos _turnos;
 
+    // TABLERO
+
     char _contenidoDelTablero[3][3];
 
     sf::RectangleShape _cuadradosDelTablero[3][3];
+
+    // TEXTURAS
 
     sf::Texture _texturaFondo;
 
@@ -25,23 +31,53 @@ private:
 
     sf::Texture _texturaAlien;
 
-    std::optional<sf::Sprite> _imagenDeFondo;  //sprites del juego
+    sf::Texture _texturaBomba;
 
-    std::optional<sf::Sprite> _naveEspacial;
+    sf::Texture _texturaMina;
 
-    std::optional<sf::Sprite> _imagenesHumanos[3][3];
+    sf::Texture _texturaTorre;
 
-    std::optional<sf::Sprite> _imagenesAliens[3][3];
+    // SPRITES PRINCIPALES
+
+    sf::Sprite *_imagenDeFondo;
+
+    sf::Sprite *_naveEspacial;
+
+    // PERSONAJES
+
+    sf::Sprite *_imagenesHumanos[3][3];
+
+    sf::Sprite *_imagenesAliens[3][3];
+
+    // OBJETOS HUMANO
+
+    sf::Sprite *_spriteBombaHumano;
+
+    sf::Sprite *_spriteMinaHumano;
+
+    sf::Sprite *_spriteTorreHumano;
+
+    // OBJETOS ALIEN
+
+    sf::Sprite *_spriteBombaAlien;
+
+    sf::Sprite *_spriteMinaAlien;
+
+    sf::Sprite *_spriteTorreAlien;
+
+    // TURNOS
 
     bool _esTurnoHumano;
 
     bool _juegoTerminado;
 
+    // CANTIDAD FICHAS
+
     int _cantidadFichasHumano;
 
     int _cantidadFichasAlien;
 
-// ficha seleccionada para mover
+    // SELECCION
 
     bool _hayFichaSeleccionada;
 
@@ -49,29 +85,66 @@ private:
 
     int _columnaSeleccionada;
 
-    float _posicionNaveX;  // movimiento de la nave
+    // NAVE
 
-    sf::RectangleShape _barraEnergiaHumano;    // barra de energia humana
+    float _posicionNaveX;
 
-    sf::RectangleShape _fondoBarraEnergiaHumano;   // fondo de energia
+    // ENERGIA
+
+    sf::RectangleShape _barraEnergiaHumano;
+
+    sf::RectangleShape _fondoBarraEnergiaHumano;
 
     sf::RectangleShape _barraEnergiaAlien;
 
     sf::RectangleShape _fondoBarraEnergiaAlien;
 
+    sf::Font _fuente;
+
+    sf::Text *_textoGanador;
+
+    // OBJETO
+
+    int _objetoSeleccionado;
+
 public:
+
+    // CONSTRUCTOR
 
     TableroGrafico();
 
+    // ACTUALIZAR
+
     void actualizar();
 
-    void dibujarTablero(sf::RenderWindow &ventana);
+    // DIBUJAR
 
-    void procesarClickDelMouse(const sf::Event &evento,sf::RenderWindow &ventana);
+    void dibujarTablero(
+        sf::RenderWindow &ventana
+    );
 
-    bool verificarVictoria(char simboloJugador);
+    // CLICK MOUSE
+
+    void procesarClickDelMouse(
+        const sf::Event &evento,
+        sf::RenderWindow &ventana
+    );
+
+    // VICTORIA
+
+    bool verificarVictoria(
+        char simboloJugador
+    );
+
+    // TABLERO LLENO
 
     bool tableroLleno();
 
+    // REINICIAR
+
     void reiniciarTablero();
+
+    // DESTRUCTOR
+
+    ~TableroGrafico();
 };

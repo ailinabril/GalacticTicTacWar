@@ -1,23 +1,36 @@
 #include "Torre.h"
-#include <cstring>
 
-///constructoer///
-Torre::Torre() : ObjetoEspecial(3) {
-    strcpy(_nombre, "Torre");
-}
+#include <iostream>
 
-///bloquea la casilla para ambos jugadores///
-bool Torre::aplicarEfecto(Tablero &tablero, int fila, int columna, char simboloJugador) {
+using namespace std;
 
-    char casilla = tablero.getCasillero(fila, columna);//<----------------!!! use get.casillero pero es provicional ya que faltan en el .h y falta el .cpp del mismo//
-
-    if (casilla == simboloJugador) {  ///no se puede poner en la casilla del jugador///
-        return false;
+Torre::Torre():ObjetoEspecial(30,"TORRE")
+{
+     if (!_textura.loadFromFile("torre.png"))
+    {
+        cout << "ERROR TORRE" << endl;
     }
 
-    tablero.setCasillero(fila, columna, '#'); ///bloquea la casille y elimina ficha enemiga en caso de haber///
+    _sprite = new sf::Sprite(_textura);
 
-    tablero.setTurnosBloqueados(fila, columna, 2);
+    _sprite->setScale(sf::Vector2f(0.18f,0.18f));
+}
+
+
+bool Torre::aplicarEfecto(Tablero &tablero,int fila,int columna,char simboloJugador)
+{
+    cout << "TORRE ACTIVADA" << endl;
 
     return true;
 }
+
+void Torre::dibujar(sf::RenderWindow &ventana)
+{
+    ventana.draw(*_sprite);
+}
+
+
+void Torre::setPosicion(float x,float y)
+{
+    _sprite->setPosition(sf::Vector2f(x,y));
+};
