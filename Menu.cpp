@@ -42,6 +42,5 @@ void Menu::MostrarOpciones(){
     cout<< "0- Salir" <<endl;
 
 }
-void Menu::LeerOpcion(){}
 void Menu::MostrarReglas(){}
 void Menu::MostrarRanking(){}

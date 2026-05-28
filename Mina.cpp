@@ -2,7 +2,7 @@
 #include <cstring>
 
 ///constructor///
-Mina::Mina() : ObjetoEspecial(2) {
+Mina::Mina() : ObjetoEspecial(){
     strcpy(_nombre, "Mina");
 }
 

@@ -614,7 +614,7 @@
 	"Tablero.h"
 	"Turnos.h"
 
-1780000757 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
+1780004591 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
@@ -2481,7 +2481,7 @@
 	"Torre.h"
 	<iostream>
 
-1780000844 source:c:\users\usuario\desktop\galactic\juego.cpp
+1780004161 source:c:\users\usuario\desktop\galactic\juego.cpp
 	"Juego.h"
 
 1780000844 c:\users\usuario\desktop\galactic\juego.h
@@ -2507,4 +2507,23 @@
 1780000757 source:c:\users\usuario\desktop\galactic\torre.cpp
 	"Torre.h"
 	<iostream>
+
+1780003230 source:c:\users\usuario\desktop\galactic\mina.cpp
+	"Mina.h"
+	<cstring>
+
+1780002567 source:c:\users\usuario\desktop\galactic\menu.cpp
+	"Menu.h"
+
+1780001122 c:\users\usuario\desktop\galactic\menu.h
+	<iostream>
+	"Juego.h"
+
+1780004591 source:c:\users\usuario\desktop\galactic\archivoganarpartida.cpp
+	"ArchivoGanarPartida.h"
+	<iostream>
+
+1780004161 c:\users\usuario\desktop\galactic\archivoganarpartida.h
+	<fstream>
+	"Partida.h"
 

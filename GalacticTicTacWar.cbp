@@ -39,6 +39,8 @@
 			<Add library="SFML/lib/libsfml-window.a" />
 			<Add directory="SFML/lib" />
 		</Linker>
+		<Unit filename="ArchivoGanarPartida.cpp" />
+		<Unit filename="ArchivoGanarPartida.h" />
 		<Unit filename="Bomba.cpp" />
 		<Unit filename="Bomba.h" />
 		<Unit filename="Fecha.cpp" />
@@ -47,7 +49,9 @@
 		<Unit filename="Juego.h" />
 		<Unit filename="Jugador.cpp" />
 		<Unit filename="Jugador.h" />
+		<Unit filename="Menu.cpp" />
 		<Unit filename="Menu.h" />
+		<Unit filename="Mina.cpp" />
 		<Unit filename="Mina.h" />
 		<Unit filename="Movimiento.cpp" />
 		<Unit filename="Movimiento.h" />

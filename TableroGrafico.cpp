@@ -250,7 +250,7 @@ _textoGanador->setPosition(sf::Vector2f(320.f,500.f));
 
 void TableroGrafico::actualizar() //actualizar tablero
 {
-    _posicionNaveX += 0.1f;
+    _posicionNaveX += 0.01f;
 
     if (_posicionNaveX > 520.f)
     {

@@ -106,14 +106,8 @@ void Juego::FinalizarPartida(){
 
 }
 
-void Juego::GuardarPartida()
-{
+void Juego::GuardarPartida(){}
 
-}
-
-void Juego::ActualizarRanking()
-{
-
-}
+void Juego::ActualizarRanking(){}
 
 
