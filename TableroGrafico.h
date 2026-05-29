@@ -57,13 +57,30 @@ private:
 
     sf::Sprite *_spriteTorreHumano;
 
-    // OBJETOS ALIEN
 
+
+    // OBJETOS ALIEN
     sf::Sprite *_spriteBombaAlien;
 
     sf::Sprite *_spriteMinaAlien;
 
     sf::Sprite *_spriteTorreAlien;
+
+    // MARCOS OBJETOS HUMANO
+
+    sf::RectangleShape _marcoBombaHumano;
+
+    sf::RectangleShape _marcoMinaHumano;
+
+    sf::RectangleShape _marcoTorreHumano;
+
+    // MARCOS OBJETOS ALIEN
+
+    sf::RectangleShape _marcoBombaAlien;
+
+    sf::RectangleShape _marcoMinaAlien;
+
+    sf::RectangleShape _marcoTorreAlien;
 
     // TURNOS
 
@@ -102,6 +119,22 @@ private:
     sf::Font _fuente;
 
     sf::Text *_textoGanador;
+
+    // COSTO DE ENERGIA OBJETOS HUMANO
+
+    sf::Text *_textoCostoBombaHumano;
+
+    sf::Text *_textoCostoMinaHumano;
+
+    sf::Text *_textoCostoTorreHumano;
+
+    // COSTO DE ENERGIA OBJETOS ALIEN
+
+    sf::Text *_textoCostoBombaAlien;
+
+    sf::Text *_textoCostoMinaAlien;
+
+    sf::Text *_textoCostoTorreAlien;
 
     // OBJETO
 

@@ -27,6 +27,7 @@ TableroGrafico::TableroGrafico() //contructor
 
     // OBJETO
 
+
     _objetoSeleccionado = 0;
 
     // TABLERO VACIO
@@ -87,7 +88,6 @@ TableroGrafico::TableroGrafico() //contructor
 
     _posicionNaveX = 150.f;
 
-
     _naveEspacial->setPosition(sf::Vector2f(_posicionNaveX,40.f));
 
     _naveEspacial->setScale(sf::Vector2f(0.40f,0.40f));
@@ -101,21 +101,23 @@ TableroGrafico::TableroGrafico() //contructor
 
     // TEXTO GANADOR
 
-  _textoGanador =new sf::Text(_fuente,"",55);
+    _textoGanador =new sf::Text(_fuente,"",55);
 
-_textoGanador->setFillColor(sf::Color::Cyan);
+    _textoGanador->setFillColor(sf::Color::Cyan);
 
-_textoGanador->setPosition(sf::Vector2f(320.f,500.f));
+    _textoGanador->setPosition(sf::Vector2f(320.f,500.f));
 
     // ENERGIA HUMANO
 
     _fondoBarraEnergiaHumano.setSize(sf::Vector2f(220.f,24.f));
 
-    _fondoBarraEnergiaHumano.setFillColor(sf::Color(40,40,40));
+    _fondoBarraEnergiaHumano.setFillColor(sf::Color(40,40,40));// establece el color de relleno de las figura que dibujo
 
-    _fondoBarraEnergiaHumano.setPosition(sf::Vector2f( 40.f,640.f));
+    _fondoBarraEnergiaHumano.setPosition(sf::Vector2f(40.f,690.f));//ubica un objeto en una posición determinada de la ventana
 
-    _barraEnergiaHumano.setSize(sf::Vector2f(210.f,14.f));
+    _barraEnergiaHumano.setPosition(sf::Vector2f(45.f,695.f));
+
+    _barraEnergiaHumano.setSize(sf::Vector2f(210.f,14.f)); // cambiar el tamaño de un objeto
 
     _barraEnergiaHumano.setFillColor(sf::Color::Green);
 
@@ -127,7 +129,9 @@ _textoGanador->setPosition(sf::Vector2f(320.f,500.f));
 
     _fondoBarraEnergiaAlien.setFillColor(sf::Color(40,40,40));
 
-    _fondoBarraEnergiaAlien.setPosition(sf::Vector2f(1010.f,640.f));
+    _fondoBarraEnergiaAlien.setPosition(sf::Vector2f(1045.f,400.f));
+
+    _barraEnergiaAlien.setPosition(sf::Vector2f(1045.f,400.f));
 
     _barraEnergiaAlien.setSize(sf::Vector2f(210.f,14.f));
 
@@ -172,8 +176,37 @@ _textoGanador->setPosition(sf::Vector2f(320.f,500.f));
 
     // OBJETOS HUMANO
 
-    _spriteBombaHumano =
-        new sf::Sprite(_texturaBomba);
+    _marcoBombaHumano.setSize(sf::Vector2f(220.f,60.f));
+
+    _marcoBombaHumano.setPosition(sf::Vector2f(20.f,265.f));
+
+    _marcoBombaHumano.setFillColor(sf::Color(0,0,0,120));
+
+    _marcoBombaHumano.setOutlineThickness(2.f);
+
+    _marcoBombaHumano.setOutlineColor(sf::Color::Transparent);
+
+    _marcoMinaHumano.setSize(sf::Vector2f(220.f,60.f));
+
+    _marcoMinaHumano.setPosition(sf::Vector2f(20.f,335.f));
+
+    _marcoMinaHumano.setFillColor(sf::Color(0,0,0,120));
+
+    _marcoMinaHumano.setOutlineThickness(2.f);
+
+    _marcoMinaHumano.setOutlineColor(sf::Color::Transparent); // para que sea visible el rectangulo en cyan sino Transparent
+
+    _marcoTorreHumano.setSize(sf::Vector2f(220.f,60.f));
+
+    _marcoTorreHumano.setPosition(sf::Vector2f(20.f,405.f));
+
+    _marcoTorreHumano.setFillColor(sf::Color(0,0,0,120));
+
+    _marcoTorreHumano.setOutlineThickness(2.f); //dibuja un marco verde de 2 píxeles alrededor de _marcoTorreHumano.
+
+    _marcoTorreHumano.setOutlineColor(sf::Color::Transparent);
+
+    _spriteBombaHumano =new sf::Sprite(_texturaBomba);
 
     _spriteMinaHumano =new sf::Sprite(_texturaMina);
 
@@ -187,35 +220,65 @@ _textoGanador->setPosition(sf::Vector2f(320.f,500.f));
 
     _spriteTorreAlien = new sf::Sprite(_texturaTorre);
 
+    _marcoBombaAlien.setSize(sf::Vector2f(220.f,60.f));
+
+    _marcoBombaAlien.setPosition(sf::Vector2f(1040.f,265.f));
+
+    _marcoBombaAlien.setFillColor(sf::Color(0,0,0,120));
+
+    _marcoBombaAlien.setOutlineThickness(2.f);
+
+    _marcoBombaAlien.setOutlineColor(sf::Color::Green); // establece el color del borde (contorno) de una figura
+
+    _marcoMinaAlien.setSize(sf::Vector2f(220.f,60.f));
+
+    _marcoMinaAlien.setPosition(sf::Vector2f(1040.f,335.f));
+
+    _marcoMinaAlien.setFillColor(sf::Color(0,0,0,120));
+
+    _marcoMinaAlien.setOutlineThickness(2.f);
+
+    _marcoMinaAlien.setOutlineColor(sf::Color::Green);
+
+    _marcoTorreAlien.setSize(sf::Vector2f(220.f,60.f));
+
+    _marcoTorreAlien.setPosition(sf::Vector2f(1040.f,405.f));
+
+    _marcoTorreAlien.setFillColor(sf::Color(0,0,0,120));
+
+    _marcoTorreAlien.setOutlineThickness(2.f);
+
+    _marcoTorreAlien.setOutlineColor(sf::Color::Green);
+
     // POSICIONES HUMANO
 
-    _spriteBombaHumano->setPosition(sf::Vector2f(40.f,250.f));
+    _spriteBombaHumano->setPosition(sf::Vector2f(-25.f,240.f));
 
-    _spriteMinaHumano->setPosition(sf::Vector2f(40.f,360.f));
+    _spriteMinaHumano->setPosition(sf::Vector2f(-65.f,300.f));
 
-    _spriteTorreHumano->setPosition(sf::Vector2f(40.f,470.f));
+    _spriteTorreHumano->setPosition(sf::Vector2f(-65.f,380.f));
 
     // POSICIONES ALIEN
 
-    _spriteBombaAlien->setPosition(sf::Vector2f(1110.f,250.f));
+    _spriteBombaAlien->setPosition(sf::Vector2f(1000.f,240.f));
 
-    _spriteMinaAlien->setPosition(sf::Vector2f(1110.f,360.f));
+    _spriteMinaAlien->setPosition(sf::Vector2f(960.f,300.f));
 
-    _spriteTorreAlien->setPosition(sf::Vector2f(1110.f,470.f));
+    _spriteTorreAlien->setPosition(sf::Vector2f(960.f,380.f));
 
     // ESCALAS
 
-    _spriteBombaHumano->setScale(sf::Vector2f(0.06f,0.06f));
+    _spriteBombaHumano->setScale(sf::Vector2f(0.1f,0.1f));
 
-    _spriteMinaHumano->setScale(sf::Vector2f(0.06f,0.06f));
+    _spriteMinaHumano->setScale(sf::Vector2f(0.1f,0.1f));
 
-    _spriteTorreHumano->setScale(sf::Vector2f(0.06f,0.06f));
+    _spriteTorreHumano->setScale(sf::Vector2f(0.1f,0.1f));
 
-    _spriteBombaAlien->setScale(sf::Vector2f(0.06f,0.06f));
+    _spriteBombaAlien->setScale(sf::Vector2f(0.1f,0.1f));
 
-    _spriteMinaAlien->setScale(sf::Vector2f(0.06f,0.06f));
+    _spriteMinaAlien->setScale(sf::Vector2f(0.1f,0.1f));
 
-    _spriteTorreAlien->setScale(sf::Vector2f(0.06f,0.06f));
+    _spriteTorreAlien->setScale(sf::Vector2f(0.1f,0.1f));
 
     // PERSONAJES
 
@@ -239,7 +302,7 @@ _textoGanador->setPosition(sf::Vector2f(320.f,500.f));
 
             sf::Vector2f posicionCuadrado =
 
-                _cuadradosDelTablero[fila][columna].getPosition();
+            _cuadradosDelTablero[fila][columna].getPosition();
 
             _imagenesHumanos[fila][columna]->setPosition(sf::Vector2f(posicionCuadrado.x + 5.f,posicionCuadrado.y - 12.f));
 
@@ -252,9 +315,9 @@ void TableroGrafico::actualizar() //actualizar tablero
 {
     _posicionNaveX += 0.01f;
 
-    if (_posicionNaveX > 520.f)
+    if (_posicionNaveX > -25.f)
     {
-        _posicionNaveX = 350.f;
+        _posicionNaveX = 1040.f;
     }
 
     _naveEspacial->setPosition(sf::Vector2f(_posicionNaveX,40.f));
@@ -263,8 +326,7 @@ void TableroGrafico::actualizar() //actualizar tablero
 }
 
 void TableroGrafico::dibujarTablero( //dibujar
-    sf::RenderWindow &ventana
-)
+    sf::RenderWindow &ventana)
 {
     ventana.draw(*_imagenDeFondo);
 
@@ -277,6 +339,18 @@ void TableroGrafico::dibujarTablero( //dibujar
     ventana.draw(_fondoBarraEnergiaAlien);
 
     ventana.draw(_barraEnergiaAlien);
+
+    ventana.draw(_marcoBombaHumano);
+
+    ventana.draw(_marcoMinaHumano);
+
+    ventana.draw(_marcoTorreHumano);
+
+    ventana.draw(_marcoBombaAlien);
+
+    ventana.draw(_marcoMinaAlien);
+
+    ventana.draw(_marcoTorreAlien);
 
     // OBJETOS HUMANO
 
@@ -336,9 +410,7 @@ void TableroGrafico::dibujarTablero( //dibujar
     }
 }
 void TableroGrafico::procesarClickDelMouse(
-    const sf::Event &evento,
-    sf::RenderWindow &ventana
-)
+    const sf::Event &evento,sf::RenderWindow &ventana)
 {
     if (_juegoTerminado)
     {
