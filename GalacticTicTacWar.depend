@@ -1898,9 +1898,10 @@
 
 1779921754 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\main.cpp
 
-1779921754 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\maingrafico.cpp
+1780105035 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
+	<ctime>
 	"TableroGrafico.h"
 
 1779921753 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\sfml\include\sfml\graphics.hpp
@@ -2440,7 +2441,7 @@
 	<string_view>
 	<cstdint>
 
-1780020047 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
+1780105669 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
 	"Tablero.h"
 	"Turnos.h"
@@ -2464,7 +2465,7 @@
 	"Tablero.h"
 	<iostream>
 
-1780102913 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
+1780105750 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 

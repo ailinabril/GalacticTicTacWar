@@ -1,9 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <optional>
-
+#include <ctime>
 #include "TableroGrafico.h"
 
 int main(){
+    srand(time(NULL));
     sf::RenderWindow ventana(
         sf::VideoMode(sf::Vector2u(1280, 720)),   // Crear ventana principal
         "GalacticTicTacWar"

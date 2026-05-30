@@ -43,6 +43,19 @@ private:
 
     sf::Sprite *_naveEspacial;
 
+    // Vero Random
+
+    sf::Texture _texturaVero;
+
+    sf::Sprite *_spriteVero;
+
+    bool _mostrarVero;
+
+    int _contadorVero;
+
+    bool _veroYaAparecio;
+
+
     // PERSONAJES
 
     sf::Sprite *_imagenesHumanos[3][3];

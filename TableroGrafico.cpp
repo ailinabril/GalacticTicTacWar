@@ -27,8 +27,27 @@ TableroGrafico::TableroGrafico() //contructor
 
     // OBJETO
 
-
     _objetoSeleccionado = 0;
+
+    // Vero
+
+    _veroYaAparecio = false;
+
+    _mostrarVero = false;
+
+    _contadorVero = 0;
+
+    if (!_texturaVero.loadFromFile("Vero.png"))
+    {
+        cout << "ERROR Vero" << endl;
+    }
+
+    _spriteVero =new sf::Sprite(_texturaVero);
+
+    _spriteVero->setPosition(sf::Vector2f(900.f,500.f));
+
+    _spriteVero->setScale(sf::Vector2f(0.3f,0.3f));
+
 
     // TABLERO VACIO
 
@@ -328,15 +347,51 @@ void TableroGrafico::actualizar() //actualizar tablero
 {
     _posicionNaveX += 0.01f;
 
-    if (_posicionNaveX > 25.f)
+    if (_posicionNaveX > 540.f)
     {
-        _posicionNaveX = 1040.f;
+        _posicionNaveX = 150.f;
     }
 
     _naveEspacial->setPosition(sf::Vector2f(_posicionNaveX,40.f));
 
     _turnos.actualizar();
-}
+
+    // APARICION ALEATORIA DEL Vero
+
+      if (!_veroYaAparecio)
+    {
+        int numeroRandom = rand() % 30000;
+
+        if (numeroRandom == 1)
+        {
+            _mostrarVero = true;
+
+            _contadorVero = 6000;
+
+            _veroYaAparecio = true;
+        }
+    }
+
+    if (_mostrarVero)
+        {
+            _contadorVero--;
+
+            if (_contadorVero <= 0)
+            {
+                _mostrarVero = false;
+            }
+
+    }
+    else
+        {
+            _contadorVero--;
+
+            if (_contadorVero <= 0)
+            {
+                _mostrarVero = false;
+            }
+        }
+    }
 
 void TableroGrafico::dibujarTablero( //dibujar
     sf::RenderWindow &ventana)
@@ -364,6 +419,11 @@ void TableroGrafico::dibujarTablero( //dibujar
     ventana.draw(_marcoMinaAlien);
 
     ventana.draw(_marcoTorreAlien);
+
+        if (_mostrarVero)
+    {
+        ventana.draw(*_spriteVero);
+    }
 
     // OBJETOS HUMANO
 
@@ -646,6 +706,8 @@ TableroGrafico::~TableroGrafico()
     delete _spriteMinaAlien;
 
     delete _spriteTorreAlien;
+
+    delete _spriteVero;
 
     for (int fila = 0; fila < 3; fila++)
     {
