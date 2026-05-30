@@ -42,11 +42,11 @@ TableroGrafico::TableroGrafico() //contructor
 
     // POSICION TABLERO
 
-    float posicionInicialX = 305.f;
+    float posicionInicialX = 380.f;
 
-    float posicionInicialY = 110.f;
+    float posicionInicialY = 140.f;
 
-    float anchoCasilla = 240.f;
+    float anchoCasilla = 180.f;
 
     float altoCasilla = 120.f;
 
@@ -56,13 +56,13 @@ TableroGrafico::TableroGrafico() //contructor
     {
         for (int columna = 0; columna < 3; columna++)
         {
-            _cuadradosDelTablero[fila][columna].setSize(sf::Vector2f(anchoCasilla - 10.f,altoCasilla - 10.f));
+            _cuadradosDelTablero[fila][columna].setSize(sf::Vector2f(anchoCasilla - 5.f,altoCasilla - 5.f));
 
             _cuadradosDelTablero[fila][columna].setPosition(sf::Vector2f(posicionInicialX + columna * anchoCasilla,posicionInicialY + fila * altoCasilla));
 
             _cuadradosDelTablero[fila][columna].setFillColor(sf::Color::Transparent);
 
-            _cuadradosDelTablero[fila][columna].setOutlineThickness(3.f);
+            _cuadradosDelTablero[fila][columna].setOutlineThickness(1.f);
 
             _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Transparent);
         }
@@ -70,7 +70,7 @@ TableroGrafico::TableroGrafico() //contructor
 
     // FONDO
 
-    if (!_texturaFondo.loadFromFile("fondo.png"))
+    if (!_texturaFondo.loadFromFile("fondo2.png"))
     {
         cout << "ERROR FONDO" << endl;
     }
@@ -111,13 +111,13 @@ TableroGrafico::TableroGrafico() //contructor
 
     _fondoBarraEnergiaHumano.setSize(sf::Vector2f(220.f,24.f));
 
-    _fondoBarraEnergiaHumano.setFillColor(sf::Color(40,40,40));// establece el color de relleno de las figura que dibujo
+    _fondoBarraEnergiaHumano.setFillColor(sf::Color(0,0,0));// el setfillcolor establece el color de relleno de las figura que dibujo
 
-    _fondoBarraEnergiaHumano.setPosition(sf::Vector2f(40.f,690.f));//ubica un objeto en una posición determinada de la ventana
+    _fondoBarraEnergiaHumano.setPosition(sf::Vector2f(40.f,790.f));//el setposition ubica un objeto en una posición determinada de la ventana
 
-    _barraEnergiaHumano.setPosition(sf::Vector2f(45.f,695.f));
+    _barraEnergiaHumano.setPosition(sf::Vector2f(500.f,400.f));
 
-    _barraEnergiaHumano.setSize(sf::Vector2f(210.f,14.f)); // cambiar el tamaño de un objeto
+    _barraEnergiaHumano.setSize(sf::Vector2f(210.f,14.f)); //el setsize cambiar el tamaño de un objeto
 
     _barraEnergiaHumano.setFillColor(sf::Color::Green);
 
@@ -129,9 +129,9 @@ TableroGrafico::TableroGrafico() //contructor
 
     _fondoBarraEnergiaAlien.setFillColor(sf::Color(40,40,40));
 
-    _fondoBarraEnergiaAlien.setPosition(sf::Vector2f(1045.f,400.f));
+    _fondoBarraEnergiaAlien.setPosition(sf::Vector2f(1600.f,400.f));
 
-    _barraEnergiaAlien.setPosition(sf::Vector2f(1045.f,400.f));
+    _barraEnergiaAlien.setPosition(sf::Vector2f(2000.f,400.f));
 
     _barraEnergiaAlien.setSize(sf::Vector2f(210.f,14.f));
 
@@ -180,7 +180,7 @@ TableroGrafico::TableroGrafico() //contructor
 
     _marcoBombaHumano.setPosition(sf::Vector2f(20.f,265.f));
 
-    _marcoBombaHumano.setFillColor(sf::Color(0,0,0,120));
+    _marcoBombaHumano.setFillColor(sf::Color(0,0,0,0));
 
     _marcoBombaHumano.setOutlineThickness(2.f);
 
@@ -190,7 +190,7 @@ TableroGrafico::TableroGrafico() //contructor
 
     _marcoMinaHumano.setPosition(sf::Vector2f(20.f,335.f));
 
-    _marcoMinaHumano.setFillColor(sf::Color(0,0,0,120));
+    _marcoMinaHumano.setFillColor(sf::Color(0,0,0,0));
 
     _marcoMinaHumano.setOutlineThickness(2.f);
 
@@ -200,7 +200,7 @@ TableroGrafico::TableroGrafico() //contructor
 
     _marcoTorreHumano.setPosition(sf::Vector2f(20.f,405.f));
 
-    _marcoTorreHumano.setFillColor(sf::Color(0,0,0,120));
+    _marcoTorreHumano.setFillColor(sf::Color(0,0,0,0));
 
     _marcoTorreHumano.setOutlineThickness(2.f); //dibuja un marco verde de 2 píxeles alrededor de _marcoTorreHumano.
 
@@ -224,7 +224,7 @@ TableroGrafico::TableroGrafico() //contructor
 
     _marcoBombaAlien.setPosition(sf::Vector2f(1040.f,265.f));
 
-    _marcoBombaAlien.setFillColor(sf::Color(0,0,0,120));
+    _marcoBombaAlien.setFillColor(sf::Color(0,0,0,0));
 
     _marcoBombaAlien.setOutlineThickness(2.f);
 
@@ -252,19 +252,32 @@ TableroGrafico::TableroGrafico() //contructor
 
     // POSICIONES HUMANO
 
-    _spriteBombaHumano->setPosition(sf::Vector2f(-25.f,240.f));
+    _spriteBombaHumano->setPosition(sf::Vector2f(15.f,250.f));
 
-    _spriteMinaHumano->setPosition(sf::Vector2f(-65.f,300.f));
+    _spriteBombaHumano->setColor(sf::Color(255,255,255,0));
 
-    _spriteTorreHumano->setPosition(sf::Vector2f(-65.f,380.f));
+    _spriteMinaHumano->setPosition(sf::Vector2f(-20.f,315.f));
+
+    _spriteMinaHumano->setColor(sf::Color(255,255,255,0));
+
+    _spriteTorreHumano->setPosition(sf::Vector2f(-20.f,395.f));
+
+    _spriteTorreHumano->setColor(sf::Color(255,255,255,0));
 
     // POSICIONES ALIEN
 
-    _spriteBombaAlien->setPosition(sf::Vector2f(1000.f,240.f));
+    _spriteBombaAlien->setPosition(sf::Vector2f(1000.f,250.f));
 
-    _spriteMinaAlien->setPosition(sf::Vector2f(960.f,300.f));
+    _spriteBombaAlien->setColor(sf::Color(255,255,255,0));
 
-    _spriteTorreAlien->setPosition(sf::Vector2f(960.f,380.f));
+    _spriteMinaAlien->setPosition(sf::Vector2f(1000.f,315.f));
+
+    _spriteMinaAlien->setColor(sf::Color(255,255,255,0));
+
+    _spriteTorreAlien->setPosition(sf::Vector2f(960.f,395.f));
+
+    _spriteTorreAlien->setColor(sf::Color(255,255,255,0));
+
 
     // ESCALAS
 
@@ -304,9 +317,9 @@ TableroGrafico::TableroGrafico() //contructor
 
             _cuadradosDelTablero[fila][columna].getPosition();
 
-            _imagenesHumanos[fila][columna]->setPosition(sf::Vector2f(posicionCuadrado.x + 5.f,posicionCuadrado.y - 12.f));
+            _imagenesHumanos[fila][columna]->setPosition(sf::Vector2f(posicionCuadrado.x -20.f,posicionCuadrado.y -10.f));
 
-            _imagenesAliens[fila][columna]->setPosition(sf::Vector2f(posicionCuadrado.x + 10.f,posicionCuadrado.y - 0.f));
+            _imagenesAliens[fila][columna]->setPosition(sf::Vector2f(posicionCuadrado.x -2.f,posicionCuadrado.y - 0.f));
         }
     }
 }
@@ -315,7 +328,7 @@ void TableroGrafico::actualizar() //actualizar tablero
 {
     _posicionNaveX += 0.01f;
 
-    if (_posicionNaveX > -25.f)
+    if (_posicionNaveX > 25.f)
     {
         _posicionNaveX = 1040.f;
     }
