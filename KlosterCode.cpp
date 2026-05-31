@@ -24,7 +24,7 @@ void Klostercode::ProcesarLetra(char letra){
     }
     else{
         if(letra == _codigo[0])
-            _pasoActual = 1;  ///un seguro por si el usuario repite la primera tecla por error
+            _pasoActual = 1;  ///un seguro por si el usuario repite dos veces una tecla por error
         else
             _pasoActual = 0;
     }

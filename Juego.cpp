@@ -24,6 +24,9 @@ Juego::Juego(){
 }
 
 void Juego::IniciarPartida(){
+    //cargar jugadores
+
+    //reiniciar variables
     _movimientosTotales = 0;
     _empate = false;
     _juegoTerminado = false;
@@ -31,6 +34,8 @@ void Juego::IniciarPartida(){
     _energiaJugador2 = 5;
     _turnoActual = 1;
     _jugadorEnTurno = 1;
+
+    //preparar tablero
 }
 
 void Juego::Jugar(){
@@ -73,6 +78,7 @@ bool Juego::VerificarGanador(){
     if(_tablero.HayGanador('X') == true){
 
         _juegoTerminado = true;
+        _partida.setGanador(1);
         return true;
     }
 
@@ -80,12 +86,14 @@ bool Juego::VerificarGanador(){
     if(_tablero.HayGanador('O') == true){
 
         _juegoTerminado = true;
+        _partida.setGanador(2);
         return true;
     }
 
     //empate
     if(_tablero.HayEmpate() == true){
 
+        _partida.setGanador(0);
         _empate = true;
         _juegoTerminado = true;
 
@@ -106,7 +114,9 @@ void Juego::FinalizarPartida(){
 
 }
 
-void Juego::GuardarPartida(){}
+void Juego::GuardarPartida(){
+    _archivo.GuardarPartida(_partida);
+}
 
 void Juego::ActualizarRanking(){}
 

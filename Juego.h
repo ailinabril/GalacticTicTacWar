@@ -6,6 +6,7 @@
 #include "Torre.h"
 #include "Mina.h"
 #include "Bomba.h"
+#include "ArchivoGanarPartida.h"
 
 class Juego{
 private:
@@ -33,6 +34,7 @@ private:
 
     //partida actual
     Partida _partida;
+    ArchivoPartidas _archivo;
 
     //turnos
     int _turnoActual;
