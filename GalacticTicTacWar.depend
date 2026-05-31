@@ -2461,15 +2461,15 @@
 	<iostream>
 	"Partida.h"
 
-1779921753 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablero.cpp
+1780194364 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablero.cpp
 	"Tablero.h"
 	<iostream>
 
-1780105750 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
+1780197818 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
-1779938020 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\turnos.cpp
+1780194364 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\turnos.cpp
 	"Turnos.h"
 	<SFML/Graphics.hpp>
 	<iostream>

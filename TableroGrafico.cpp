@@ -61,13 +61,13 @@ TableroGrafico::TableroGrafico() //contructor
 
     // POSICION TABLERO
 
-    float posicionInicialX = 380.f;
+    float posicionInicialX = 390.f;
 
     float posicionInicialY = 140.f;
 
-    float anchoCasilla = 180.f;
+    float anchoCasilla = 169.f;
 
-    float altoCasilla = 120.f;
+    float altoCasilla = 135.f;
 
     // CREAR CASILLAS
 
@@ -79,17 +79,17 @@ TableroGrafico::TableroGrafico() //contructor
 
             _cuadradosDelTablero[fila][columna].setPosition(sf::Vector2f(posicionInicialX + columna * anchoCasilla,posicionInicialY + fila * altoCasilla));
 
-            _cuadradosDelTablero[fila][columna].setFillColor(sf::Color::Transparent);
+            _cuadradosDelTablero[fila][columna].setFillColor(sf::Color::Transparent); // relleno de los cuadros
 
             _cuadradosDelTablero[fila][columna].setOutlineThickness(1.f);
 
-            _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Transparent);
+            _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Cyan); // contorno de los cuadros
         }
     }
 
     // FONDO
 
-    if (!_texturaFondo.loadFromFile("fondo2.png"))
+    if (!_texturaFondo.loadFromFile("fondo3.png"))
     {
         cout << "ERROR FONDO" << endl;
     }
@@ -120,11 +120,11 @@ TableroGrafico::TableroGrafico() //contructor
 
     // TEXTO GANADOR
 
-    _textoGanador =new sf::Text(_fuente,"",55);
+    _textoGanador =new sf::Text(_fuente,"",40);
 
     _textoGanador->setFillColor(sf::Color::Cyan);
 
-    _textoGanador->setPosition(sf::Vector2f(320.f,500.f));
+    _textoGanador->setPosition(sf::Vector2f(400.f,530.f));
 
     // ENERGIA HUMANO
 
@@ -132,15 +132,13 @@ TableroGrafico::TableroGrafico() //contructor
 
     _fondoBarraEnergiaHumano.setFillColor(sf::Color(0,0,0));// el setfillcolor establece el color de relleno de las figura que dibujo
 
-    _fondoBarraEnergiaHumano.setPosition(sf::Vector2f(40.f,790.f));//el setposition ubica un objeto en una posición determinada de la ventana
-
-    _barraEnergiaHumano.setPosition(sf::Vector2f(500.f,400.f));
+    //_fondoBarraEnergiaHumano.setPosition(sf::Vector2f(40.f,592.f));//el setposition ubica un objeto en una posición determinada de la ventana
 
     _barraEnergiaHumano.setSize(sf::Vector2f(210.f,14.f)); //el setsize cambiar el tamaño de un objeto
 
     _barraEnergiaHumano.setFillColor(sf::Color::Green);
 
-    _barraEnergiaHumano.setPosition(sf::Vector2f(45.f,645.f));
+    _barraEnergiaHumano.setPosition(sf::Vector2f(80.f,600.f)); //donde se ubica la barra verde de la energia
 
     // ENERGIA ALIEN
 
@@ -150,13 +148,13 @@ TableroGrafico::TableroGrafico() //contructor
 
     _fondoBarraEnergiaAlien.setPosition(sf::Vector2f(1600.f,400.f));
 
-    _barraEnergiaAlien.setPosition(sf::Vector2f(2000.f,400.f));
+    _barraEnergiaAlien.setPosition(sf::Vector2f(2000.f,592.f));
 
     _barraEnergiaAlien.setSize(sf::Vector2f(210.f,14.f));
 
     _barraEnergiaAlien.setFillColor(sf::Color::Green);
 
-    _barraEnergiaAlien.setPosition(sf::Vector2f(1015.f,645.f));
+    _barraEnergiaAlien.setPosition(sf::Vector2f(985.f,605.f));
 
     // HUMANO
 
@@ -247,27 +245,27 @@ TableroGrafico::TableroGrafico() //contructor
 
     _marcoBombaAlien.setOutlineThickness(2.f);
 
-    _marcoBombaAlien.setOutlineColor(sf::Color::Green); // establece el color del borde (contorno) de una figura
+    _marcoBombaAlien.setOutlineColor(sf::Color::Transparent); // establece el color del borde (contorno) de una figura
 
     _marcoMinaAlien.setSize(sf::Vector2f(220.f,60.f));
 
     _marcoMinaAlien.setPosition(sf::Vector2f(1040.f,335.f));
 
-    _marcoMinaAlien.setFillColor(sf::Color(0,0,0,120));
+    _marcoMinaAlien.setFillColor(sf::Color(0,0,0,0));
 
     _marcoMinaAlien.setOutlineThickness(2.f);
 
-    _marcoMinaAlien.setOutlineColor(sf::Color::Green);
+    _marcoMinaAlien.setOutlineColor(sf::Color::Transparent);
 
     _marcoTorreAlien.setSize(sf::Vector2f(220.f,60.f));
 
     _marcoTorreAlien.setPosition(sf::Vector2f(1040.f,405.f));
 
-    _marcoTorreAlien.setFillColor(sf::Color(0,0,0,120));
+    _marcoTorreAlien.setFillColor(sf::Color(0,0,0,0));
 
     _marcoTorreAlien.setOutlineThickness(2.f);
 
-    _marcoTorreAlien.setOutlineColor(sf::Color::Green);
+    _marcoTorreAlien.setOutlineColor(sf::Color::Transparent);
 
     // POSICIONES HUMANO
 
@@ -287,7 +285,7 @@ TableroGrafico::TableroGrafico() //contructor
 
     _spriteBombaAlien->setPosition(sf::Vector2f(1000.f,250.f));
 
-    _spriteBombaAlien->setColor(sf::Color(255,255,255,0));
+    _spriteBombaAlien->setColor(sf::Color(255,255,255,0)); // 0 es transparente --> ,255) 100% visible
 
     _spriteMinaAlien->setPosition(sf::Vector2f(1000.f,315.f));
 
@@ -334,7 +332,7 @@ TableroGrafico::TableroGrafico() //contructor
 
             sf::Vector2f posicionCuadrado =
 
-            _cuadradosDelTablero[fila][columna].getPosition();
+                _cuadradosDelTablero[fila][columna].getPosition();
 
             _imagenesHumanos[fila][columna]->setPosition(sf::Vector2f(posicionCuadrado.x -20.f,posicionCuadrado.y -10.f));
 
@@ -358,7 +356,7 @@ void TableroGrafico::actualizar() //actualizar tablero
 
     // APARICION ALEATORIA DEL Vero
 
-      if (!_veroYaAparecio)
+    if (!_veroYaAparecio)
     {
         int numeroRandom = rand() % 30000;
 
@@ -373,25 +371,25 @@ void TableroGrafico::actualizar() //actualizar tablero
     }
 
     if (_mostrarVero)
-        {
-            _contadorVero--;
+    {
+        _contadorVero--;
 
-            if (_contadorVero <= 0)
-            {
-                _mostrarVero = false;
-            }
+        if (_contadorVero <= 0)
+        {
+            _mostrarVero = false;
+        }
 
     }
     else
-        {
-            _contadorVero--;
+    {
+        _contadorVero--;
 
-            if (_contadorVero <= 0)
-            {
-                _mostrarVero = false;
-            }
+        if (_contadorVero <= 0)
+        {
+            _mostrarVero = false;
         }
     }
+}
 
 void TableroGrafico::dibujarTablero( //dibujar
     sf::RenderWindow &ventana)
@@ -420,7 +418,7 @@ void TableroGrafico::dibujarTablero( //dibujar
 
     ventana.draw(_marcoTorreAlien);
 
-        if (_mostrarVero)
+    if (_mostrarVero)
     {
         ventana.draw(*_spriteVero);
     }
@@ -443,7 +441,10 @@ void TableroGrafico::dibujarTablero( //dibujar
 
     // TURNOS
 
-    _turnos.dibujar(ventana);
+    if (!_juegoTerminado)
+    {
+        _turnos.dibujar(ventana);
+    }
 
     // TABLERO
 
@@ -459,7 +460,7 @@ void TableroGrafico::dibujarTablero( //dibujar
             }
             else
             {
-                _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Transparent);
+                _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Cyan);
             }
 
             // HUMANOS
@@ -477,9 +478,9 @@ void TableroGrafico::dibujarTablero( //dibujar
             }
         }
         if (_juegoTerminado)
-{
-    ventana.draw(*_textoGanador);
-}
+        {
+            ventana.draw(*_textoGanador);
+        }
     }
 }
 void TableroGrafico::procesarClickDelMouse(
@@ -620,13 +621,13 @@ void TableroGrafico::procesarClickDelMouse(
                     }
                     if (verificarVictoria('X'))
                     {
-                     _textoGanador->setString("GANARON HUMANOS");
+                        _textoGanador->setString("GANARON HUMANOS");
                         _juegoTerminado = true;
                     }
 
                     if (verificarVictoria('O'))
                     {
-                       _textoGanador->setString("GANARON ALIENS");
+                        _textoGanador->setString("GANARON ALIENS");
                         _juegoTerminado = true;
                     }
 
