@@ -1250,9 +1250,10 @@
 
 1779484207 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\main.cpp
 
-1779484207 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\maingrafico.cpp
+1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
+	<ctime>
 	"TableroGrafico.h"
 
 1779229324 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\sfml\include\sfml\graphics.hpp
@@ -1792,13 +1793,12 @@
 	<string_view>
 	<cstdint>
 
-1779484207 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.h
+1780245437 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
 	"Tablero.h"
 	"Turnos.h"
-	<optional>
 
-1779484207 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\turnos.h
+1780003393 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\turnos.h
 	<SFML/Graphics.hpp>
 
 1779229323 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\movimiento.cpp
@@ -1822,15 +1822,16 @@
 	"Tablero.h"
 	<iostream>
 
-1779484207 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.cpp
+1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
-1779484207 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\turnos.cpp
+1780003393 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\turnos.cpp
 	"Turnos.h"
 	<SFML/Graphics.hpp>
+	<iostream>
 
-1779830410 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\juego.cpp
+1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\juego.cpp
 	"Juego.h"
 
 1779484207 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\juego.h
@@ -1842,8 +1843,9 @@
 	"Mina.h"
 	"Bomba.h"
 
-1779229325 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\torre.h
+1780003393 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\torre.h
 	"ObjetoEspecial.h"
+	<SFML/Graphics.hpp>
 
 1779229323 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\mina.h
 	"ObjetoEspecial.h"
@@ -2546,4 +2548,31 @@
 1780007088 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\mina.cpp
 	"Mina.h"
 	<cstring>
+
+1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\archivoganarpartida.cpp
+	"ArchivoGanarPartida.h"
+	<iostream>
+
+1780245437 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\archivoganarpartida.h
+	<fstream>
+	"Partida.h"
+
+1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\menu.cpp
+	"Menu.h"
+
+1780003393 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\menu.h
+	<iostream>
+	"Juego.h"
+
+1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\mina.cpp
+	"Mina.h"
+	<cstring>
+
+1780003393 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\objetoespecial.cpp
+	"ObjetoEspecial.h"
+	<cstring>
+
+1780003393 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\torre.cpp
+	"Torre.h"
+	<iostream>
 
