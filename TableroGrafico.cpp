@@ -17,6 +17,11 @@ TableroGrafico::TableroGrafico() //contructor
 
     _cantidadFichasAlien = 0;
 
+    _victoriasHumanos = 0;
+
+    _victoriasAliens = 0;
+
+
     // SELECCION
 
     _hayFichaSeleccionada = false;
@@ -125,6 +130,18 @@ TableroGrafico::TableroGrafico() //contructor
     _textoGanador->setFillColor(sf::Color::Green);
 
     _textoGanador->setPosition(sf::Vector2f(400.f,560.f));
+
+    _textoVictoriasHumanos =new sf::Text(_fuente);
+
+    _textoVictoriasAliens =new sf::Text(_fuente);
+
+    _textoVictoriasHumanos->setCharacterSize(24);
+
+    _textoVictoriasAliens->setCharacterSize(24);
+
+    _textoVictoriasHumanos->setPosition(sf::Vector2f(260.f,510.f));
+
+    _textoVictoriasAliens->setPosition(sf::Vector2f(1165.f,515.f));
 
     // ENERGIA HUMANO
 
@@ -409,6 +426,10 @@ void TableroGrafico::dibujarTablero( //dibujar
 
     ventana.draw(_marcoTorreAlien);
 
+    ventana.draw(*_textoVictoriasHumanos);
+
+    ventana.draw(*_textoVictoriasAliens);
+
     if (_mostrarVero)
     {
         ventana.draw(*_spriteVero);
@@ -614,12 +635,24 @@ void TableroGrafico::procesarClickDelMouse(
                     {
                         _textoGanador->setString("GANARON HUMANOS");
                         _juegoTerminado = true;
+                        _victoriasHumanos++;
+                        _textoVictoriasHumanos->setString(" "+ std::to_string( _victoriasHumanos));
+                    }
+                    else{
+                        _victoriasHumanos = 0;
+                        _textoVictoriasHumanos->setString("0");
                     }
 
                     if (verificarVictoria('O'))
                     {
                         _textoGanador->setString("GANARON LOS ALIENS");
                         _juegoTerminado = true;
+                        _victoriasAliens++;
+                        _textoVictoriasAliens->setString(" "+ std::to_string(_victoriasAliens));
+                    }
+                     else{
+                        _victoriasHumanos = 0;
+                        _textoVictoriasAliens->setString("0");
                     }
 
                     return;

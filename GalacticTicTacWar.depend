@@ -2446,7 +2446,7 @@
 	<string_view>
 	<cstdint>
 
-1780105669 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
+1780368060 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
 	"Tablero.h"
 	"Turnos.h"
@@ -2470,11 +2470,11 @@
 	"Tablero.h"
 	<iostream>
 
-1780366377 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
+1780369154 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
-1780366577 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\turnos.cpp
+1780366765 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\turnos.cpp
 	"Turnos.h"
 	<SFML/Graphics.hpp>
 	<iostream>

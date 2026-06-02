@@ -107,6 +107,16 @@ private:
 
     int _cantidadFichasAlien;
 
+    // VICTORIAS
+
+    int _victoriasHumanos;
+
+    int _victoriasAliens;
+
+    sf::Text *_textoVictoriasHumanos;
+
+    sf::Text *_textoVictoriasAliens;
+
     // SELECCION
 
     bool _hayFichaSeleccionada;
