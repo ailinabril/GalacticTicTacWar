@@ -2485,8 +2485,9 @@
 	"Torre.h"
 	<iostream>
 
-1780258667 source:c:\users\usuario\desktop\galactic\juego.cpp
+1780357508 source:c:\users\usuario\desktop\galactic\juego.cpp
 	"Juego.h"
+	"ArchivoJugadores.h"
 
 1780256628 c:\users\usuario\desktop\galactic\juego.h
 	"Jugador.h"
@@ -2583,11 +2584,12 @@
 
 1780251880 c:\users\usuario\desktop\galactic\klostercode.h
 
-1780258667 source:c:\users\usuario\desktop\galactic\archivojugadores.cpp
+1780261197 source:c:\users\usuario\desktop\galactic\archivojugadores.cpp
 	<iostream>
 	"ArchivoJugadores.h"
+	<cstring>
 
-1780258667 c:\users\usuario\desktop\galactic\archivojugadores.h
+1780261198 c:\users\usuario\desktop\galactic\archivojugadores.h
 	<fstream>
 	"Jugador.h"
 

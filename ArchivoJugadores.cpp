@@ -60,3 +60,22 @@ bool ArchivoJugadores::BuscarJugador(const char* nombre){
     _archivo.close();
     return false;
 }
+
+Jugador ArchivoJugadores::BuscarYLeerJugador(const char* nombre){
+    //abrimos el archivo
+    _archivo.open("jugadores.dat", ios::in | ios::binary);
+
+    //validamos si se abrio correctamente
+    Jugador cargarDatos;
+    if(_archivo.is_open()){
+
+        while(_archivo.read((char*) &cargarDatos, sizeof(Jugador))){
+            if(stricmp(cargarDatos.getNombre(), nombre)== 0){
+                _archivo.close();
+                return cargarDatos;
+            }
+        }
+        _archivo.close();
+    }
+    return cargarDatos;
+}

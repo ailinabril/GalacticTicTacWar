@@ -11,4 +11,5 @@ public:
     void GuardarJugador(Jugador jugador);
     void LeerJugador();
     bool BuscarJugador(const char* nombre);
+    Jugador BuscarYLeerJugador(const char* nombre);
 };

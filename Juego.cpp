@@ -1,4 +1,5 @@
 #include "Juego.h"
+#include "ArchivoJugadores.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ Juego::Juego(){
 
 void Juego::IniciarPartida(){
     //cargar jugadores
+    _jugador1.Cargar(1);
+    _jugador2.Cargar(2);
 
     //reiniciar variables
     _movimientosTotales = 0;
