@@ -14,11 +14,11 @@ Turnos::Turnos(){
 
     // TEXTO
 
-    _textoTurno =new sf::Text(_fuente,"TURNO HUMANOS",25);
+    _textoTurno =new sf::Text(_fuente,"        HUMANOS",25);
 
     _textoTurno->setFillColor(sf::Color::Cyan);
 
-    _textoTurno->setPosition(sf::Vector2f(520.f,620.f));
+    _textoTurno->setPosition(sf::Vector2f(500.f,640.f));
 }
 
 void Turnos::siguienteTurno()
@@ -29,7 +29,7 @@ void Turnos::siguienteTurno()
     {
         _jugadorActual = 'O';
 
-        _textoTurno->setString("TURNO HUMANOS");
+        _textoTurno->setString("        HUMANOS");
 
         _textoTurno->setFillColor(sf::Color::Cyan);
     }
@@ -37,9 +37,9 @@ void Turnos::siguienteTurno()
     {
         _jugadorActual = 'X';
 
-        _textoTurno->setString("TURNO ALIENS");
+        _textoTurno->setString("          ALIENS");
 
-        _textoTurno->setFillColor(sf::Color(180,0,255));
+        _textoTurno->setFillColor(sf::Color::Green);
     }
 }
 

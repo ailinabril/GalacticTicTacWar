@@ -122,9 +122,9 @@ TableroGrafico::TableroGrafico() //contructor
 
     _textoGanador =new sf::Text(_fuente,"",40);
 
-    _textoGanador->setFillColor(sf::Color::Cyan);
+    _textoGanador->setFillColor(sf::Color::Green);
 
-    _textoGanador->setPosition(sf::Vector2f(400.f,530.f));
+    _textoGanador->setPosition(sf::Vector2f(400.f,560.f));
 
     // ENERGIA HUMANO
 
@@ -330,9 +330,9 @@ TableroGrafico::TableroGrafico() //contructor
 
             // POSICION
 
-            sf::Vector2f posicionCuadrado =
+            sf::Vector2f posicionCuadrado = // sf::Vector2f es una estructura de sfml que almacena una posicion bidimensional usando 2 numeros tipo float
 
-                _cuadradosDelTablero[fila][columna].getPosition();
+            _cuadradosDelTablero[fila][columna].getPosition();
 
             _imagenesHumanos[fila][columna]->setPosition(sf::Vector2f(posicionCuadrado.x -20.f,posicionCuadrado.y -10.f));
 
@@ -356,38 +356,29 @@ void TableroGrafico::actualizar() //actualizar tablero
 
     // APARICION ALEATORIA DEL Vero
 
-    if (!_veroYaAparecio)
+    if (!_veroYaAparecio)  // verfico que vero no haya aparecido
     {
         int numeroRandom = rand() % 30000;
 
         if (numeroRandom == 1)
         {
-            _mostrarVero = true;
+            _mostrarVero = true; // activvo una bandera para indicar que vero debe mostrarse en pantalla
 
-            _contadorVero = 6000;
+            _contadorVero = 6000; // tiempo que permanece en pantalla
 
-            _veroYaAparecio = true;
+            _veroYaAparecio = true; // impido que vuelva activarse de nuevo la aparicion de vero
         }
     }
 
-    if (_mostrarVero)
+    if (_mostrarVero) // si aparece vero
     {
-        _contadorVero--;
+        _contadorVero--; // si aparecio voy descontando en 1
 
-        if (_contadorVero <= 0)
+        if (_contadorVero <= 0) // verifico si el tiempo asignado termino
         {
-            _mostrarVero = false;
+            _mostrarVero = false; // cuando llega a 0 dejo de mostrar a vero
         }
 
-    }
-    else
-    {
-        _contadorVero--;
-
-        if (_contadorVero <= 0)
-        {
-            _mostrarVero = false;
-        }
     }
 }
 
@@ -452,15 +443,15 @@ void TableroGrafico::dibujarTablero( //dibujar
     {
         for (int columna = 0; columna < 3; columna++)
         {
-            ventana.draw(_cuadradosDelTablero[fila][columna]);
+            ventana.draw(_cuadradosDelTablero[fila][columna]); //dibuja el cuadrado correspondiente a la posicion del tablero
 
-            if (_hayFichaSeleccionada && fila == _filaSeleccionada && columna == _columnaSeleccionada)
+            if (_hayFichaSeleccionada && fila == _filaSeleccionada && columna == _columnaSeleccionada) // aca verifico 2 condiciones que exista una ficha seleccionada y que la posicion que esttoy recorriendo coincida con la posicion guardada como seleccionada
             {
-                _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Green);
+                _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Green); // si ambas son verdaderas se pone el borde de color verde
             }
             else
             {
-                _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Cyan);
+                _cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Transparent); // si no hay ficha dentro de la misma el borde del cuadro seleccionado es transparente
             }
 
             // HUMANOS
@@ -472,12 +463,12 @@ void TableroGrafico::dibujarTablero( //dibujar
 
             // ALIENS
 
-            if (_contenidoDelTablero[fila][columna] == 'O')
+            if (_contenidoDelTablero[fila][columna] == 'O')  // verifico si la casilla del tablero contiene "O"
             {
-                ventana.draw(*_imagenesAliens[fila][columna]);
+                ventana.draw(*_imagenesAliens[fila][columna]); // si se cumple dibujo la ficha de aliens
             }
         }
-        if (_juegoTerminado)
+        if (_juegoTerminado) //
         {
             ventana.draw(*_textoGanador);
         }
@@ -627,7 +618,7 @@ void TableroGrafico::procesarClickDelMouse(
 
                     if (verificarVictoria('O'))
                     {
-                        _textoGanador->setString("GANARON ALIENS");
+                        _textoGanador->setString("GANARON LOS ALIENS");
                         _juegoTerminado = true;
                     }
 
