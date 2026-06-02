@@ -108,7 +108,17 @@ TableroGrafico::TableroGrafico() //contructor
         cout << "ERROR NAVE" << endl;
     }
 
-    _naveEspacial =new sf::Sprite(_texturaNave);
+    // IMAGENES DEL RIVAL
+
+    _texturaAlienNormal.loadFromFile("marciano.png");
+
+    _texturaBossKloster.loadFromFile("klosterFinalBoss.png");
+
+    // CREAR SPRITE DEL RIVAL
+
+    _spriteRival = new sf::Sprite(_texturaAlienNormal);
+
+    _naveEspacial = new sf::Sprite(_texturaNave);
 
     _posicionNaveX = 150.f;
 
@@ -367,6 +377,21 @@ void TableroGrafico::actualizar() //actualizar tablero
         _posicionNaveX = 150.f;
     }
 
+
+
+    if (_klosterCode.EstaActivado())
+{
+    _spriteRival->setTexture(_texturaBossKloster);
+}
+else
+{
+    _spriteRival->setTexture(_texturaAlienNormal);
+}
+
+    _spriteRival->setPosition(sf::Vector2f(970.f,35.f));
+
+    _spriteRival->setScale(sf::Vector2f(0.18f,0.18f));
+
     _naveEspacial->setPosition(sf::Vector2f(_posicionNaveX,40.f));
 
     _turnos.actualizar();
@@ -401,8 +426,12 @@ void TableroGrafico::actualizar() //actualizar tablero
 
 void TableroGrafico::dibujarTablero( //dibujar
     sf::RenderWindow &ventana)
+
+
 {
     ventana.draw(*_imagenDeFondo);
+
+    ventana.draw(*_spriteRival);
 
     ventana.draw(*_naveEspacial);
 
@@ -638,10 +667,6 @@ void TableroGrafico::procesarClickDelMouse(
                         _victoriasHumanos++;
                         _textoVictoriasHumanos->setString(" "+ std::to_string( _victoriasHumanos));
                     }
-                    else{
-                        _victoriasHumanos = 0;
-                        _textoVictoriasHumanos->setString("0");
-                    }
 
                     if (verificarVictoria('O'))
                     {
@@ -649,10 +674,6 @@ void TableroGrafico::procesarClickDelMouse(
                         _juegoTerminado = true;
                         _victoriasAliens++;
                         _textoVictoriasAliens->setString(" "+ std::to_string(_victoriasAliens));
-                    }
-                     else{
-                        _victoriasHumanos = 0;
-                        _textoVictoriasAliens->setString("0");
                     }
 
                     return;
@@ -714,6 +735,8 @@ void TableroGrafico::reiniciarTablero() //reiniciar
 
 TableroGrafico::~TableroGrafico()
 {
+    delete _spriteRival;
+
     delete _imagenDeFondo;
 
     delete _naveEspacial;

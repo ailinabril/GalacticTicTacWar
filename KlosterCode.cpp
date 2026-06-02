@@ -31,6 +31,7 @@ void Klostercode::ProcesarLetra(char letra){
 }
 
 bool Klostercode::EstaActivado(){
+
     return _activado;
 }
 

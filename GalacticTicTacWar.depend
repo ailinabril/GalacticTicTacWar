@@ -2446,8 +2446,9 @@
 	<string_view>
 	<cstdint>
 
-1780368060 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
+1780443020 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
+	"KlosterCode.h"
 	"Tablero.h"
 	"Turnos.h"
 
@@ -2470,7 +2471,7 @@
 	"Tablero.h"
 	<iostream>
 
-1780369154 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
+1780443612 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
@@ -2604,7 +2605,7 @@
 	<fstream>
 	"Jugador.h"
 
-1780277999 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\klostercode.cpp
+1780441904 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\klostercode.cpp
 	"KlosterCode.h"
 
 1780252248 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\klostercode.h

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
+#include "KlosterCode.h"
 #include "Tablero.h"
 #include "Turnos.h"
 
@@ -23,6 +23,8 @@ private:
 
     // TEXTURAS
 
+    Klostercode _klosterCode;
+
     sf::Texture _texturaFondo;
 
     sf::Texture _texturaNave;
@@ -32,6 +34,12 @@ private:
     sf::Texture _texturaAlien;
 
     sf::Texture _texturaBomba;
+
+    sf::Texture _texturaAlienNormal;
+
+    sf::Texture _texturaBossKloster;
+
+    sf::Sprite *_spriteRival;
 
     sf::Texture _texturaMina;
 
@@ -175,22 +183,15 @@ public:
 
     // DIBUJAR
 
-    void dibujarTablero(
-        sf::RenderWindow &ventana
-    );
+    void dibujarTablero(sf::RenderWindow &ventana);
 
     // CLICK MOUSE
 
-    void procesarClickDelMouse(
-        const sf::Event &evento,
-        sf::RenderWindow &ventana
-    );
+    void procesarClickDelMouse(const sf::Event &evento,sf::RenderWindow &ventana);
 
     // VICTORIA
 
-    bool verificarVictoria(
-        char simboloJugador
-    );
+    bool verificarVictoria(char simboloJugador);
 
     // TABLERO LLENO
 
