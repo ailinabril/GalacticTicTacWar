@@ -34,11 +34,6 @@ void Jugador::Cargar(int id) {
     cout << "Ingrese nombre del jugador: ";
     cin.ignore();
     cin.getline(_nombre, 30);
-
-    _victorias = 0;
-    _derrotas = 0;
-    _empates = 0;
-    _eliminado = false;
 }
 
 ///mostrar datos///
@@ -77,6 +72,9 @@ bool Jugador::getEliminado() {
 }
 
 ///setters///
+void Jugador::setNombre(const char* nombre){
+    strcpy(_nombre, nombre);
+}
 void Jugador::setVictorias(int victorias) {
     _victorias = victorias;
 }

@@ -23,6 +23,7 @@ public:
     bool getEliminado();
 
     //setters para modificar los datos
+    void setNombre(const char* nombre);
     void setVictorias(int victorias);
     void setDerrotas(int derrotas);
     void setEmpates(int empates);

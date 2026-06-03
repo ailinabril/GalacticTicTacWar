@@ -1,6 +1,7 @@
 #include "Juego.h"
 #include "ArchivoJugadores.h"
 
+
 using namespace std;
 
 Juego::Juego(){
@@ -27,7 +28,23 @@ Juego::Juego(){
 void Juego::IniciarPartida(){
     //cargar jugadores
     _jugador1.Cargar(1);
+    //validamos si ese nombre ya existe
+    if(_archivoJugadores.BuscarJugador(_jugador1.getNombre())){
+        _jugador1 = _archivoJugadores.BuscarYLeerJugador(_jugador1.getNombre());
+    }
+    else {
+        _archivoJugadores.GuardarJugador(_jugador1);
+    }
+
     _jugador2.Cargar(2);
+    //validamos si ese nombre ya existe
+    if(_archivoJugadores.BuscarJugador(_jugador2.getNombre())){
+        _jugador2 = _archivoJugadores.BuscarYLeerJugador(_jugador2.getNombre());
+    }
+    else {
+        _archivoJugadores.GuardarJugador(_jugador2);
+    }
+
 
     //reiniciar variables
     _movimientosTotales = 0;
@@ -121,6 +138,37 @@ void Juego::GuardarPartida(){
     _archivo.GuardarPartida(_partida);
 }
 
-void Juego::ActualizarRanking(){}
+void Juego::ActualizarRanking(){
+    if(_partida.getGanador() == 1){
+        int victorias = _jugador1.getVictorias();
+        victorias++;
+        _jugador1.setVictorias(victorias);
+
+        //jugador 2 pierde
+        int derrota = _jugador2.getDerrotas();
+        derrota++;
+        _jugador2.setDerrotas(derrota);
+    }
+    else if(_partida.getGanador() == 2){
+        int derrotas = _jugador1.getDerrotas();
+        derrotas++;
+        _jugador1.setDerrotas(derrotas);
+
+        //jugador 2 gano
+        int victoria = _jugador2.getVictorias();
+        victoria++;
+        _jugador2.setVictorias(victoria);
+    }
+    else if(_partida.getGanador() == 0){
+        int empates1 = _jugador1.getEmpates();
+        empates1++;
+        _jugador1.setEmpates(empates1);
+
+        //jugador 2 empato
+        int empates2 = _jugador2.getEmpates();
+        empates2++;
+        _jugador2.setEmpates(empates2);
+    }
+}
 
 
