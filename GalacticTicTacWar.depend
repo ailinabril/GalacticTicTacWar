@@ -1868,11 +1868,11 @@
 
 1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\fecha.h
 
-1780364569 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.cpp
+1780450493 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
 
-1780277999 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.h
+1780450493 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"
@@ -1881,8 +1881,9 @@
 	"Mina.h"
 	"Bomba.h"
 	"ArchivoGanarPartida.h"
+	"ArchivoJugadores.h"
 
-1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\jugador.h
+1780450493 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\jugador.h
 
 1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\partida.h
 	"Fecha.h"
@@ -1896,7 +1897,7 @@
 1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\mina.h
 	"ObjetoEspecial.h"
 
-1780364569 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\jugador.cpp
+1780450493 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\jugador.cpp
 	<iostream>
 	<cstring>
 	"Jugador.h"
@@ -2446,7 +2447,7 @@
 	<string_view>
 	<cstdint>
 
-1780443020 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
+1780458092 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
 	"KlosterCode.h"
 	"Tablero.h"
@@ -2471,7 +2472,7 @@
 	"Tablero.h"
 	<iostream>
 
-1780443612 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
+1780458092 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 

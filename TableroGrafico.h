@@ -193,6 +193,8 @@ public:
 
     bool verificarVictoria(char simboloJugador);
 
+    void procesarLetraKloster(char letra);
+
     // TABLERO LLENO
 
     bool tableroLleno();
