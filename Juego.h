@@ -7,6 +7,7 @@
 #include "Mina.h"
 #include "Bomba.h"
 #include "ArchivoGanarPartida.h"
+#include "ArchivoJugadores.h"
 
 class Juego{
 private:
@@ -35,6 +36,9 @@ private:
     //partida actual
     Partida _partida;
     ArchivoPartidas _archivo;
+
+    //jugadore
+    ArchivoJugadores _archivoJugadores;
 
     //turnos
     int _turnoActual;
