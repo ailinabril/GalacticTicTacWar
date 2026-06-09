@@ -77,5 +77,30 @@ Jugador ArchivoJugadores::BuscarYLeerJugador(const char* nombre){
         }
         _archivo.close();
     }
+    else {
+        cout<< "El archivo no se abrio." <<endl;
+    }
     return cargarDatos;
+}
+
+void ArchivoJugadores::ModificarJugador(Jugador jugador){
+    //abrimos el archivo
+    _archivo.open("Jugadores.dat", ios::in | ios::out | ios::binary);
+
+    //validamos si se abrio correctamente
+    Jugador modificarDatos;
+    if(_archivo.is_open()){
+        while(_archivo.read((char*) &modificarDatos, sizeof(Jugador))){
+            if(stricmp(modificarDatos.getNombre(), jugador.getNombre()) == 0){
+                //volvemos un registro
+                _archivo.seekp(-sizeof(Jugador), ios::cur);
+                //actualizamos al jugador
+                _archivo.write((char*) &jugador, sizeof(Jugador));
+                //cerramos el archivo
+                _archivo.close();
+                return;
+            }
+        }
+    }
+    _archivo.close();
 }

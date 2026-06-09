@@ -169,6 +169,9 @@ void Juego::ActualizarRanking(){
         empates2++;
         _jugador2.setEmpates(empates2);
     }
+
+    _archivoJugadores.ModificarJugador(_jugador1);
+    _archivoJugadores.ModificarJugador(_jugador2);
 }
 
 

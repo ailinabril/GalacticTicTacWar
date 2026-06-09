@@ -12,4 +12,5 @@ public:
     void LeerJugador();
     bool BuscarJugador(const char* nombre);
     Jugador BuscarYLeerJugador(const char* nombre);
+    void ModificarJugador(Jugador jugador);
 };
