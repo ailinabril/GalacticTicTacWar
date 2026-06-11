@@ -1869,7 +1869,7 @@
 
 1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\fecha.h
 
-1780450493 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.cpp
+1781048225 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
 
@@ -1905,11 +1905,12 @@
 
 1779921754 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\main.cpp
 
-1780105035 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\maingrafico.cpp
+1781151668 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
 	<ctime>
 	"TableroGrafico.h"
+	"Menu.h"
 
 1779921753 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\sfml\include\sfml\graphics.hpp
 	<SFML/Graphics/BlendMode.hpp>
@@ -2547,12 +2548,13 @@
 	<fstream>
 	"Partida.h"
 
-1780277999 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menu.cpp
+1781151728 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menu.cpp
 	"Menu.h"
 
-1780007088 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menu.h
+1781150212 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menu.h
 	<iostream>
 	"Juego.h"
+	<SFML/Graphics.hpp>
 
 1780007088 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\mina.cpp
 	"Mina.h"
@@ -2599,12 +2601,12 @@
 	<fstream>
 	"Jugador.h"
 
-1780364568 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\archivojugadores.cpp
+1781048225 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\archivojugadores.cpp
 	<iostream>
 	"ArchivoJugadores.h"
 	<cstring>
 
-1780364568 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\archivojugadores.h
+1781048225 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\archivojugadores.h
 	<fstream>
 	"Jugador.h"
 
@@ -2612,4 +2614,6 @@
 	"KlosterCode.h"
 
 1780252248 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\klostercode.h
+
+1781145904 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menugrafico.cpp
 
