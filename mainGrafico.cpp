@@ -57,59 +57,56 @@ int main()
 
             if (pantallaActual == 0)
             {
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                if (const auto *click =evento->getIf<sf::Event::MouseButtonPressed>())
                 {
-                    sf::Vector2i posicionMouse = sf::Mouse::getPosition(ventana);
+                    sf::Vector2i posicionMouse =sf::Mouse::getPosition(ventana);
 
                     // prueba de coordenadas en consola
 
-                     std::cout << "X: "<< posicionMouse.x<< " Y: "<< posicionMouse.y << std::endl;
+                    std::cout << "X: "<< posicionMouse.x<< " Y: "<< posicionMouse.y << std::endl;
 
                     int opcionMenu = menuPrincipal.procesarClick(posicionMouse);
 
                     if (opcionMenu == 1)
-                        {
-                            pantallaActual = 1;
-                        }
+                    {
+                        pantallaActual = 1;
+                    }
 
-                        if (opcionMenu == 3)
-                        {
-                            pantallaActual = 2;
-                        }
+                    if (opcionMenu == 3)
+                    {
+                        pantallaActual = 2;
+                    }
 
-                        if (opcionMenu == 0)
-                        {
-                            ventana.close();
-                        }
+                    if (opcionMenu == 0)
+                    {
+                        ventana.close();
+                    }
                 }
             }
-                        if (pantallaActual == 1)
-                {
-                        tablero.procesarClickDelMouse(*evento, ventana);
-                }
+            if (pantallaActual == 1)
+            {
+                tablero.procesarClickDelMouse(*evento, ventana);
+            }
         }
-
         ventana.clear();
 
+        if (pantallaActual == 0)
+        {
+            menuPrincipal.dibujar(ventana);
+        }
 
+        if (pantallaActual == 1)
+        {
+            tablero.dibujarTablero(ventana);
+            tablero.actualizar();
+        }
 
-                    if (pantallaActual == 0)
-                    {
-                        menuPrincipal.dibujar(ventana);
-                    }
+        if (pantallaActual == 2)
+        {
+            menuPrincipal.dibujarReglas(ventana);
+        }
 
-                    if (pantallaActual == 1)
-                    {
-                        tablero.dibujarTablero(ventana);
-                        tablero.actualizar();
-                    }
-
-                    if (pantallaActual == 2)
-                    {
-                        menuPrincipal.dibujarReglas(ventana);
-                    }
-
-                    ventana.display();
+        ventana.display();
     }
 
 
