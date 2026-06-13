@@ -53,6 +53,7 @@ public:
     void Jugar(); //controla el flujo del juego, alternando turnos entre los jugadores hasta que haya un ganador o empate
     void TurnoJugador(); //realiza las acciones del jugador en turno, como colocar ficha, usar objetos especiales, etc.
     void MostrarEstado(); //muestra el estado actual del juego, incluyendo el tablero, energia de los jugadores y objetos usados
+    void MostrarRanking();
 
     //control de victorias
     bool VerificarGanador(); //verifica si hay un ganador o empate después de cada turno y actualiza las estadísticas de los jugadores y la partida

@@ -13,4 +13,5 @@ public:
     bool BuscarJugador(const char* nombre);
     Jugador BuscarYLeerJugador(const char* nombre);
     void ModificarJugador(Jugador jugador);
+    void MostrarRanking();
 };

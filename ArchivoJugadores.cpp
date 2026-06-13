@@ -13,9 +13,7 @@ void ArchivoJugadores::GuardarJugador(Jugador jugador){
         //guardamos el archivo
         _archivo.write((char*) &jugador, sizeof(Jugador));
     }
-    else {
-        cout<< "El archivo no se abrio. "<< endl;
-    }
+
     //cerramos el archivo
     _archivo.close();
 }
@@ -30,9 +28,6 @@ void ArchivoJugadores::LeerJugador(){
 
         //cargamos los datos
          _archivo.read((char*) &cargarDatos, sizeof(Jugador));
-    }
-    else {
-        cout<< "El archivo no se abrio. "<< endl;
     }
 
     //cerramos el archivo
@@ -77,9 +72,7 @@ Jugador ArchivoJugadores::BuscarYLeerJugador(const char* nombre){
         }
         _archivo.close();
     }
-    else {
-        cout<< "El archivo no se abrio." <<endl;
-    }
+
     return cargarDatos;
 }
 
@@ -103,4 +96,22 @@ void ArchivoJugadores::ModificarJugador(Jugador jugador){
         }
     }
     _archivo.close();
+}
+
+void ArchivoJugadores::MostrarRanking(){
+    //abrimos el archivo
+    _archivo.open("Jugadores.dat", ios::in | ios::binary);
+
+    //nos fijamos si abrio correctamente
+    if(_archivo.is_open()){
+        Jugador cargarDatos;
+        while(_archivo.read((char*) &cargarDatos, sizeof(Jugador))){
+            //nos fijamos primero si esta eliminado
+            if(cargarDatos.getEliminado() == false){
+                cargarDatos.Mostrar();
+            }
+        }
+    }
+    _archivo.close();
+
 }

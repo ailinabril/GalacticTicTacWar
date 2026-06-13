@@ -56,7 +56,9 @@ void Menu::MostrarReglas(){
     cout<< "El jugador que consiga formar una linea horizontal, vertical o diagonal de tres fichas sera declarado ganador." <<endl;
     cout<< "En caso de que ningun jugador consiga ganar luego de 20 movimientos consecutivos despues de colocar las tres fichas, la partida finalizara en empate." <<endl;
 }
+
 void Menu::MostrarRanking(){
+    _juego.MostrarRanking();
 }
 
 

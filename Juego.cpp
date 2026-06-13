@@ -174,4 +174,8 @@ void Juego::ActualizarRanking(){
     _archivoJugadores.ModificarJugador(_jugador2);
 }
 
+void Juego::MostrarRanking(){
+    _archivoJugadores.MostrarRanking();
+}
+
 
