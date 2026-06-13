@@ -1244,20 +1244,21 @@
 
 1779229323 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\fecha.h
 
-1779229323 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\jugador.cpp
+1781210459 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\jugador.cpp
 	<iostream>
 	<cstring>
 	"Jugador.h"
 
-1779229323 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\jugador.h
+1781210459 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\jugador.h
 
 1779484207 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\main.cpp
 
-1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\maingrafico.cpp
+1781370872 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
 	<ctime>
 	"TableroGrafico.h"
+	"Menu.h"
 
 1779229324 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\sfml\include\sfml\graphics.hpp
 	<SFML/Graphics/BlendMode.hpp>
@@ -1796,8 +1797,9 @@
 	<string_view>
 	<cstdint>
 
-1780245437 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.h
+1781210459 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
+	"KlosterCode.h"
 	"Tablero.h"
 	"Turnos.h"
 
@@ -1825,19 +1827,20 @@
 	"Tablero.h"
 	<iostream>
 
-1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.cpp
+1781210459 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
-1780003393 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\turnos.cpp
+1781210459 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\turnos.cpp
 	"Turnos.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\juego.cpp
+1781370872 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\juego.cpp
 	"Juego.h"
+	"ArchivoJugadores.h"
 
-1779484207 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\juego.h
+1781370872 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"
@@ -1845,6 +1848,8 @@
 	"Torre.h"
 	"Mina.h"
 	"Bomba.h"
+	"ArchivoGanarPartida.h"
+	"ArchivoJugadores.h"
 
 1780003393 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\torre.h
 	"ObjetoEspecial.h"
@@ -2570,12 +2575,13 @@
 	<fstream>
 	"Partida.h"
 
-1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\menu.cpp
+1781370872 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\menu.cpp
 	"Menu.h"
 
-1780003393 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\menu.h
+1781370872 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\menu.h
 	<iostream>
 	"Juego.h"
+	<SFML/Graphics.hpp>
 
 1780245437 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\mina.cpp
 	"Mina.h"
@@ -2618,4 +2624,18 @@
 1780252248 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\klostercode.h
 
 1781145904 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menugrafico.cpp
+
+1781376371 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\archivojugadores.h
+	<fstream>
+	"Jugador.h"
+
+1781210459 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\klostercode.cpp
+	"KlosterCode.h"
+
+1780247922 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\klostercode.h
+
+1781376891 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\archivojugadores.cpp
+	<iostream>
+	"ArchivoJugadores.h"
+	<cstring>
 

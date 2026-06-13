@@ -115,3 +115,51 @@ void ArchivoJugadores::MostrarRanking(){
     _archivo.close();
 
 }
+
+bool ArchivoJugadores::EliminarJugador(const char* nombre){
+
+    //verificamos que el jugador exista
+    if(BuscarJugador(nombre)){
+
+        //buscamos y cargamos el jugador desde el archivo
+        Jugador jugador = BuscarYLeerJugador(nombre);
+
+        //verificamos que no este eliminado
+        if(jugador.getEliminado() == false){
+
+            //marcamos al jugador como eliminado
+            jugador.setEliminado(true);
+
+            //actualizamos los datos del jugador en el archivo
+            ModificarJugador(jugador);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool ArchivoJugadores::ReactivarJugador(const char* nombre){
+
+    //verificamos que el jugador exista
+    if(BuscarJugador(nombre)){
+
+        //buscamos y cargamos el jugador desde el archivo
+        Jugador jugador = BuscarYLeerJugador(nombre);
+
+        //verificamos que este eliminado
+        if(jugador.getEliminado() == true){
+
+            //reactivamos al jugador
+            jugador.setEliminado(false);
+
+            //actualizamos los datos del jugador en el archivo
+            ModificarJugador(jugador);
+
+            return true;
+        }
+    }
+
+    return false;
+}
