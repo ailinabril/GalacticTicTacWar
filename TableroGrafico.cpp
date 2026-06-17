@@ -11,6 +11,8 @@ TableroGrafico::TableroGrafico() //contructor
 
 	_juegoTerminado = false;
 
+	_cpuPensando = false;
+
 	// FICHAS
 
 	_cantidadFichasHumano = 0;
@@ -422,6 +424,62 @@ void TableroGrafico::actualizar() //actualizar tablero
 		}
 
 	}
+
+	if (_cpuPensando){
+
+    if (_relojCPU.getElapsedTime().asSeconds() >= 1.5f){
+        turnoCPU();
+
+        _cpuPensando = false;
+    }
+}
+}
+
+void TableroGrafico::turnoCPU()
+{
+    int fila;
+    int columna;
+
+    if (_cantidadFichasAlien < 3)
+    {
+        do
+        {
+            fila = rand() % 3;
+            columna = rand() % 3;
+        }
+        while (_contenidoDelTablero[fila][columna] != ' ');
+
+        _contenidoDelTablero[fila][columna] = 'O';
+
+        _cantidadFichasAlien++;
+    }
+    else
+    {
+        int filaOrigen;
+        int columnaOrigen;
+
+        do
+        {
+            filaOrigen = rand() % 3;
+            columnaOrigen = rand() % 3;
+        }
+        while (_contenidoDelTablero[filaOrigen][columnaOrigen] != 'O');
+
+        do
+        {
+            fila = rand() % 3;
+            columna = rand() % 3;
+        }
+        while (_contenidoDelTablero[fila][columna] != ' ');
+
+        _contenidoDelTablero[filaOrigen][columnaOrigen] = ' ';
+
+        _contenidoDelTablero[fila][columna] = 'O';
+    }
+
+    _esTurnoHumano = true;
+
+    _turnos.siguienteTurno();
 }
 
 void TableroGrafico::dibujarTablero( //dibujar
@@ -525,162 +583,123 @@ void TableroGrafico::dibujarTablero( //dibujar
 	}
 }
 void TableroGrafico::procesarClickDelMouse(
-										   const sf::Event &evento,sf::RenderWindow &ventana)
+    const sf::Event &evento,
+    sf::RenderWindow &ventana)
 {
-	if (_juegoTerminado)
-	{
-		return;
-	}
+    if (_juegoTerminado)
+    {
+        return;
+    }
 
-	if (const auto *clickMouse =evento.getIf<sf::Event::MouseButtonPressed>())
-	{
-		sf::Vector2f posicionClick(
-								   static_cast<float>(clickMouse->position.x),
-								   static_cast<float>(clickMouse->position.y)
-								   );
+    if (!_esTurnoHumano)
+    {
+        return;
+    }
 
-		// RECORRER TABLERO
+    if (const auto *clickMouse = evento.getIf<sf::Event::MouseButtonPressed>())
+    {
+        sf::Vector2f posicionClick(
+            static_cast<float>(clickMouse->position.x),
+            static_cast<float>(clickMouse->position.y));
 
-		for (int fila = 0; fila < 3; fila++)
-		{
-			for (int columna = 0; columna < 3; columna++)
-			{
-				sf::FloatRect areaCasilla =
-					_cuadradosDelTablero[fila][columna].getGlobalBounds();
+        for (int fila = 0; fila < 3; fila++)
+        {
+            for (int columna = 0; columna < 3; columna++)
+            {
+                sf::FloatRect areaCasilla =
+                    _cuadradosDelTablero[fila][columna].getGlobalBounds();
 
-					if (areaCasilla.contains(posicionClick))
-					{
-						if (_esTurnoHumano)
-						{
+                if (areaCasilla.contains(posicionClick))
+                {
+                    // COLOCAR FICHAS
+                    if (_cantidadFichasHumano < 3)
+                    {
+                        if (_contenidoDelTablero[fila][columna] == ' ')
+                        {
+                            _contenidoDelTablero[fila][columna] = 'X';
 
-							if (_cantidadFichasHumano < 3)
-							{
-								if (_contenidoDelTablero[fila][columna] == ' ')
-								{
-									_contenidoDelTablero[fila][columna] = 'X';
+                            _cantidadFichasHumano++;
 
-									_cantidadFichasHumano++;
+                            _esTurnoHumano = false;
 
-									_esTurnoHumano = false;
+                            _turnos.siguienteTurno();
 
-									_turnos.siguienteTurno();
-								}
-							}
+                            _cpuPensando = true;
+                            _relojCPU.restart();
+                        }
+                    }
+                    // MOVER FICHAS
+                    else
+                    {
+                        // SELECCIONAR
+                        if (!_hayFichaSeleccionada)
+                        {
+                            if (_contenidoDelTablero[fila][columna] == 'X')
+                            {
+                                _hayFichaSeleccionada = true;
 
-							// MOVER FICHAS
+                                _filaSeleccionada = fila;
 
-							else
-							{
-								// SELECCIONAR
+                                _columnaSeleccionada = columna;
+                            }
+                        }
+                        // MOVER
+                        else
+                        {
+                            if (_contenidoDelTablero[fila][columna] == ' ')
+                            {
+                                _contenidoDelTablero[_filaSeleccionada][_columnaSeleccionada] = ' ';
 
-								if (!_hayFichaSeleccionada)
-								{
-									if (_contenidoDelTablero[fila][columna] == 'X')
-									{
-										_hayFichaSeleccionada = true;
+                                _contenidoDelTablero[fila][columna] = 'X';
 
-										_filaSeleccionada = fila;
+                                _hayFichaSeleccionada = false;
 
-										_columnaSeleccionada = columna;
-									}
-								}
+                                _filaSeleccionada = -1;
 
-								// MOVER
+                                _columnaSeleccionada = -1;
 
-								else
-								{
-									if (_contenidoDelTablero[fila][columna] == ' ')
-									{
-										_contenidoDelTablero[_filaSeleccionada][_columnaSeleccionada] = ' ';
+                                _esTurnoHumano = false;
 
-										_contenidoDelTablero[fila][columna] = 'X';
+                                _turnos.siguienteTurno();
 
-										_hayFichaSeleccionada = false;
+                                turnoCPU();
+                            }
+                        }
+                    }
 
-										_filaSeleccionada = -1;
+                    // VERIFICAR VICTORIA HUMANO
 
-										_columnaSeleccionada = -1;
+                    if (verificarVictoria('X'))
+                    {
+                        _textoGanador->setString("GANARON HUMANOS");
 
-										_esTurnoHumano = false;
+                        _juegoTerminado = true;
 
-										_turnos.siguienteTurno();
-									}
-								}
-							}
-						}
+                        _victoriasHumanos++;
 
-						else
-						{
+                        _textoVictoriasHumanos->setString(
+                            " " + std::to_string(_victoriasHumanos));
+                    }
 
-							if (_cantidadFichasAlien < 3)
-							{
-								if (_contenidoDelTablero[fila][columna] == ' ')
-								{
-									_contenidoDelTablero[fila][columna] = 'O';
+                    // VERIFICAR VICTORIA CPU
 
-									_cantidadFichasAlien++;
+                    if (verificarVictoria('O'))
+                    {
+                        _textoGanador->setString("GANARON LOS ALIENS");
 
-									_esTurnoHumano = true;
+                        _juegoTerminado = true;
 
-									_turnos.siguienteTurno();
-								}
-							}
+                        _victoriasAliens++;
 
-							else
-							{
-								if (!_hayFichaSeleccionada)
-								{
-									if (_contenidoDelTablero[fila][columna] == 'O')
-									{
-										_hayFichaSeleccionada = true;
+                        _textoVictoriasAliens->setString(
+                            " " + std::to_string(_victoriasAliens));
+                    }
 
-										_filaSeleccionada = fila;
-
-										_columnaSeleccionada = columna;
-									}
-								}
-								else
-								{
-									if (_contenidoDelTablero[fila][columna] == ' ')
-									{
-										_contenidoDelTablero[_filaSeleccionada][_columnaSeleccionada] = ' ';
-
-										_contenidoDelTablero[fila][columna] = 'O';
-
-										_hayFichaSeleccionada = false;
-
-										_filaSeleccionada = -1;
-
-										_columnaSeleccionada = -1;
-
-										_esTurnoHumano = true;
-
-										_turnos.siguienteTurno();
-									}
-								}
-							}
-						}
-						if (verificarVictoria('X'))
-						{
-							_textoGanador->setString("GANARON HUMANOS");
-							_juegoTerminado = true;
-							_victoriasHumanos++;
-							_textoVictoriasHumanos->setString(" "+ std::to_string( _victoriasHumanos));
-						}
-
-						if (verificarVictoria('O'))
-						{
-							_textoGanador->setString("GANARON LOS ALIENS");
-							_juegoTerminado = true;
-							_victoriasAliens++;
-							_textoVictoriasAliens->setString(" "+ std::to_string(_victoriasAliens));
-						}
-
-						return;
-					}
-			}
-		}
-	}
+                    return;
+                }
+            }
+        }
+    }
 }
 
 bool TableroGrafico::verificarVictoria(

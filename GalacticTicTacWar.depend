@@ -1797,8 +1797,9 @@
 	<string_view>
 	<cstdint>
 
-1781210459 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.h
+1781737879 c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
 	"KlosterCode.h"
 	"Tablero.h"
 	"Turnos.h"
@@ -1827,7 +1828,7 @@
 	"Tablero.h"
 	<iostream>
 
-1781210459 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.cpp
+1781738067 source:c:\users\bruno\desktop\nueva carpeta\facultad\proyectos tp facu\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include "KlosterCode.h"
 #include "Tablero.h"
 #include "Turnos.h"
@@ -171,7 +172,16 @@ private:
 
     int _objetoSeleccionado;
 
+    //"PENSAMIENTO" DE LA CPU
+
+    bool _cpuPensando;
+    sf::Clock _relojCPU;
+
 public:
+
+    // JUEGA LA CPU
+
+    void turnoCPU();
 
     // CONSTRUCTOR
 
