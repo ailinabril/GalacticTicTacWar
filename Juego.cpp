@@ -22,9 +22,6 @@ Juego::Juego(){
     _movimientosTotales = 0;
     _empate = false;
     _juegoTerminado = false;
-
-    _turnoActual = 1;
-    _jugadorEnTurno = 1;
 }
 
 void Juego::IniciarPartida(){
@@ -45,10 +42,6 @@ void Juego::IniciarPartida(){
     _juegoTerminado = false;
     _energiaJugador = 5;
     _energiaIA = 5;
-    _turnoActual = 1;
-    _jugadorEnTurno = 1;
-
-    //preparar tablero
 }
 
 void Juego::Jugar(){
@@ -99,10 +92,39 @@ void Juego::TurnoIA(Tablero &tablero){
     }
 }
 
-bool Juego::VerificarGanador(){
+bool Juego::ColocarFicha(Tablero &tablero, int fila, int columna){
+
+    //verificamos que la casilla este libre
+    if(tablero.getCasillero(fila, columna) != ' '){
+
+        return false;
+    }
+    //colocamos la ficha del jugador
+    tablero.setCasillero(fila, columna, 'X');
+
+    //actualizamos la cantidad de fichas colocadas
+    _cantidadFichasJugador++;
+
+    return true;
+}
+
+bool Juego::MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino){
+    //verificamos si la casilla del destino esta libre
+    if(tablero.getCasillero(filaDestino, columnaDestino) != ' '){
+        return false;
+    }
+
+    //mueve la ficha del jugador
+    tablero.setCasillero(filaOrigen, columnaOrigen, ' ');
+    tablero.setCasillero(filaDestino, columnaDestino, 'X');
+
+    return true;
+}
+
+bool Juego::VerificarGanador(Tablero &tablero){
 
     //gana jugador
-    if(_tablero.HayGanador('X')){
+    if(tablero.HayGanador('X')){
 
         _juegoTerminado = true;
         _partida.setGanador(1);
@@ -110,7 +132,7 @@ bool Juego::VerificarGanador(){
     }
 
     //gana IA
-    if(_tablero.HayGanador('O')){
+    if(tablero.HayGanador('O')){
 
         _juegoTerminado = true;
         _partida.setGanador(2);
@@ -118,7 +140,7 @@ bool Juego::VerificarGanador(){
     }
 
     //empate
-    if(_tablero.HayEmpate()){
+    if(tablero.HayEmpate()){
 
         _partida.setGanador(0);
         _empate = true;
@@ -129,7 +151,6 @@ bool Juego::VerificarGanador(){
 
     return false;
 }
-
 
 void Juego::FinalizarPartida(){
 
@@ -167,6 +188,14 @@ void Juego::ActualizarRanking(){
 
 void Juego::MostrarRanking(){
     _archivoJugadores.MostrarRanking();
+}
+
+int Juego::getCantidadFichasJugador(){
+    return _cantidadFichasJugador;
+}
+
+int Juego::getCantidadFichasIA(){
+    return _cantidadFichasIA;
 }
 
 

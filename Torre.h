@@ -5,15 +5,9 @@
 class Torre : public ObjetoEspecial{
 private:
     sf::Texture _textura;
-
     sf::Sprite *_sprite;
-
-
 public:
-
     //constructores
-
-
     Torre(); //constructor por defecto
 
     //polimorfismo dinamico
@@ -24,6 +18,5 @@ public:
      void dibujar(sf::RenderWindow &ventana);
 
     // POSICION
-
     void setPosicion(float x,float y);
 };

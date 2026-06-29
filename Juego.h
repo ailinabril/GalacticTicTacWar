@@ -2,7 +2,6 @@
 #include "Jugador.h"
 #include "Tablero.h"
 #include "Partida.h"
-#include "Movimiento.h"
 #include "Torre.h"
 #include "Mina.h"
 #include "Bomba.h"
@@ -13,9 +12,6 @@ class Juego{
 private:
     //jugador
     Jugador _jugador;
-
-    //tablero
-    Tablero _tablero;
 
     //cantidad de fichas
     int _cantidadFichasJugador;
@@ -43,10 +39,6 @@ private:
     //archivo de jugadores
     ArchivoJugadores _archivoJugadores;
 
-    //turnos
-    int _turnoActual;
-    int _jugadorEnTurno;
-
 public:
     //constructores
     Juego(); //constructor por defecto
@@ -57,14 +49,20 @@ public:
     void MostrarRanking();
 
     //control de victorias
-    bool VerificarGanador(); //verifica si hay un ganador o empate después de cada turno y actualiza las estadísticas de los jugadores y la partida
+    bool VerificarGanador(Tablero &tablero); //verifica si hay un ganador o empate después de cada turno y actualiza las estadísticas de los jugadores y la partida
     void FinalizarPartida(); //finaliza la partida, mostrando el resultado y guardando los datos de la partida
 
     //archivos
     void GuardarPartida(); //guarda los datos de la partida en un archivo
-    void GuardarMovimiento(int jugador, int accion, int posicion); //guarda los movimientos realizados por los jugadores en un archivo
     void ActualizarRanking(); //actualiza el ranking de jugadores basado en sus victorias, derrotas y empates
 
     //IA
     void TurnoIA(Tablero &tablero);
+
+    //fichas
+    bool ColocarFicha(Tablero &tablero, int fila, int comlumna);
+    bool MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino);
+
+    int getCantidadFichasJugador();
+    int getCantidadFichasIA();
 };

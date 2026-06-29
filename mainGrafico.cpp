@@ -14,9 +14,7 @@ int main()
     );
 
     TableroGrafico tablero;
-
     Menu menuPrincipal;
-
     int pantallaActual = 0;
 
     while (ventana.isOpen())
@@ -62,7 +60,6 @@ int main()
                     sf::Vector2i posicionMouse =sf::Mouse::getPosition(ventana);
 
                     // prueba de coordenadas en consola
-
                     std::cout << "X: "<< posicionMouse.x<< " Y: "<< posicionMouse.y << std::endl;
 
                     int opcionMenu = menuPrincipal.procesarClick(posicionMouse);
@@ -71,13 +68,16 @@ int main()
                     {
                         pantallaActual = 1;
                     }
-
-                    if (opcionMenu == 3)
-                    {
+                    else if(opcionMenu == 2){
                         pantallaActual = 2;
                     }
 
-                    if (opcionMenu == 0)
+                    else if (opcionMenu == 3)
+                    {
+                        pantallaActual = 3;
+                    }
+
+                    else if (opcionMenu == 0)
                     {
                         ventana.close();
                     }
@@ -108,7 +108,6 @@ int main()
 
         ventana.display();
     }
-
 
     return 0;
 }
