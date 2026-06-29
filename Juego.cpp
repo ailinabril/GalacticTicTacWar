@@ -1,21 +1,23 @@
 #include "Juego.h"
 #include "ArchivoJugadores.h"
 
-
 using namespace std;
 
 Juego::Juego(){
-    _energiaJugador1 = 5;
-    _energiaJugador2 = 5;
+    _cantidadFichasJugador = 0;
+    _cantidadFichasIA = 0;
 
-    _torreUsadaJugador1 = false;
-    _torreUsadaJugador2 = false;
+    _energiaJugador = 5;
+    _energiaIA = 5;
 
-    _minaUsadaJugador1 = false;
-    _minaUsadaJugador2 = false;
+    _torreUsadaJugador = false;
+    _torreUsadaIA = false;
 
-    _bombaUsadaJugador1 = false;
-    _bombaUsadaJugador2 = false;
+    _minaUsadaJugador = false;
+    _minaUsadaIA = false;
+
+    _bombaUsadaJugador = false;
+    _bombaUsadaIA = false;
 
     _movimientosTotales = 0;
     _empate = false;
@@ -27,22 +29,13 @@ Juego::Juego(){
 
 void Juego::IniciarPartida(){
     //cargar jugadores
-    _jugador1.Cargar(1);
+    _jugador.Cargar(1);
     //validamos si ese nombre ya existe
-    if(_archivoJugadores.BuscarJugador(_jugador1.getNombre())){
-        _jugador1 = _archivoJugadores.BuscarYLeerJugador(_jugador1.getNombre());
+    if(_archivoJugadores.BuscarJugador(_jugador.getNombre())){
+        _jugador = _archivoJugadores.BuscarYLeerJugador(_jugador.getNombre());
     }
     else {
-        _archivoJugadores.GuardarJugador(_jugador1);
-    }
-
-    _jugador2.Cargar(2);
-    //validamos si ese nombre ya existe
-    if(_archivoJugadores.BuscarJugador(_jugador2.getNombre())){
-        _jugador2 = _archivoJugadores.BuscarYLeerJugador(_jugador2.getNombre());
-    }
-    else {
-        _archivoJugadores.GuardarJugador(_jugador2);
+        _archivoJugadores.GuardarJugador(_jugador);
     }
 
 
@@ -50,8 +43,8 @@ void Juego::IniciarPartida(){
     _movimientosTotales = 0;
     _empate = false;
     _juegoTerminado = false;
-    _energiaJugador1 = 5;
-    _energiaJugador2 = 5;
+    _energiaJugador = 5;
+    _energiaIA = 5;
     _turnoActual = 1;
     _jugadorEnTurno = 1;
 
@@ -60,50 +53,64 @@ void Juego::IniciarPartida(){
 
 void Juego::Jugar(){
     IniciarPartida();
-
-    //el juego no termino
-    while(!_juegoTerminado){
-        MostrarEstado();
-        TurnoJugador();
-        VerificarGanador();
-    }
-
-    FinalizarPartida();
 }
 
-void Juego::TurnoJugador(){
-    //validamos el turno actual
-    if(_jugadorEnTurno == 1){
-        _jugadorEnTurno = 2;
+void Juego::TurnoIA(Tablero &tablero){
+    int fila;
+    int columna;
+
+    //si la ia todabia no coloco sus tres fichas
+    if(_cantidadFichasIA < 3){
+
+        //busca una casilla libre al azar
+        do {
+            fila = rand() % 3;
+            columna = rand() % 3;
+
+        } while(tablero.getCasillero(fila, columna) != ' ');
+
+        //coloca la ficha de la ia
+        tablero.setCasillero(fila, columna, 'O');
+
+        //actualiza la candidad de fichas colocadas
+        _cantidadFichasIA++;
     }
     else{
-        _jugadorEnTurno = 1;
+        int filaOrigen;
+        int columnaOrigen;
+
+        //elige una ficha de la ia al azar
+        do{
+            filaOrigen = rand() % 3;
+            columnaOrigen = rand() % 3;
+
+        } while(tablero.getCasillero(filaOrigen, columnaOrigen) != 'O');
+
+        //busca una casilla libre para mover la ficha
+        do{
+            fila = rand() % 3;
+            columna = rand() % 3;
+
+        } while(tablero.getCasillero(fila, columna) != ' ');
+
+        //mueve la ficha a la nueva posicion
+        tablero.setCasillero(filaOrigen, columnaOrigen, ' ');
+        tablero.setCasillero(fila, columna, 'O');
     }
-
-    _turnoActual++;
 }
-
-void Juego::MostrarEstado(){
-
-    //actualiza estados temporales del tablero
-    _tablero.ActualizarBloqueo();
-    _tablero.ActualizarDestruccion();
-
-}
-
 
 bool Juego::VerificarGanador(){
 
-    //gana jugador 1
-    if(_tablero.HayGanador('X') == true){
+    //gana jugador
+    if(_tablero.HayGanador('X')){
 
         _juegoTerminado = true;
         _partida.setGanador(1);
         return true;
     }
 
-    //gana jugador 2
-    if(_tablero.HayGanador('O') == true){
+    //gana IA
+    if(_tablero.HayGanador('O')){
 
         _juegoTerminado = true;
         _partida.setGanador(2);
@@ -111,7 +118,7 @@ bool Juego::VerificarGanador(){
     }
 
     //empate
-    if(_tablero.HayEmpate() == true){
+    if(_tablero.HayEmpate()){
 
         _partida.setGanador(0);
         _empate = true;
@@ -140,38 +147,22 @@ void Juego::GuardarPartida(){
 
 void Juego::ActualizarRanking(){
     if(_partida.getGanador() == 1){
-        int victorias = _jugador1.getVictorias();
+        int victorias = _jugador.getVictorias();
         victorias++;
-        _jugador1.setVictorias(victorias);
-
-        //jugador 2 pierde
-        int derrota = _jugador2.getDerrotas();
-        derrota++;
-        _jugador2.setDerrotas(derrota);
+        _jugador.setVictorias(victorias);
     }
     else if(_partida.getGanador() == 2){
-        int derrotas = _jugador1.getDerrotas();
+        int derrotas = _jugador.getDerrotas();
         derrotas++;
-        _jugador1.setDerrotas(derrotas);
-
-        //jugador 2 gano
-        int victoria = _jugador2.getVictorias();
-        victoria++;
-        _jugador2.setVictorias(victoria);
+        _jugador.setDerrotas(derrotas);
     }
     else if(_partida.getGanador() == 0){
-        int empates1 = _jugador1.getEmpates();
-        empates1++;
-        _jugador1.setEmpates(empates1);
-
-        //jugador 2 empato
-        int empates2 = _jugador2.getEmpates();
-        empates2++;
-        _jugador2.setEmpates(empates2);
+        int empates = _jugador.getEmpates();
+        empates++;
+        _jugador.setEmpates(empates);
     }
 
-    _archivoJugadores.ModificarJugador(_jugador1);
-    _archivoJugadores.ModificarJugador(_jugador2);
+    _archivoJugadores.ModificarJugador(_jugador);
 }
 
 void Juego::MostrarRanking(){

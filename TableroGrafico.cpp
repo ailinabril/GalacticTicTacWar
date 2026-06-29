@@ -6,42 +6,28 @@ using namespace std;
 TableroGrafico::TableroGrafico() //contructor
 {
 	// TURNOS
-
 	_esTurnoHumano = true;
-
 	_juegoTerminado = false;
-
 	_cpuPensando = false;
 
 	// FICHAS
-
 	_cantidadFichasHumano = 0;
-
 	_cantidadFichasAlien = 0;
-
 	_victoriasHumanos = 0;
-
 	_victoriasAliens = 0;
 
 
 	// SELECCION
-
 	_hayFichaSeleccionada = false;
-
 	_filaSeleccionada = -1;
-
 	_columnaSeleccionada = -1;
 
 	// OBJETO
-
 	_objetoSeleccionado = 0;
 
 	// Vero
-
 	_veroYaAparecio = false;
-
 	_mostrarVero = false;
-
 	_contadorVero = 0;
 
 	if (!_texturaVero.loadFromFile("Vero.png"))
@@ -57,14 +43,7 @@ TableroGrafico::TableroGrafico() //contructor
 
 
 	// TABLERO VACIO
-
-	for (int fila = 0; fila < 3; fila++)
-	{
-		for (int columna = 0; columna < 3; columna++)
-		{
-			_contenidoDelTablero[fila][columna] = ' ';
-		}
-	}
+	_tablero.Inicializar();
 
 	// POSICION TABLERO
 
@@ -435,52 +414,12 @@ void TableroGrafico::actualizar() //actualizar tablero
 }
 }
 
-void TableroGrafico::turnoCPU()
-{
-    int fila;
-    int columna;
-
-    if (_cantidadFichasAlien < 3)
-    {
-        do
-        {
-            fila = rand() % 3;
-            columna = rand() % 3;
-        }
-        while (_contenidoDelTablero[fila][columna] != ' ');
-
-        _contenidoDelTablero[fila][columna] = 'O';
-
-        _cantidadFichasAlien++;
-    }
-    else
-    {
-        int filaOrigen;
-        int columnaOrigen;
-
-        do
-        {
-            filaOrigen = rand() % 3;
-            columnaOrigen = rand() % 3;
-        }
-        while (_contenidoDelTablero[filaOrigen][columnaOrigen] != 'O');
-
-        do
-        {
-            fila = rand() % 3;
-            columna = rand() % 3;
-        }
-        while (_contenidoDelTablero[fila][columna] != ' ');
-
-        _contenidoDelTablero[filaOrigen][columnaOrigen] = ' ';
-
-        _contenidoDelTablero[fila][columna] = 'O';
-    }
-
+void TableroGrafico::turnoCPU(){
+    _juego.TurnoIA(_tablero);
     _esTurnoHumano = true;
-
     _turnos.siguienteTurno();
 }
+
 
 void TableroGrafico::dibujarTablero( //dibujar
 									sf::RenderWindow &ventana)
@@ -563,19 +502,18 @@ void TableroGrafico::dibujarTablero( //dibujar
 			}
 
 			// HUMANOS
-
-			if (_contenidoDelTablero[fila][columna] == 'X')
+			if (_tablero.getCasillero(fila, columna) == 'X')
 			{
 				ventana.draw(*_imagenesHumanos[fila][columna]);
 			}
 
 			// ALIENS
-
-			if (_contenidoDelTablero[fila][columna] == 'O')  // verifico si la casilla del tablero contiene "O"
+			if (_tablero.getCasillero(fila, columna) == 'O')  // verifico si la casilla del tablero contiene "O"
 			{
 				ventana.draw(*_imagenesAliens[fila][columna]); // si se cumple dibujo la ficha de aliens
 			}
 		}
+
 		if (_juegoTerminado) //
 		{
 			ventana.draw(*_textoGanador);
@@ -614,9 +552,9 @@ void TableroGrafico::procesarClickDelMouse(
                     // COLOCAR FICHAS
                     if (_cantidadFichasHumano < 3)
                     {
-                        if (_contenidoDelTablero[fila][columna] == ' ')
+                        if (_tablero.getCasillero(fila, columna) == ' ')
                         {
-                            _contenidoDelTablero[fila][columna] = 'X';
+                            _tablero.setCasillero(fila, columna, 'X');
 
                             _cantidadFichasHumano++;
 
@@ -634,7 +572,7 @@ void TableroGrafico::procesarClickDelMouse(
                         // SELECCIONAR
                         if (!_hayFichaSeleccionada)
                         {
-                            if (_contenidoDelTablero[fila][columna] == 'X')
+                            if (_tablero.getCasillero(fila, columna) == 'X')
                             {
                                 _hayFichaSeleccionada = true;
 
@@ -646,11 +584,11 @@ void TableroGrafico::procesarClickDelMouse(
                         // MOVER
                         else
                         {
-                            if (_contenidoDelTablero[fila][columna] == ' ')
+                            if (_tablero.getCasillero(fila, columna) == ' ')
                             {
-                                _contenidoDelTablero[_filaSeleccionada][_columnaSeleccionada] = ' ';
+                                _tablero.setCasillero(_filaSeleccionada, _columnaSeleccionada, ' ');
 
-                                _contenidoDelTablero[fila][columna] = 'X';
+                                _tablero.setCasillero(fila, columna, 'X');
 
                                 _hayFichaSeleccionada = false;
 
@@ -669,7 +607,7 @@ void TableroGrafico::procesarClickDelMouse(
 
                     // VERIFICAR VICTORIA HUMANO
 
-                    if (verificarVictoria('X'))
+                    if (_tablero.HayGanador('X'))
                     {
                         _textoGanador->setString("GANARON HUMANOS");
 
@@ -683,7 +621,7 @@ void TableroGrafico::procesarClickDelMouse(
 
                     // VERIFICAR VICTORIA CPU
 
-                    if (verificarVictoria('O'))
+                    if (_tablero.HayGanador('O'))
                     {
                         _textoGanador->setString("GANARON LOS ALIENS");
 
@@ -700,56 +638,6 @@ void TableroGrafico::procesarClickDelMouse(
             }
         }
     }
-}
-
-bool TableroGrafico::verificarVictoria(
-									   char simboloJugador
-									   )
-{
-	// FILAS
-
-	for (int fila = 0; fila < 3; fila++)
-	{
-		if (_contenidoDelTablero[fila][0] == simboloJugador && _contenidoDelTablero[fila][1] == simboloJugador && _contenidoDelTablero[fila][2] == simboloJugador)
-		{
-			return true;
-		}
-	}
-
-	// COLUMNAS
-
-	for (int columna = 0; columna < 3; columna++)
-	{
-		if (_contenidoDelTablero[0][columna] == simboloJugador && _contenidoDelTablero[1][columna] == simboloJugador && _contenidoDelTablero[2][columna] == simboloJugador)
-		{
-			return true;
-		}
-	}
-
-	// DIAGONAL PRINCIPAL
-
-	if (_contenidoDelTablero[0][0] == simboloJugador && _contenidoDelTablero[1][1] == simboloJugador && _contenidoDelTablero[2][2] == simboloJugador)
-	{
-		return true;
-	}
-
-	// DIAGONAL SECUNDARIA
-
-	if (_contenidoDelTablero[0][2] == simboloJugador && _contenidoDelTablero[1][1] == simboloJugador && _contenidoDelTablero[2][0] == simboloJugador)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool TableroGrafico::tableroLleno() //tablero lleno
-{
-	return false;
-}
-
-void TableroGrafico::reiniciarTablero() //reiniciar
-{
 }
 
 void TableroGrafico::procesarLetraKloster(char letra)

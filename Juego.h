@@ -11,24 +11,27 @@
 
 class Juego{
 private:
-    //jugadores
-    Jugador _jugador1;
-    Jugador _jugador2;
+    //jugador
+    Jugador _jugador;
 
     //tablero
     Tablero _tablero;
 
+    //cantidad de fichas
+    int _cantidadFichasJugador;
+    int _cantidadFichasIA;
+
     //energia
-    int _energiaJugador1;
-    int _energiaJugador2;
+    int _energiaJugador;
+    int _energiaIA;
 
     //objetos usados
-    bool _torreUsadaJugador1;
-    bool _torreUsadaJugador2;
-    bool _minaUsadaJugador1;
-    bool _minaUsadaJugador2;
-    bool _bombaUsadaJugador1;
-    bool _bombaUsadaJugador2;
+    bool _torreUsadaJugador;
+    bool _torreUsadaIA;
+    bool _minaUsadaJugador;
+    bool _minaUsadaIA;
+    bool _bombaUsadaJugador;
+    bool _bombaUsadaIA;
     int _movimientosTotales;
     bool _empate;
     bool _juegoTerminado;
@@ -37,7 +40,7 @@ private:
     Partida _partida;
     ArchivoPartidas _archivo;
 
-    //jugadore
+    //archivo de jugadores
     ArchivoJugadores _archivoJugadores;
 
     //turnos
@@ -51,8 +54,6 @@ public:
     //funciones principales
     void IniciarPartida(); //inicia una nueva partida, cargando los datos de los jugadores y la fecha
     void Jugar(); //controla el flujo del juego, alternando turnos entre los jugadores hasta que haya un ganador o empate
-    void TurnoJugador(); //realiza las acciones del jugador en turno, como colocar ficha, usar objetos especiales, etc.
-    void MostrarEstado(); //muestra el estado actual del juego, incluyendo el tablero, energia de los jugadores y objetos usados
     void MostrarRanking();
 
     //control de victorias
@@ -63,4 +64,7 @@ public:
     void GuardarPartida(); //guarda los datos de la partida en un archivo
     void GuardarMovimiento(int jugador, int accion, int posicion); //guarda los movimientos realizados por los jugadores en un archivo
     void ActualizarRanking(); //actualiza el ranking de jugadores basado en sus victorias, derrotas y empates
+
+    //IA
+    void TurnoIA(Tablero &tablero);
 };

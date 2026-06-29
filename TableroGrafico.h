@@ -5,21 +5,17 @@
 #include "KlosterCode.h"
 #include "Tablero.h"
 #include "Turnos.h"
+#include "Juego.h"
 
 class TableroGrafico
 {
 private:
-
     // LOGICA
-
     Tablero _tablero;
-
     Turnos _turnos;
+    Juego _juego;
 
     // TABLERO
-
-    char _contenidoDelTablero[3][3];
-
     sf::RectangleShape _cuadradosDelTablero[3][3];
 
     // TEXTURAS
@@ -200,18 +196,7 @@ public:
     void procesarClickDelMouse(const sf::Event &evento,sf::RenderWindow &ventana);
 
     // VICTORIA
-
-    bool verificarVictoria(char simboloJugador);
-
     void procesarLetraKloster(char letra);
-
-    // TABLERO LLENO
-
-    bool tableroLleno();
-
-    // REINICIAR
-
-    void reiniciarTablero();
 
     // DESTRUCTOR
 
