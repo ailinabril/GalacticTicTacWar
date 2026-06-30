@@ -1870,7 +1870,7 @@
 1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\objetoespecial.h
 	"Tablero.h"
 
-1779921753 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablero.h
+1781575068 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablero.h
 
 1779921751 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\fecha.cpp
 	<iostream>
@@ -1878,15 +1878,14 @@
 
 1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\fecha.h
 
-1781048225 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.cpp
+1782776575 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
 
-1780450493 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.h
+1782776575 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"
-	"Movimiento.h"
 	"Torre.h"
 	"Mina.h"
 	"Bomba.h"
@@ -1895,12 +1894,12 @@
 
 1780450493 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\jugador.h
 
-1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\partida.h
+1782776575 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\partida.h
 	"Fecha.h"
 
 1779921751 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\movimiento.h
 
-1779930744 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\torre.h
+1782776575 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\torre.h
 	"ObjetoEspecial.h"
 	<SFML/Graphics.hpp>
 
@@ -1914,7 +1913,7 @@
 
 1779921754 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\main.cpp
 
-1781152642 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\maingrafico.cpp
+1782776575 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
 	<ctime>
@@ -2458,11 +2457,13 @@
 	<string_view>
 	<cstdint>
 
-1780458092 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
+1782776575 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
 	"KlosterCode.h"
 	"Tablero.h"
 	"Turnos.h"
+	"Juego.h"
 
 1779937534 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\turnos.h
 	<SFML/Graphics.hpp>
@@ -2475,7 +2476,7 @@
 	"ObjetoEspecial.h"
 	<cstring>
 
-1779921751 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\partida.cpp
+1782776575 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\partida.cpp
 	<iostream>
 	"Partida.h"
 
@@ -2483,11 +2484,11 @@
 	"Tablero.h"
 	<iostream>
 
-1780458092 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
+1782776575 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
-1780366765 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\turnos.cpp
+1782776575 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\turnos.cpp
 	"Turnos.h"
 	<SFML/Graphics.hpp>
 	<iostream>
@@ -2496,7 +2497,7 @@
 	"ObjetoEspecial.h"
 	<cstring>
 
-1779931001 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\torre.cpp
+1782776575 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\torre.cpp
 	"Torre.h"
 	<iostream>
 
@@ -2557,7 +2558,7 @@
 	<fstream>
 	"Partida.h"
 
-1781151728 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menu.cpp
+1781464796 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menu.cpp
 	"Menu.h"
 
 1781150212 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\menu.h
@@ -2611,12 +2612,12 @@
 	<fstream>
 	"Jugador.h"
 
-1781048225 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\archivojugadores.cpp
+1781464796 source:c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\archivojugadores.cpp
 	<iostream>
 	"ArchivoJugadores.h"
 	<cstring>
 
-1781048225 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\archivojugadores.h
+1781464796 c:\users\aldos\onedrive\escritorio\proyec_orig\galactictictacwar\archivojugadores.h
 	<fstream>
 	"Jugador.h"
 
