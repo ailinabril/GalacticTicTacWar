@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <optional>
 #include <ctime>
+
 #include "TableroGrafico.h"
 #include "Menu.h"
 
@@ -13,97 +14,141 @@ int main()
         "GalacticTicTacWar"
     );
 
+    //------------------------------------------------------------
+    // OBJETOS PRINCIPALES
+    //------------------------------------------------------------
     TableroGrafico tablero;
     Menu menuPrincipal;
+
+    //------------------------------------------------------------
+    // PANTALLA ACTUAL
+    // 0 = Menu
+    // 1 = Juego
+    // 2 = Ranking
+    // 3 = Reglas
+    //------------------------------------------------------------
     int pantallaActual = 0;
 
     while (ventana.isOpen())
     {
         while (std::optional evento = ventana.pollEvent())
         {
+            //------------------------------------------------------------
+            // CERRAR VENTANA
+            //------------------------------------------------------------
             if (evento->is<sf::Event::Closed>())
             {
                 ventana.close();
             }
 
+            //------------------------------------------------------------
             // CODIGO SECRETO KLOSTER
-
-            if (const auto *teclaPresionada =
-                        evento->getIf<sf::Event::KeyPressed>())
+            //------------------------------------------------------------
+            if (const auto* teclaPresionada =
+                    evento->getIf<sf::Event::KeyPressed>())
             {
-                if (teclaPresionada->code == sf::Keyboard::Key::K)
+                switch (teclaPresionada->code)
+                {
+                case sf::Keyboard::Key::K:
                     tablero.procesarLetraKloster('K');
+                    break;
 
-                if (teclaPresionada->code == sf::Keyboard::Key::L)
+                case sf::Keyboard::Key::L:
                     tablero.procesarLetraKloster('L');
+                    break;
 
-                if (teclaPresionada->code == sf::Keyboard::Key::O)
+                case sf::Keyboard::Key::O:
                     tablero.procesarLetraKloster('O');
+                    break;
 
-                if (teclaPresionada->code == sf::Keyboard::Key::S)
+                case sf::Keyboard::Key::S:
                     tablero.procesarLetraKloster('S');
+                    break;
 
-                if (teclaPresionada->code == sf::Keyboard::Key::T)
+                case sf::Keyboard::Key::T:
                     tablero.procesarLetraKloster('T');
+                    break;
 
-                if (teclaPresionada->code == sf::Keyboard::Key::E)
+                case sf::Keyboard::Key::E:
                     tablero.procesarLetraKloster('E');
+                    break;
 
-                if (teclaPresionada->code == sf::Keyboard::Key::R)
+                case sf::Keyboard::Key::R:
                     tablero.procesarLetraKloster('R');
+                    break;
+
+                default:
+                    break;
+                }
             }
 
+            //------------------------------------------------------------
+            // MENU PRINCIPAL
+            //------------------------------------------------------------
             if (pantallaActual == 0)
             {
-                if (const auto *click =evento->getIf<sf::Event::MouseButtonPressed>())
+                if (const auto* click =
+                        evento->getIf<sf::Event::MouseButtonPressed>())
                 {
-                    sf::Vector2i posicionMouse =sf::Mouse::getPosition(ventana);
+                    sf::Vector2i posicionMouse =
+                        sf::Mouse::getPosition(ventana);
 
-                    // prueba de coordenadas en consola
-                    std::cout << "X: "<< posicionMouse.x<< " Y: "<< posicionMouse.y << std::endl;
+                    int opcionSeleccionada =
+                        menuPrincipal.procesarClick(posicionMouse);
 
-                    int opcionMenu = menuPrincipal.procesarClick(posicionMouse);
-
-                    if (opcionMenu == 1)
+                    switch (opcionSeleccionada)
                     {
+                    case 1:
                         pantallaActual = 1;
-                    }
-                    else if(opcionMenu == 2){
+                        break;
+
+                    case 2:
                         pantallaActual = 2;
-                    }
+                        break;
 
-                    else if (opcionMenu == 3)
-                    {
+                    case 3:
                         pantallaActual = 3;
-                    }
+                        break;
 
-                    else if (opcionMenu == 0)
-                    {
+                    case 0:
                         ventana.close();
+                        break;
                     }
                 }
             }
+
+            //------------------------------------------------------------
+            // JUEGO
+            //------------------------------------------------------------
             if (pantallaActual == 1)
             {
                 tablero.procesarClickDelMouse(*evento, ventana);
             }
         }
+
+        //------------------------------------------------------------
+        // DIBUJAR PANTALLA
+        //------------------------------------------------------------
         ventana.clear();
 
-        if (pantallaActual == 0)
+        switch (pantallaActual)
         {
+        case 0:
             menuPrincipal.dibujar(ventana);
-        }
+            break;
 
-        if (pantallaActual == 1)
-        {
+        case 1:
             tablero.dibujarTablero(ventana);
             tablero.actualizar();
-        }
+            break;
 
-        if (pantallaActual == 2)
-        {
+        case 2:
+            menuPrincipal.dibujarRanking(ventana);
+            break;
+
+        case 3:
             menuPrincipal.dibujarReglas(ventana);
+            break;
         }
 
         ventana.display();

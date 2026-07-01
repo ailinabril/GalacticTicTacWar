@@ -2,22 +2,23 @@
 
 class Jugador{
 private:
-    int _idJugador;
     char _nombre[30];
     int _victorias;
     int _derrotas;
     int _empates;
     bool _eliminado;
 public:
-    Jugador(); //constructor por defecto
-    Jugador(int id, const char* nomb); //constructor
-    void Cargar(int id); //pedir datos del jugador
-    void Mostrar(); //mostrar datos
+   // Constructores
+    Jugador();
+    Jugador(const char* nombreJugador);
 
+    // Carga los datos del jugador
+    void Cargar();
+    // Asigna el identificador del jugador
+    void Mostrar(); //mostrar datos
     //getters para obtener los datos
-    int getIdJugador();
     const char* getNombre();
-    int getVictorias();
+    int getVictorias() const;
     int getDerrotas();
     int getEmpates();
     bool getEliminado();

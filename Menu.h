@@ -1,26 +1,58 @@
 #pragma once
-#include <iostream>
-#include "Juego.h"
+
 #include <SFML/Graphics.hpp>
 
-class Menu {
-private:
-    Juego _juego;
-    sf::Texture _texturaMenu;
-    sf::Sprite *_spriteMenu;
-    sf::Font _fuente;
-    sf::Text *_textoReglas;
+#include "Juego.h"
+#include "ArchivoJugadores.h"
 
+class Menu
+{
+private:
+
+    //------------------------------------------------------------
+    // LÓGICA
+    //------------------------------------------------------------
+    Juego _juego;
+    ArchivoJugadores _archivoJugadores;
+
+    //------------------------------------------------------------
+    // RECURSOS GRÁFICOS
+    //------------------------------------------------------------
+    sf::Texture _texturaMenu;
+    sf::Sprite* _spriteMenu;
+
+    sf::Font _fuente;
+
+    //------------------------------------------------------------
+    // TEXTOS
+    //------------------------------------------------------------
+    sf::Text* _textoReglas;
+    sf::Text* _textoPantallaRanking;
 
 public:
-    int procesarClick(sf::Vector2i mouse);
-    void IniciarMenu();
-    void MostrarOpciones();
-    void LeerOpcion();
-    void MostrarReglas();
-    void MostrarRanking();
-    Menu();
-    void dibujar(sf::RenderWindow &ventana);
-    void dibujarReglas(sf::RenderWindow &ventana);
 
+    //------------------------------------------------------------
+    // CONSTRUCTOR
+    //------------------------------------------------------------
+    Menu();
+
+    //------------------------------------------------------------
+    // PROCESA LOS CLICS DEL MENÚ
+    //------------------------------------------------------------
+    int procesarClick(sf::Vector2i mouse);
+
+    //------------------------------------------------------------
+    // DIBUJA EL MENÚ PRINCIPAL
+    //------------------------------------------------------------
+    void dibujar(sf::RenderWindow& ventana);
+
+    //------------------------------------------------------------
+    // DIBUJA LA PANTALLA DE REGLAS
+    //------------------------------------------------------------
+    void dibujarReglas(sf::RenderWindow& ventana);
+
+    //------------------------------------------------------------
+    // DIBUJA LA PANTALLA DE RANKING
+    //------------------------------------------------------------
+    void dibujarRanking(sf::RenderWindow& ventana);
 };

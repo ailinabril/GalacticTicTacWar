@@ -2,112 +2,76 @@
 
 using namespace std;
 
-void Menu::IniciarMenu(){
-    int opcion;
-
-    do {
-        MostrarOpciones();
-
-        cout<< "Ingrese una opcion: ";
-        cin>> opcion;
-
-        switch(opcion){
-        case 1:
-            _juego.Jugar();
-            break;
-
-        case 2:
-            MostrarRanking();
-            break;
-
-        case 3:
-            MostrarReglas();
-            break;
-
-        case 0:
-            cout<< "Gracias por jugar a nuestro juego. ADIOS :)" <<endl;
-            break;
-
-        default:
-            cout<< "Opcion invalida" <<endl;
-            break;
-        }
-
-    }while (opcion != 0);
-}
-void Menu::MostrarOpciones(){
-    cout<< "1- Jugar" <<endl;
-    cout<< "2- Ranking" <<endl;
-    cout<< "3- Reglas" <<endl;
-    cout<< "0- Salir" <<endl;
-
-}
-void Menu::MostrarReglas(){
-    cout<< "Cada jugador contara con un maximo de 3 fichas dentro del tablero." <<endl;
-    cout<< "Los jugadores jugaran por turnos alternados." <<endl;
-    cout<< "Una vez colocadas las 3 fichas, deberan mover una de sus piezas hacia una posicion libre del tablero." <<endl;
-    cout<< "Los objetos especiales consumiran energia al ser utilizados." <<endl;
-    cout<< "Cada objeto especial podra utilizarse una unica vez por partida."<< endl;
-    cout<< "Solo podra existir una torre activa dentro del tablero al mismo tiempo." <<endl;
-    cout<< "La torre bloqueara temporalmente una casilla del tablero y unicamente podra colocarse sobre posiciones vacias." <<endl;
-    cout<< "La bomba permite destruir una ficha enemiga y la casilla afectada no podra utilizarse durante un turno." <<endl;
-    cout<< "La mina energetica otorgara energia adicional al jugador que la utilice." <<endl;
-    cout<< "Los objetos especiales no modifica las condiciones de victoria." <<endl;
-    cout<< "El jugador que consiga formar una linea horizontal, vertical o diagonal de tres fichas sera declarado ganador." <<endl;
-    cout<< "En caso de que ningun jugador consiga ganar luego de 20 movimientos consecutivos despues de colocar las tres fichas, la partida finalizara en empate." <<endl;
-}
-
-void Menu::MostrarRanking(){
-    _juego.MostrarRanking();
-}
-
-
-
+//------------------------------------------------------------
+// CONSTRUCTOR
+//------------------------------------------------------------
 Menu::Menu()
 {
     _texturaMenu.loadFromFile("menuPrincipal.png");
 
     _spriteMenu = new sf::Sprite(_texturaMenu);
 
-    _fuente.openFromFile("Orbitron-Regular.ttf");
+    if (!_fuente.openFromFile("Orbitron-Regular.ttf"))
+    {
+        cout << "Error al cargar la fuente." << endl;
+    }
 
+    //------------------------------------------------------------
+    // TEXTO DE REGLAS
+    //------------------------------------------------------------
     _textoReglas = new sf::Text(_fuente);
 
     _textoReglas->setCharacterSize(22);
-
     _textoReglas->setFillColor(sf::Color::White);
+    _textoReglas->setPosition(sf::Vector2f(50.f, 50.f));
 
-    _textoReglas->setPosition(sf::Vector2f(50.f,50.f));
+    //------------------------------------------------------------
+    // TEXTO DEL RANKING
+    //------------------------------------------------------------
+    _textoPantallaRanking = new sf::Text(_fuente);
 
+    _textoPantallaRanking->setCharacterSize(28);
+    _textoPantallaRanking->setFillColor(sf::Color::White);
+    _textoPantallaRanking->setPosition(sf::Vector2f(80.f, 60.f));
 }
 
+//------------------------------------------------------------
+// DIBUJA EL MENU PRINCIPAL
+//------------------------------------------------------------
 void Menu::dibujar(sf::RenderWindow &ventana)
 {
     ventana.draw(*_spriteMenu);
 }
 
+//------------------------------------------------------------
+// PROCESA LOS CLICS DEL MENU
+//------------------------------------------------------------
 int Menu::procesarClick(sf::Vector2i mouse)
 {
     // JUGAR
-    if (mouse.x >= 370 && mouse.x <= 910 && mouse.y >= 245 && mouse.y <= 330)
+    if (mouse.x >= 370 && mouse.x <= 910 &&
+        mouse.y >= 245 && mouse.y <= 330)
     {
         return 1;
     }
 
     // RANKING
-    if (mouse.x >= 370 && mouse.x <= 910 && mouse.y >= 350 && mouse.y <= 435)
+    if (mouse.x >= 370 && mouse.x <= 910 &&
+        mouse.y >= 350 && mouse.y <= 435)
     {
         return 2;
     }
 
     // REGLAS
-    if (mouse.x >= 370 && mouse.x <= 910 && mouse.y >= 441 && mouse.y <= 540)
+    if (mouse.x >= 370 && mouse.x <= 910 &&
+        mouse.y >= 441 && mouse.y <= 540)
     {
         return 3;
     }
 
     // SALIR
-    if (mouse.x >= 370 && mouse.x <= 910 && mouse.y >= 560 && mouse.y <= 645)
+    if (mouse.x >= 370 && mouse.x <= 910 &&
+        mouse.y >= 560 && mouse.y <= 645)
     {
         return 0;
     }
@@ -115,31 +79,69 @@ int Menu::procesarClick(sf::Vector2i mouse)
     return -1;
 }
 
+//------------------------------------------------------------
+// DIBUJA LA PANTALLA DE REGLAS
+//------------------------------------------------------------
 void Menu::dibujarReglas(sf::RenderWindow &ventana)
 {
     _textoReglas->setString(
 
-    "REGLAS\n\n"
+        "REGLAS\n\n"
 
-    "Cada jugador contara con un maximo de 3 fichas dentro del tablero.\n\n"
-    "Los jugadores jugaran por turnos alternados.\n\n"
-    "Una vez colocadas las 3 fichas, deberan mover una de sus piezas.\n\n"
-    "hacia una posicion libre del tablero.\n\n"
-    "Los objetos especiales consumiran energia al ser utilizados.\n\n"
-    "Cada objeto especial podra utilizarse una unica vez por partida.\n\n"
-    "Solo podra existir una torre activa dentro del tablero al mismo tiempo.\n\n"
-    "La torre bloqueara temporalmente una casilla del tablero y unicamente.\n\n"
-    "podra colocarse sobre posiciones vacias.\n\n"
-    "La bomba permite destruir una ficha enemiga y la casilla afectada.\n\n"
-    "no podra utilizarse durante un turno.\n\n"
-    "La mina energetica otorgara energia adicional al jugador que la utilice.\n\n"
-    "Los objetos especiales no modifica las condiciones de victoria.\n\n"
-    "El jugador que consiga formar una linea horizontal.\n\n"
-    "vertical o diagonal de tres fichas sera declarado ganador.\n\n"
-    "En caso de que ningun jugador consiga ganar luego de 20 movimientos consecutivos.\n\n"
-    "despues de colocar las tres fichas, la partida finalizara en empate.\n\n"
-    )
-;
+        "Cada jugador contara con un maximo de 3 fichas dentro del tablero.\n\n"
+        "Los jugadores jugaran por turnos alternados.\n\n"
+        "Una vez colocadas las 3 fichas deberan mover una de ellas.\n\n"
+        "Los objetos especiales consumen energia.\n\n"
+        "Cada objeto especial solo puede utilizarse una vez.\n\n"
+        "Solo puede existir una torre activa.\n\n"
+        "La torre bloquea una casilla temporalmente.\n\n"
+        "La bomba destruye una ficha enemiga.\n\n"
+        "La mina energetica otorga energia adicional.\n\n"
+        "Los objetos especiales no modifican la condicion de victoria.\n\n"
+        "Gana quien forme una linea horizontal, vertical o diagonal.\n\n"
+        "Si nadie gana luego de 20 movimientos,\n"
+        "la partida finaliza en empate."
+    );
 
     ventana.draw(*_textoReglas);
+}
+
+//------------------------------------------------------------
+// DIBUJA LA PANTALLA DEL RANKING
+//------------------------------------------------------------
+void Menu::dibujarRanking(sf::RenderWindow &ventana)
+{
+    string textoRanking;
+
+    textoRanking = "RANKING DE JUGADORES\n\n";
+
+    int cantidadJugadores = _archivoJugadores.CantidadJugadores();
+
+    for (int i = 0; i < cantidadJugadores; i++)
+    {
+        Jugador jugador = _archivoJugadores.LeerJugador(i);
+
+        if (jugador.getEliminado() == false)
+        {
+            textoRanking += jugador.getNombre();
+
+            textoRanking += "   V: ";
+
+            textoRanking += to_string(jugador.getVictorias());
+
+            textoRanking += "   D: ";
+
+            textoRanking += to_string(jugador.getDerrotas());
+
+            textoRanking += "   E: ";
+
+            textoRanking += to_string(jugador.getEmpates());
+
+            textoRanking += "\n";
+        }
+    }
+
+    _textoPantallaRanking->setString(textoRanking);
+
+    ventana.draw(*_textoPantallaRanking);
 }

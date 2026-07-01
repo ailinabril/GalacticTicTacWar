@@ -4,48 +4,43 @@
 
 using namespace std;
 
-void ArchivoJugadores::GuardarJugador(Jugador jugador){
-    //abrimos el archivo
+void ArchivoJugadores::GuardarJugador(Jugador jugador)
+{
     _archivo.open("jugadores.dat", ios::out | ios::binary | ios::app);
 
-    //validamos si se abrio correctamente
-    if(_archivo.is_open()){
-        //guardamos el archivo
-        _archivo.write((char*) &jugador, sizeof(Jugador));
+    if (_archivo.is_open())
+    {
+        _archivo.write((char*)&jugador, sizeof(Jugador));
     }
 
-    //cerramos el archivo
     _archivo.close();
 }
 
-void ArchivoJugadores::LeerJugador(){
-    //abrimos el archivo
+void ArchivoJugadores::LeerJugador()
+{
     _archivo.open("jugadores.dat", ios::in | ios::binary);
 
-    //validamos si se abrio correctamente
-    if(_archivo.is_open()){
+    if (_archivo.is_open())
+    {
         Jugador cargarDatos;
-
-        //cargamos los datos
-         _archivo.read((char*) &cargarDatos, sizeof(Jugador));
+        _archivo.read((char*)&cargarDatos, sizeof(Jugador));
     }
 
-    //cerramos el archivo
     _archivo.close();
 }
 
-bool ArchivoJugadores::BuscarJugador(const char* nombre){
-    //abrimos el archivo
+bool ArchivoJugadores::BuscarJugador(const char* nombre)
+{
     _archivo.open("jugadores.dat", ios::in | ios::binary);
 
-    //validamos si se abrio correctamente
-    if(_archivo.is_open()){
+    if (_archivo.is_open())
+    {
         Jugador cargarDatos;
 
-        //cargamos los datos y recorremos los jugadores que estan guardados
-        while(_archivo.read((char*) &cargarDatos, sizeof(Jugador))){
-            //comparamos los nombres
-            if(stricmp(cargarDatos.getNombre(), nombre)== 0){
+        while (_archivo.read((char*)&cargarDatos, sizeof(Jugador)))
+        {
+            if (stricmp(cargarDatos.getNombre(), nombre) == 0)
+            {
                 _archivo.close();
                 return true;
             }
@@ -56,110 +51,144 @@ bool ArchivoJugadores::BuscarJugador(const char* nombre){
     return false;
 }
 
-Jugador ArchivoJugadores::BuscarYLeerJugador(const char* nombre){
-    //abrimos el archivo
+Jugador ArchivoJugadores::BuscarYLeerJugador(const char* nombre)
+{
     _archivo.open("jugadores.dat", ios::in | ios::binary);
 
-    //validamos si se abrio correctamente
     Jugador cargarDatos;
-    if(_archivo.is_open()){
 
-        while(_archivo.read((char*) &cargarDatos, sizeof(Jugador))){
-            if(stricmp(cargarDatos.getNombre(), nombre)== 0){
+    if (_archivo.is_open())
+    {
+        while (_archivo.read((char*)&cargarDatos, sizeof(Jugador)))
+        {
+            if (stricmp(cargarDatos.getNombre(), nombre) == 0)
+            {
                 _archivo.close();
                 return cargarDatos;
             }
         }
+
         _archivo.close();
     }
 
     return cargarDatos;
 }
 
-void ArchivoJugadores::ModificarJugador(Jugador jugador){
-    //abrimos el archivo
+void ArchivoJugadores::ModificarJugador(Jugador jugador)
+{
     _archivo.open("Jugadores.dat", ios::in | ios::out | ios::binary);
 
-    //validamos si se abrio correctamente
     Jugador modificarDatos;
-    if(_archivo.is_open()){
-        while(_archivo.read((char*) &modificarDatos, sizeof(Jugador))){
-            if(stricmp(modificarDatos.getNombre(), jugador.getNombre()) == 0){
-                //volvemos un registro
+
+    if (_archivo.is_open())
+    {
+        while (_archivo.read((char*)&modificarDatos, sizeof(Jugador)))
+        {
+            if (stricmp(modificarDatos.getNombre(), jugador.getNombre()) == 0)
+            {
                 _archivo.seekp(-sizeof(Jugador), ios::cur);
-                //actualizamos al jugador
-                _archivo.write((char*) &jugador, sizeof(Jugador));
-                //cerramos el archivo
+                _archivo.write((char*)&jugador, sizeof(Jugador));
                 _archivo.close();
                 return;
             }
         }
     }
+
     _archivo.close();
 }
 
-void ArchivoJugadores::MostrarRanking(){
-    //abrimos el archivo
+void ArchivoJugadores::MostrarRanking()
+{
     _archivo.open("Jugadores.dat", ios::in | ios::binary);
 
-    //nos fijamos si abrio correctamente
-    if(_archivo.is_open()){
+    if (_archivo.is_open())
+    {
         Jugador cargarDatos;
-        while(_archivo.read((char*) &cargarDatos, sizeof(Jugador))){
-            //nos fijamos primero si esta eliminado
-            if(cargarDatos.getEliminado() == false){
+
+        while (_archivo.read((char*)&cargarDatos, sizeof(Jugador)))
+        {
+            if (!cargarDatos.getEliminado())
+            {
                 cargarDatos.Mostrar();
             }
         }
     }
+
+    _archivo.close();
+}
+
+bool ArchivoJugadores::EliminarJugador(const char* nombre)
+{
+    if (BuscarJugador(nombre))
+    {
+        Jugador jugador = BuscarYLeerJugador(nombre);
+
+        if (!jugador.getEliminado())
+        {
+            jugador.setEliminado(true);
+            ModificarJugador(jugador);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool ArchivoJugadores::ReactivarJugador(const char* nombre)
+{
+    if (BuscarJugador(nombre))
+    {
+        Jugador jugador = BuscarYLeerJugador(nombre);
+
+        if (jugador.getEliminado())
+        {
+            jugador.setEliminado(false);
+            ModificarJugador(jugador);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//------------------------------------------------------------
+// DEVUELVE LA CANTIDAD DE JUGADORES GUARDADOS EN EL ARCHIVO
+//------------------------------------------------------------
+int ArchivoJugadores::CantidadJugadores()
+{
+    _archivo.open("jugadores.dat", ios::in | ios::binary);
+
+    if (!_archivo.is_open())
+    {
+        return 0;
+    }
+
+    _archivo.seekg(0, ios::end);
+
+    int cantidad = _archivo.tellg() / sizeof(Jugador);
+
     _archivo.close();
 
+    return cantidad;
 }
 
-bool ArchivoJugadores::EliminarJugador(const char* nombre){
+//------------------------------------------------------------
+// LEE Y DEVUELVE UN JUGADOR SEGUN SU POSICION EN EL ARCHIVO
+//------------------------------------------------------------
+Jugador ArchivoJugadores::LeerJugador(int posicion)
+{
+    Jugador jugador;
 
-    //verificamos que el jugador exista
-    if(BuscarJugador(nombre)){
+    _archivo.open("jugadores.dat", ios::in | ios::binary);
 
-        //buscamos y cargamos el jugador desde el archivo
-        Jugador jugador = BuscarYLeerJugador(nombre);
-
-        //verificamos que no este eliminado
-        if(jugador.getEliminado() == false){
-
-            //marcamos al jugador como eliminado
-            jugador.setEliminado(true);
-
-            //actualizamos los datos del jugador en el archivo
-            ModificarJugador(jugador);
-
-            return true;
-        }
+    if (_archivo.is_open())
+    {
+        _archivo.seekg(posicion * sizeof(Jugador), ios::beg);
+        _archivo.read((char*)&jugador, sizeof(Jugador));
+        _archivo.close();
     }
 
-    return false;
-}
-
-bool ArchivoJugadores::ReactivarJugador(const char* nombre){
-
-    //verificamos que el jugador exista
-    if(BuscarJugador(nombre)){
-
-        //buscamos y cargamos el jugador desde el archivo
-        Jugador jugador = BuscarYLeerJugador(nombre);
-
-        //verificamos que este eliminado
-        if(jugador.getEliminado() == true){
-
-            //reactivamos al jugador
-            jugador.setEliminado(false);
-
-            //actualizamos los datos del jugador en el archivo
-            ModificarJugador(jugador);
-
-            return true;
-        }
-    }
-
-    return false;
+    return jugador;
 }

@@ -6,56 +6,56 @@ using namespace std;
 
 
 ///constructor original///
-Jugador::Jugador(){
-    _idJugador = 0;
+Jugador::Jugador()
+{
     _victorias = 0;
     _derrotas = 0;
     _empates = 0;
     _eliminado = false;
-    strcpy (_nombre, " ");
 
+    strcpy(_nombre, "");
 }
 
 
 ///constructor con parametros///
- Jugador::Jugador(int id, const char* nomb) {
-    _idJugador = id;
+Jugador::Jugador(const char* nombreJugador)
+{
     _victorias = 0;
     _derrotas = 0;
     _empates = 0;
     _eliminado = false;
-    strcpy (_nombre, nomb);
+
+    strcpy(_nombre, nombreJugador);
 }
 
 ///cargar datos///
-void Jugador::Cargar(int id) {
-    _idJugador = id;
+    void Jugador::Cargar()
+    {
+        cout << "Ingrese el nombre del jugador: ";
 
-    cout << "Ingrese nombre del jugador: ";
-    cin.ignore();
-    cin.getline(_nombre, 30);
-}
+        cin.ignore();
+
+        cin.getline(_nombre, 30);
+    }
 
 ///mostrar datos///
-void Jugador::Mostrar() {
-    cout << "ID: " << _idJugador << endl;
-    cout << "Nombre: " << _nombre << endl;
-    cout << "Victorias: " << _victorias << endl;
-    cout << "Derrotas: " << _derrotas << endl;
-    cout << "Empates: " << _empates << endl;
-    cout << "Eliminado: " << (_eliminado ? "Si" : "No") << endl;
-}
+    void Jugador::Mostrar()
+    {
+        cout << "Nombre: " << _nombre << endl;
+        cout << "Victorias: " << _victorias << endl;
+        cout << "Derrotas: " << _derrotas << endl;
+        cout << "Empates: " << _empates << endl;
+        cout << "Eliminado: " << (_eliminado ? "Si" : "No") << endl;
+    }
 
 ///getters///
-int Jugador::getIdJugador() {
-    return _idJugador;
-}
 
 const char* Jugador::getNombre() {
     return _nombre;
 }
 
-int Jugador::getVictorias() {
+int Jugador::getVictorias() const
+{
     return _victorias;
 }
 

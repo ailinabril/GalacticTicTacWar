@@ -1,5 +1,6 @@
 #include "Juego.h"
 #include "ArchivoJugadores.h"
+#include <iostream>
 
 using namespace std;
 
@@ -23,20 +24,22 @@ Juego::Juego(){
     _empate = false;
     _juegoTerminado = false;
 }
+//------------------------------------------------------------
+// INICIA UNA NUEVA PARTIDA
+//------------------------------------------------------------
+void Juego::IniciarPartida()
+{
+    _jugador.Cargar();
 
-void Juego::IniciarPartida(){
-    //cargar jugadores
-    _jugador.Cargar(1);
-    //validamos si ese nombre ya existe
-    if(_archivoJugadores.BuscarJugador(_jugador.getNombre())){
+    if (_archivoJugadores.BuscarJugador(_jugador.getNombre()))
+    {
         _jugador = _archivoJugadores.BuscarYLeerJugador(_jugador.getNombre());
     }
-    else {
+    else
+    {
         _archivoJugadores.GuardarJugador(_jugador);
     }
 
-
-    //reiniciar variables
     _movimientosTotales = 0;
     _empate = false;
     _juegoTerminado = false;
@@ -186,8 +189,57 @@ void Juego::ActualizarRanking(){
     _archivoJugadores.ModificarJugador(_jugador);
 }
 
-void Juego::MostrarRanking(){
-    _archivoJugadores.MostrarRanking();
+//------------------------------------------------------------
+// MUESTRA EL RANKING DE JUGADORES ORDENADO POR VICTORIAS
+//------------------------------------------------------------
+void Juego::MostrarRanking()
+{
+    int cantidadJugadores = _archivoJugadores.CantidadJugadores();
+
+    if (cantidadJugadores == 0)
+    {
+        cout << "No hay jugadores registrados." << endl;
+        return;
+    }
+
+    Jugador* jugadores = new Jugador[cantidadJugadores];
+
+    // Cargar todos los jugadores desde el archivo
+    for (int i = 0; i < cantidadJugadores; i++)
+    {
+        jugadores[i] = _archivoJugadores.LeerJugador(i);
+    }
+
+    // Ordenar por cantidad de victorias (de mayor a menor)
+    for (int i = 0; i < cantidadJugadores - 1; i++)
+    {
+        for (int j = 0; j < cantidadJugadores - i - 1; j++)
+        {
+            if (jugadores[j].getVictorias() < jugadores[j + 1].getVictorias())
+            {
+                Jugador auxiliar = jugadores[j];
+                jugadores[j] = jugadores[j + 1];
+                jugadores[j + 1] = auxiliar;
+            }
+        }
+    }
+
+    cout << endl;
+    cout << "========== RANKING ==========" << endl;
+
+    for (int i = 0; i < cantidadJugadores; i++)
+    {
+        if (!jugadores[i].getEliminado())
+        {
+            cout << i + 1 << " - "
+                 << jugadores[i].getNombre()
+                 << " | Victorias: "
+                 << jugadores[i].getVictorias()
+                 << endl;
+        }
+    }
+
+    delete[] jugadores;
 }
 
 int Juego::getCantidadFichasJugador(){
@@ -198,4 +250,11 @@ int Juego::getCantidadFichasIA(){
     return _cantidadFichasIA;
 }
 
+//------------------------------------------------------------
+// REGISTRA EL RESULTADO DE LA PARTIDA
+//------------------------------------------------------------
+void Juego::RegistrarResultadoPartida(int ganador)
+{
+    _partida.setGanador(ganador);
+}
 

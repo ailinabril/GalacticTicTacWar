@@ -7,6 +7,9 @@
 #include "Bomba.h"
 #include "ArchivoGanarPartida.h"
 #include "ArchivoJugadores.h"
+#include <iostream>
+
+using namespace std;
 
 class Juego{
 private:
@@ -46,12 +49,22 @@ public:
     //funciones principales
     void IniciarPartida(); //inicia una nueva partida, cargando los datos de los jugadores y la fecha
     void Jugar(); //controla el flujo del juego, alternando turnos entre los jugadores hasta que haya un ganador o empate
+    // Muestra el ranking de jugadores
     void MostrarRanking();
-
     //control de victorias
-    bool VerificarGanador(Tablero &tablero); //verifica si hay un ganador o empate después de cada turno y actualiza las estadísticas de los jugadores y la partida
-    void FinalizarPartida(); //finaliza la partida, mostrando el resultado y guardando los datos de la partida
 
+   //------------------------------------------------------------
+    // CONTROL DEL RESULTADO DE LA PARTIDA
+    //------------------------------------------------------------
+
+    // Verifica si existe un ganador o un empate
+    bool VerificarGanador(Tablero& tablero);
+
+    // Registra el ganador de la partida
+    void RegistrarResultadoPartida(int ganador);
+
+    // Guarda la partida y actualiza el ranking
+    void FinalizarPartida();
     //archivos
     void GuardarPartida(); //guarda los datos de la partida en un archivo
     void ActualizarRanking(); //actualiza el ranking de jugadores basado en sus victorias, derrotas y empates

@@ -3,6 +3,24 @@
 
 using namespace std;
 
+//------------------------------------------------------------
+// FUNCION AUXILIAR
+//------------------------------------------------------------
+
+    bool cargarTextura(sf::Texture& textura,
+                       const std::string& archivo,
+                       const std::string& nombre)
+    {
+        if (!textura.loadFromFile(archivo))
+        {
+            std::cout << "ERROR " << nombre << std::endl;
+            return false;
+        }
+
+        return true;
+    }
+
+
 TableroGrafico::TableroGrafico() //contructor
 {
 	// TURNOS
@@ -28,9 +46,10 @@ TableroGrafico::TableroGrafico() //contructor
 	_mostrarVero = false;
 	_contadorVero = 0;
 
-	if (!_texturaVero.loadFromFile("Vero.png")){
-		cout << "ERROR Vero" << endl;
-	}
+	if (!_texturaVero.loadFromFile("Vero.png"))
+{
+    cout << "ERROR Vero" << endl;
+}
 	_spriteVero =new sf::Sprite(_texturaVero);
 	_spriteVero->setPosition(sf::Vector2f(900.f,500.f));
 	_spriteVero->setScale(sf::Vector2f(0.3f,0.3f));
@@ -40,39 +59,45 @@ TableroGrafico::TableroGrafico() //contructor
 	_tablero.Inicializar();
 
 	//POSICION TABLERO
-	float posicionInicialX = 390.f;
-	float posicionInicialY = 140.f;
-	float anchoCasilla = 169.f;
-	float altoCasilla = 135.f;
+	const float posicionInicialX = 390.f;
+    const float posicionInicialY = 140.f;
+    const float anchoCasilla = 169.f;
+    const float altoCasilla = 135.f;
 
-	//CREAR CASILLAS
-	for (int fila = 0; fila < 3; fila++)
-	{
-		for (int columna = 0; columna < 3; columna++)
-		{
-			_cuadradosDelTablero[fila][columna].setSize(sf::Vector2f(anchoCasilla - 5.f,altoCasilla - 5.f));
-			_cuadradosDelTablero[fila][columna].setPosition(sf::Vector2f(posicionInicialX + columna * anchoCasilla,posicionInicialY + fila * altoCasilla));
-			_cuadradosDelTablero[fila][columna].setFillColor(sf::Color::Transparent); // relleno de los cuadros
-			_cuadradosDelTablero[fila][columna].setOutlineThickness(1.f);
-			_cuadradosDelTablero[fila][columna].setOutlineColor(sf::Color::Cyan); // contorno de los cuadros
-		}
-	}
+	// CREAR CASILLAS
+
+    for (int fila = 0; fila < 3; fila++)
+    {
+        for (int columna = 0; columna < 3; columna++)
+        {
+            sf::RectangleShape& casilla = _cuadradosDelTablero[fila][columna];
+
+            casilla.setSize(sf::Vector2f(anchoCasilla - 5.f, altoCasilla - 5.f));
+            casilla.setPosition(sf::Vector2f(
+                posicionInicialX + columna * anchoCasilla,
+                posicionInicialY + fila * altoCasilla));
+
+            casilla.setFillColor(sf::Color::Transparent);
+            casilla.setOutlineThickness(1.f);
+            casilla.setOutlineColor(sf::Color::Cyan);
+        }
+    }
 
 	//FONDO
 
-	if (!_texturaFondo.loadFromFile("fondo3.png"))
-	{
-		cout << "ERROR FONDO" << endl;
-	}
+    if (!_texturaFondo.loadFromFile("fondo3.png"))
+{
+    cout << "ERROR FONDO" << endl;
+}
 
 	_imagenDeFondo = new sf::Sprite(_texturaFondo);
 
 	//NAVE
 
-	if (!_texturaNave.loadFromFile("nave.png"))
-	{
-		cout << "ERROR NAVE" << endl;
-	}
+    if (!_texturaNave.loadFromFile("nave.png"))
+{
+    cout << "ERROR NAVE" << endl;
+}
 
 	// IMAGENES DEL RIVAL
 	_texturaAlienNormal.loadFromFile("marciano.png");
@@ -377,8 +402,8 @@ void TableroGrafico::dibujarTablero(sf::RenderWindow &ventana)
 	}
 }
 void TableroGrafico::procesarClickDelMouse(
-    const sf::Event &evento,
-    sf::RenderWindow &ventana)
+    const sf::Event& evento,
+    sf::RenderWindow& ventana)
 {
     if (_juegoTerminado)
     {
@@ -390,94 +415,135 @@ void TableroGrafico::procesarClickDelMouse(
         return;
     }
 
-    if (const auto *clickMouse = evento.getIf<sf::Event::MouseButtonPressed>())
+    const auto* clickMouse = evento.getIf<sf::Event::MouseButtonPressed>();
+
+    if (clickMouse == nullptr)
     {
-        sf::Vector2f posicionClick(
-            static_cast<float>(clickMouse->position.x),
-            static_cast<float>(clickMouse->position.y));
+        return;
+    }
 
-        for (int fila = 0; fila < 3; fila++)
+    sf::Vector2f posicionClick(
+        static_cast<float>(clickMouse->position.x),
+        static_cast<float>(clickMouse->position.y));
+
+    //------------------------------------------------------------
+    // RECORRER TODO EL TABLERO
+    //------------------------------------------------------------
+    for (int fila = 0; fila < 3; fila++)
+    {
+        for (int columna = 0; columna < 3; columna++)
         {
-            for (int columna = 0; columna < 3; columna++)
+            sf::FloatRect areaCasilla =
+                _cuadradosDelTablero[fila][columna].getGlobalBounds();
+
+            if (!areaCasilla.contains(posicionClick))
             {
-                sf::FloatRect areaCasilla =
-                    _cuadradosDelTablero[fila][columna].getGlobalBounds();
+                continue;
+            }
 
-                if (areaCasilla.contains(posicionClick))
+            //--------------------------------------------------------
+            // COLOCAR FICHAS
+            //--------------------------------------------------------
+            if (_juego.getCantidadFichasJugador() < 3)
+            {
+                if (_juego.ColocarFicha(_tablero, fila, columna))
                 {
-                    // COLOCAR FICHAS
-                    if(_juego.getCantidadFichasJugador() < 3){
-                        //intentar colocar una ficha en la posicion seleccionada
-                        if(_juego.ColocarFicha(_tablero, fila, columna)){
+                    _esTurnoHumano = false;
 
-                            //finaliza el turno del jugador
-                            _esTurnoHumano = false;
+                    _turnos.siguienteTurno();
 
-                            //pasamos al siguiente turno
-                            _turnos.siguienteTurno();
-
-                            //inicia el tiempo de espera para que juegue la IA
-                            _cpuPensando = true;
-                            _relojCPU.restart(); //reinicia un cronometro SFML
-                        }
-                    }
-                    // MOVER FICHAS
-                    else
-                    {
-                        // SELECCIONAR
-                        if (!_hayFichaSeleccionada)
-                        {
-                            if (_tablero.getCasillero(fila, columna) == 'X')
-                            {
-                                _hayFichaSeleccionada = true;
-                                _filaSeleccionada = fila;
-                                _columnaSeleccionada = columna;
-                            }
-                        }
-                        // MOVER
-                        else{
-                            //intentamos mover la ficha a la posicion seleccionada
-                            if(_juego.MoverFicha(_tablero, _filaSeleccionada, _columnaSeleccionada, fila, columna)){
-                                //deseleccionamos la ficha
-                                _hayFichaSeleccionada = false;
-                                _filaSeleccionada = -1;
-                                _columnaSeleccionada = -1;
-
-                                //finaliza el turno del jugador
-                                _esTurnoHumano = false;
-
-                                //pasa al siguiente turno
-                                _turnos.siguienteTurno();
-
-                                //sigue la IA
-                                turnoCPU();
-                            }
-                        }
-                    }
-
-                    // VERIFICAR VICTORIA HUMANO
-                    if (_tablero.HayGanador('X'))
-                    {
-                        _textoGanador->setString("GANARON HUMANOS");
-                        _juegoTerminado = true;
-                        _victoriasHumanos++;
-                        _textoVictoriasHumanos->setString(
-                            " " + std::to_string(_victoriasHumanos));
-                    }
-
-                    // VERIFICAR VICTORIA CPU
-                    if (_tablero.HayGanador('O'))
-                    {
-                        _textoGanador->setString("GANARON LOS ALIENS");
-                        _juegoTerminado = true;
-                        _victoriasAliens++;
-                        _textoVictoriasAliens->setString(
-                            " " + std::to_string(_victoriasAliens));
-                    }
-
-                    return;
+                    _cpuPensando = true;
+                    _relojCPU.restart();
                 }
             }
+            //--------------------------------------------------------
+            // MOVER FICHAS
+            //--------------------------------------------------------
+            else
+            {
+                // Seleccionar ficha
+                if (!_hayFichaSeleccionada)
+                {
+                    if (_tablero.getCasillero(fila, columna) == 'X')
+                    {
+                        _hayFichaSeleccionada = true;
+                        _filaSeleccionada = fila;
+                        _columnaSeleccionada = columna;
+                    }
+                }
+                // Mover ficha
+                else
+                {
+                    if (_juego.MoverFicha(
+                            _tablero,
+                            _filaSeleccionada,
+                            _columnaSeleccionada,
+                            fila,
+                            columna))
+                    {
+                        _hayFichaSeleccionada = false;
+                        _filaSeleccionada = -1;
+                        _columnaSeleccionada = -1;
+
+                        _esTurnoHumano = false;
+
+                        _turnos.siguienteTurno();
+
+                        turnoCPU();
+                    }
+                }
+            }
+
+            //--------------------------------------------------------
+            // VERIFICAR GANADOR HUMANO
+            //--------------------------------------------------------
+            if (_tablero.HayGanador('X'))
+            {
+                _textoGanador->setString("GANARON HUMANOS");
+
+                _juegoTerminado = true;
+
+                _victoriasHumanos++;
+
+                _textoVictoriasHumanos->setString(
+                    std::to_string(_victoriasHumanos));
+
+                _juego.RegistrarResultadoPartida(1);
+                _juego.FinalizarPartida();
+            }
+
+            //--------------------------------------------------------
+            // VERIFICAR GANADOR ALIEN
+            //--------------------------------------------------------
+            else if (_tablero.HayGanador('O'))
+            {
+                _textoGanador->setString("GANARON LOS ALIENS");
+
+                _juegoTerminado = true;
+
+                _victoriasAliens++;
+
+                _textoVictoriasAliens->setString(
+                    std::to_string(_victoriasAliens));
+
+                _juego.RegistrarResultadoPartida(2);
+                _juego.FinalizarPartida();
+            }
+
+            //--------------------------------------------------------
+            // VERIFICAR EMPATE
+            //--------------------------------------------------------
+            else if (_tablero.HayEmpate())
+            {
+                _textoGanador->setString("EMPATE");
+
+                _juegoTerminado = true;
+
+                _juego.RegistrarResultadoPartida(0);
+                _juego.FinalizarPartida();
+            }
+
+            return;
         }
     }
 }

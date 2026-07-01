@@ -1,19 +1,31 @@
 #pragma once
+
 #include <fstream>
+
 #include "Jugador.h"
 
 using namespace std;
 
-class ArchivoJugadores{
+class ArchivoJugadores
+{
 private:
     fstream _archivo;
+
 public:
     void GuardarJugador(Jugador jugador);
     void LeerJugador();
+
     bool BuscarJugador(const char* nombre);
     Jugador BuscarYLeerJugador(const char* nombre);
+
     void ModificarJugador(Jugador jugador);
+
+    // Ranking
+    int CantidadJugadores();
+    Jugador LeerJugador(int posicion);
+
     void MostrarRanking();
+
     bool EliminarJugador(const char* nombre);
     bool ReactivarJugador(const char* nombre);
 };
