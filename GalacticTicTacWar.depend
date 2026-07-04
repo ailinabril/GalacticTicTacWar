@@ -619,7 +619,7 @@
 	"Turnos.h"
 	"Juego.h"
 
-1782770467 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
+1783206442 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
@@ -2501,11 +2501,11 @@
 	"Torre.h"
 	<iostream>
 
-1782770612 source:c:\users\usuario\desktop\galactic\juego.cpp
+1783206417 source:c:\users\usuario\desktop\galactic\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
 
-1782770656 c:\users\usuario\desktop\galactic\juego.h
+1783206281 c:\users\usuario\desktop\galactic\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"

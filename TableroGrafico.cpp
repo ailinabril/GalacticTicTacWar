@@ -437,7 +437,7 @@ void TableroGrafico::procesarClickDelMouse(
                         // MOVER
                         else{
                             //intentamos mover la ficha a la posicion seleccionada
-                            if(_juego.MoverFicha(_tablero, _filaSeleccionada, _columnaSeleccionada, fila, columna)){
+                            if(_juego.MoverFicha(_tablero, _filaSeleccionada, _columnaSeleccionada, fila, columna, 'X')){
                                 //deseleccionamos la ficha
                                 _hayFichaSeleccionada = false;
                                 _filaSeleccionada = -1;

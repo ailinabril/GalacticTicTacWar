@@ -52,44 +52,67 @@ void Juego::TurnoIA(Tablero &tablero){
     int fila;
     int columna;
 
-    //si la ia todabia no coloco sus tres fichas
-    if(_cantidadFichasIA < 3){
+    //si todabia no tiene las 3 fichas
+    if(ContarFichas(tablero, 'O') < 3){
+        //1 intentar juegar
+        if(BuscarJugadaGanadora(tablero, 'O', fila, columna)){
+            tablero.ColocarFicha(fila, columna, 'O');
+            return;
+        }
 
-        //busca una casilla libre al azar
-        do {
-            fila = rand() % 3;
-            columna = rand() % 3;
+        //2 bloquear al jugador
+        if(BuscarJugadaGanadora(tablero, 'X', fila, columna)){
+            tablero.ColocarFicha(fila, columna,'O');
+            return;
+        }
 
-        } while(tablero.getCasillero(fila, columna) != ' ');
+        //3 tomar el centro
+        if(tablero.getCasillero(1, 1) == ' '){
+            tablero.ColocarFicha(1, 1, 'O');
+            return;
+        }
+        //4 tomar una esquina
+        int esquinas[4][2]={
+            {0,0},
+            {0,2},
+            {2,0},
+            {2,2}
+        };
 
-        //coloca la ficha de la ia
-        tablero.setCasillero(fila, columna, 'O');
+        for(int i=0;i<4;i++){
+            int f=esquinas[i][0];
+            int c=esquinas[i][1];
 
-        //actualiza la candidad de fichas colocadas
-        _cantidadFichasIA++;
+            if(tablero.getCasillero(f,c)==' '){
+                tablero.ColocarFicha(f,c,'O');
+                return;
+            }
+        }
+
+        // 5° Si no encontró nada, juega aleatorio.
+        if(BuscarCasillaLibre(tablero, fila, columna)){
+            tablero.ColocarFicha(fila, columna,'O');
+        }
     }
     else{
-        int filaOrigen;
-        int columnaOrigen;
-
-        //elige una ficha de la ia al azar
-        do{
-            filaOrigen = rand() % 3;
-            columnaOrigen = rand() % 3;
-
-        } while(tablero.getCasillero(filaOrigen, columnaOrigen) != 'O');
-
-        //busca una casilla libre para mover la ficha
-        do{
-            fila = rand() % 3;
-            columna = rand() % 3;
-
-        } while(tablero.getCasillero(fila, columna) != ' ');
-
-        //mueve la ficha a la nueva posicion
-        tablero.setCasillero(filaOrigen, columnaOrigen, ' ');
-        tablero.setCasillero(fila, columna, 'O');
+        // Si ya tiene las tres fichas, empieza a moverlas.
+        MoverFichaIA(tablero);
     }
+}
+
+int Juego::ContarFichas(Tablero &tablero, char simbolo){
+    int contador = 0;
+
+    //recorremos todo el tableor
+    for(int fila = 0; fila < 3; fila++){
+        for(int columna = 0; columna < 3; columna++){
+            //si encontramos la ficha del jugador indicado
+            if(tablero.getCasillero(fila, columna) == simbolo){
+                contador++;
+            }
+        }
+    }
+    return contador;
 }
 
 bool Juego::ColocarFicha(Tablero &tablero, int fila, int columna){
@@ -108,7 +131,28 @@ bool Juego::ColocarFicha(Tablero &tablero, int fila, int columna){
     return true;
 }
 
-bool Juego::MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino){
+bool Juego::BuscarCasillaLibre(Tablero &tablero, int &fila, int &columna)
+{
+    //probamos posiciones al azar
+    for (int intento = 0; intento < 100; intento++)
+    {
+        int f = rand() % 3;
+        int c = rand() % 3;
+
+        //si la casilla está libre, devolvemos esa posición
+        if (tablero.getCasillero(f, c) == ' ')
+        {
+            fila = f;
+            columna = c;
+            return true;
+        }
+    }
+
+    //no se encontró ninguna casilla libre
+    return false;
+}
+
+bool Juego::MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, char simbolo){
     //verificamos si la casilla del destino esta libre
     if(tablero.getCasillero(filaDestino, columnaDestino) != ' '){
         return false;
@@ -116,9 +160,56 @@ bool Juego::MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int 
 
     //mueve la ficha del jugador
     tablero.setCasillero(filaOrigen, columnaOrigen, ' ');
-    tablero.setCasillero(filaDestino, columnaDestino, 'X');
+    tablero.setCasillero(filaDestino, columnaDestino, simbolo);
 
     return true;
+}
+
+void Juego::MoverFichaIA(Tablero &tablero){
+    int filaOrigen;
+    int columnaOrigen;
+    int filaDestino;
+    int columnaDestino;
+
+    //buscar una ficha de la ia al azar
+    do{
+        filaOrigen = rand() % 3;
+        columnaOrigen = rand() % 3;
+    }while(tablero.getCasillero(filaOrigen, columnaOrigen) != 'O');
+
+    //buscar una casilla libre
+    BuscarCasillaLibre(tablero, filaDestino, columnaDestino);
+
+    //Reutilizar la funcion que ya existe para mover fichas
+    MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'O');
+
+}
+
+bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int &columna){
+    //recorremos todas las casillas del tablero
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            //solo probamos sobre casillas vacias
+            if(tablero.getCasillero(i, j) == ' '){
+                //simular colocar una ficha
+                tablero.setCasillero(i, j, simbolo);
+
+                //verificamos i con esa jugada se gana
+                if(tablero.HayGanador(simbolo)){
+                    //dejamos el tablero como estaba
+                    tablero.setCasillero(i, j, ' ');
+
+                    fila = i;
+                    columna = j;
+
+                    return true;
+                }
+                //si no gana, deshacemos la simulacion
+                tablero.setCasillero(i, j, ' ');
+            }
+        }
+    }
+    return false;
 }
 
 bool Juego::VerificarGanador(Tablero &tablero){
