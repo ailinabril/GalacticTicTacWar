@@ -67,7 +67,7 @@
 1783297340 c:\users\usuario\desktop\galactic\turnos.h
 	<SFML/Graphics.hpp>
 
-1783297042 source:c:\users\usuario\desktop\galactic\maingrafico.cpp
+1783316177 source:c:\users\usuario\desktop\galactic\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
 	<ctime>
@@ -2536,10 +2536,10 @@
 	"Mina.h"
 	<cstring>
 
-1783297042 source:c:\users\usuario\desktop\galactic\menu.cpp
+1783316177 source:c:\users\usuario\desktop\galactic\menu.cpp
 	"Menu.h"
 
-1783297042 c:\users\usuario\desktop\galactic\menu.h
+1783316177 c:\users\usuario\desktop\galactic\menu.h
 	<SFML/Graphics.hpp>
 	"Juego.h"
 	"ArchivoJugadores.h"
@@ -2605,10 +2605,10 @@
 
 1780251880 c:\users\usuario\desktop\galactic\klostercode.h
 
-1783297042 source:c:\users\usuario\desktop\galactic\archivojugadores.cpp
+1783316177 source:c:\users\usuario\desktop\galactic\archivojugadores.cpp
 	<iostream>
-	"ArchivoJugadores.h"
 	<cstring>
+	"ArchivoJugadores.h"
 
 1783297042 c:\users\usuario\desktop\galactic\archivojugadores.h
 	<fstream>
