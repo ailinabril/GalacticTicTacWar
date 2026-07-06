@@ -13,7 +13,6 @@ public:
     Turnos();
 
     void siguienteTurno();
-    void actualizar();
     void dibujar(sf::RenderWindow &ventana);
 
     int getTurnoActual();

@@ -42,6 +42,11 @@ private:
     //archivo de jugadores
     ArchivoJugadores _archivoJugadores;
 
+    //IA
+    void MoverFichaIA(Tablero &tablero);
+    bool BuscarMovimientoGanador(Tablero &tablero, int &filaOrigen, int &columnaOrigen, int &filaDestino, int &columnaDestino);
+    int ContarFichas(Tablero &tablero, char simbolo);
+    bool BuscarCasillaLibre(Tablero &tablero, int &fila, int &columna);
 public:
     //constructores
     Juego(); //constructor por defecto
@@ -71,10 +76,11 @@ public:
 
     //IA
     void TurnoIA(Tablero &tablero);
+    bool BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int &columna);
 
     //fichas
     bool ColocarFicha(Tablero &tablero, int fila, int comlumna);
-    bool MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino);
+    bool MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, char simbolo);
 
     int getCantidadFichasJugador();
     int getCantidadFichasIA();

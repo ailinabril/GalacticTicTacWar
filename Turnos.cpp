@@ -36,8 +36,6 @@ void Turnos::siguienteTurno()
     }
 }
 
-void Turnos::actualizar(){}
-
 void Turnos::dibujar(sf::RenderWindow &ventana){
  ventana.draw(*_textoTurno);
  }

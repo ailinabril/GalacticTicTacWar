@@ -283,7 +283,6 @@ void TableroGrafico::actualizar() //actualizar tablero
 	_spriteRival->setScale(sf::Vector2f(0.18f,0.18f));
 	_naveEspacial->setPosition(sf::Vector2f(_posicionNaveX,40.f));
 
-	_turnos.actualizar();
 
 	// APARICION ALEATORIA DEL Vero
 	if (!_veroYaAparecio)  // verfico que vero no haya aparecido
@@ -479,7 +478,8 @@ void TableroGrafico::procesarClickDelMouse(
                             _filaSeleccionada,
                             _columnaSeleccionada,
                             fila,
-                            columna))
+                            columna,
+                            'X'))
                     {
                         _hayFichaSeleccionada = false;
                         _filaSeleccionada = -1;
@@ -497,7 +497,7 @@ void TableroGrafico::procesarClickDelMouse(
             //--------------------------------------------------------
             // VERIFICAR GANADOR HUMANO
             //--------------------------------------------------------
-            if (_tablero.HayGanador('X'))
+            if (_juego.VerificarGanador(_tablero))
             {
                 _textoGanador->setString("GANARON HUMANOS");
 

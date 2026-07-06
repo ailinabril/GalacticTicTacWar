@@ -12,12 +12,12 @@
 
 1777133720 c:\users\bruno\desktop\galactictictacwar\jugador.h
 
-1780445908 source:c:\users\usuario\desktop\galactic\jugador.cpp
+1783297042 source:c:\users\usuario\desktop\galactic\jugador.cpp
 	<iostream>
 	<cstring>
 	"Jugador.h"
 
-1780445908 c:\users\usuario\desktop\galactic\jugador.h
+1783297042 c:\users\usuario\desktop\galactic\jugador.h
 
 1779316998 source:c:\users\usuario\desktop\galactic\main.cpp
 
@@ -59,15 +59,15 @@
 	"Tablero.h"
 	<iostream>
 
-1782769215 source:c:\users\usuario\desktop\galactic\turnos.cpp
+1783297340 source:c:\users\usuario\desktop\galactic\turnos.cpp
 	"Turnos.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1780000757 c:\users\usuario\desktop\galactic\turnos.h
+1783297340 c:\users\usuario\desktop\galactic\turnos.h
 	<SFML/Graphics.hpp>
 
-1782771504 source:c:\users\usuario\desktop\galactic\maingrafico.cpp
+1783297042 source:c:\users\usuario\desktop\galactic\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
 	<ctime>
@@ -611,7 +611,7 @@
 	<string_view>
 	<cstdint>
 
-1782769215 c:\users\usuario\desktop\galactic\tablerografico.h
+1783298194 c:\users\usuario\desktop\galactic\tablerografico.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	"KlosterCode.h"
@@ -619,7 +619,7 @@
 	"Turnos.h"
 	"Juego.h"
 
-1782770467 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
+1783297712 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
@@ -2501,11 +2501,12 @@
 	"Torre.h"
 	<iostream>
 
-1782770612 source:c:\users\usuario\desktop\galactic\juego.cpp
+1783315345 source:c:\users\usuario\desktop\galactic\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
+	<iostream>
 
-1782770656 c:\users\usuario\desktop\galactic\juego.h
+1783315329 c:\users\usuario\desktop\galactic\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"
@@ -2514,6 +2515,7 @@
 	"Bomba.h"
 	"ArchivoGanarPartida.h"
 	"ArchivoJugadores.h"
+	<iostream>
 
 1782769215 c:\users\usuario\desktop\galactic\torre.h
 	"ObjetoEspecial.h"
@@ -2534,13 +2536,13 @@
 	"Mina.h"
 	<cstring>
 
-1781308607 source:c:\users\usuario\desktop\galactic\menu.cpp
+1783297042 source:c:\users\usuario\desktop\galactic\menu.cpp
 	"Menu.h"
 
-1781308607 c:\users\usuario\desktop\galactic\menu.h
-	<iostream>
-	"Juego.h"
+1783297042 c:\users\usuario\desktop\galactic\menu.h
 	<SFML/Graphics.hpp>
+	"Juego.h"
+	"ArchivoJugadores.h"
 
 1780004591 source:c:\users\usuario\desktop\galactic\archivoganarpartida.cpp
 	"ArchivoGanarPartida.h"
@@ -2603,12 +2605,12 @@
 
 1780251880 c:\users\usuario\desktop\galactic\klostercode.h
 
-1781816201 source:c:\users\usuario\desktop\galactic\archivojugadores.cpp
+1783297042 source:c:\users\usuario\desktop\galactic\archivojugadores.cpp
 	<iostream>
 	"ArchivoJugadores.h"
 	<cstring>
 
-1781816201 c:\users\usuario\desktop\galactic\archivojugadores.h
+1783297042 c:\users\usuario\desktop\galactic\archivojugadores.h
 	<fstream>
 	"Jugador.h"
 
