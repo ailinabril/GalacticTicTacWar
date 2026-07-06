@@ -23,14 +23,18 @@ int main()
     //------------------------------------------------------------
     // PANTALLA ACTUAL
     // 0 = Menu
-    // 1 = Juego
-    // 2 = Ranking
-    // 3 = Reglas
+    // 1 = Contrato
+    // 2 = Juego
+    // 3 = Ranking
+    // 4 = Reglas
     //------------------------------------------------------------
     int pantallaActual = 0;
 
     while (ventana.isOpen())
     {
+        //------------------------------------------------------------
+        // EVENTOS
+        //------------------------------------------------------------
         while (std::optional evento = ventana.pollEvent())
         {
             //------------------------------------------------------------
@@ -45,7 +49,7 @@ int main()
             // CODIGO SECRETO KLOSTER
             //------------------------------------------------------------
             if (const auto* teclaPresionada =
-                    evento->getIf<sf::Event::KeyPressed>())
+                evento->getIf<sf::Event::KeyPressed>())
             {
                 switch (teclaPresionada->code)
                 {
@@ -83,15 +87,42 @@ int main()
             }
 
             //------------------------------------------------------------
+            // ESCRIBIR NOMBRE DEL JUGADOR
+            //------------------------------------------------------------
+            if (pantallaActual == 1)
+            {
+                if (const auto* texto =
+                    evento->getIf<sf::Event::TextEntered>())
+                {
+                    char letra = static_cast<char>(texto->unicode);
+
+                    if ((letra >= 'A' && letra <= 'Z') ||
+                        (letra >= 'a' && letra <= 'z') ||
+                        (letra >= '0' && letra <= '9') ||
+                        letra == ' ')
+                    {
+                        menuPrincipal.AgregarCaracter(letra);
+                    }
+
+                    if (texto->unicode == 8)
+                    {
+                        menuPrincipal.BorrarCaracter();
+                    }
+                }
+            }
+
+            //------------------------------------------------------------
             // MENU PRINCIPAL
             //------------------------------------------------------------
             if (pantallaActual == 0)
             {
-                if (const auto* click =
-                        evento->getIf<sf::Event::MouseButtonPressed>())
+                if (const auto* clickMouse =
+                    evento->getIf<sf::Event::MouseButtonPressed>())
                 {
-                    sf::Vector2i posicionMouse =
-                        sf::Mouse::getPosition(ventana);
+                    sf::Vector2i posicionMouse;
+
+                    posicionMouse.x = clickMouse->position.x;
+                    posicionMouse.y = clickMouse->position.y;
 
                     int opcionSeleccionada =
                         menuPrincipal.procesarClick(posicionMouse);
@@ -103,11 +134,11 @@ int main()
                         break;
 
                     case 2:
-                        pantallaActual = 2;
+                        pantallaActual = 3;
                         break;
 
                     case 3:
-                        pantallaActual = 3;
+                        pantallaActual = 4;
                         break;
 
                     case 0:
@@ -118,11 +149,73 @@ int main()
             }
 
             //------------------------------------------------------------
-            // JUEGO
+            // CONTRATO
             //------------------------------------------------------------
             if (pantallaActual == 1)
             {
+                if (const auto* clickMouse =
+                    evento->getIf<sf::Event::MouseButtonPressed>())
+                {
+                    sf::Vector2i posicionMouse;
+
+                    posicionMouse.x = clickMouse->position.x;
+                    posicionMouse.y = clickMouse->position.y;
+
+                    if (menuPrincipal.PresionoBotonConfirmar(posicionMouse))
+                    {
+                        menuPrincipal.ConfirmarContrato();
+
+                        pantallaActual = 2;
+                    }
+                }
+            }
+
+            //------------------------------------------------------------
+            // JUEGO
+            //------------------------------------------------------------
+            if (pantallaActual == 2)
+            {
                 tablero.procesarClickDelMouse(*evento, ventana);
+            }
+
+            //------------------------------------------------------------
+            // RANKING
+            //------------------------------------------------------------
+            if (pantallaActual == 3)
+            {
+                if (const auto* clickMouse =
+                    evento->getIf<sf::Event::MouseButtonPressed>())
+                {
+                    sf::Vector2i posicionMouse;
+
+                    posicionMouse.x = clickMouse->position.x;
+                    posicionMouse.y = clickMouse->position.y;
+
+                    if (menuPrincipal.PresionoBotonVolver(posicionMouse))
+                    {
+                        pantallaActual = 0;
+                    }
+                }
+            }
+
+            //------------------------------------------------------------
+            // REGLAS
+            //------------------------------------------------------------
+            if (pantallaActual == 4)
+            {
+                if (const auto* clickMouse =
+                    evento->getIf<sf::Event::MouseButtonPressed>())
+                {
+                    sf::Vector2i posicionMouse;
+
+                    posicionMouse.x = clickMouse->position.x;
+                    posicionMouse.y = clickMouse->position.y;
+
+                    if (menuPrincipal.PresionoBotonVolver(posicionMouse))
+                    {
+                        pantallaActual = 0;
+                    }
+                }
             }
         }
 
@@ -138,15 +231,19 @@ int main()
             break;
 
         case 1:
+            menuPrincipal.dibujarContrato(ventana);
+            break;
+
+        case 2:
             tablero.dibujarTablero(ventana);
             tablero.actualizar();
             break;
 
-        case 2:
+        case 3:
             menuPrincipal.dibujarRanking(ventana);
             break;
 
-        case 3:
+        case 4:
             menuPrincipal.dibujarReglas(ventana);
             break;
         }

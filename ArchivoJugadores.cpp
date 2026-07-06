@@ -1,9 +1,13 @@
 #include <iostream>
-#include "ArchivoJugadores.h"
 #include <cstring>
+
+#include "ArchivoJugadores.h"
 
 using namespace std;
 
+//------------------------------------------------------------
+// GUARDA UN JUGADOR EN EL ARCHIVO
+//------------------------------------------------------------
 void ArchivoJugadores::GuardarJugador(Jugador jugador)
 {
     _archivo.open("jugadores.dat", ios::out | ios::binary | ios::app);
@@ -16,19 +20,9 @@ void ArchivoJugadores::GuardarJugador(Jugador jugador)
     _archivo.close();
 }
 
-void ArchivoJugadores::LeerJugador()
-{
-    _archivo.open("jugadores.dat", ios::in | ios::binary);
-
-    if (_archivo.is_open())
-    {
-        Jugador cargarDatos;
-        _archivo.read((char*)&cargarDatos, sizeof(Jugador));
-    }
-
-    _archivo.close();
-}
-
+//------------------------------------------------------------
+// BUSCA UN JUGADOR POR SU NOMBRE
+//------------------------------------------------------------
 bool ArchivoJugadores::BuscarJugador(const char* nombre)
 {
     _archivo.open("jugadores.dat", ios::in | ios::binary);
@@ -51,6 +45,9 @@ bool ArchivoJugadores::BuscarJugador(const char* nombre)
     return false;
 }
 
+//------------------------------------------------------------
+// BUSCA Y DEVUELVE UN JUGADOR SEGUN SU NOMBRE
+//------------------------------------------------------------
 Jugador ArchivoJugadores::BuscarYLeerJugador(const char* nombre)
 {
     _archivo.open("jugadores.dat", ios::in | ios::binary);
@@ -67,16 +64,19 @@ Jugador ArchivoJugadores::BuscarYLeerJugador(const char* nombre)
                 return cargarDatos;
             }
         }
-
-        _archivo.close();
     }
+
+    _archivo.close();
 
     return cargarDatos;
 }
 
+//------------------------------------------------------------
+// MODIFICA LOS DATOS DE UN JUGADOR
+//------------------------------------------------------------
 void ArchivoJugadores::ModificarJugador(Jugador jugador)
 {
-    _archivo.open("Jugadores.dat", ios::in | ios::out | ios::binary);
+    _archivo.open("jugadores.dat", ios::in | ios::out | ios::binary);
 
     Jugador modificarDatos;
 
@@ -87,8 +87,11 @@ void ArchivoJugadores::ModificarJugador(Jugador jugador)
             if (stricmp(modificarDatos.getNombre(), jugador.getNombre()) == 0)
             {
                 _archivo.seekp(-sizeof(Jugador), ios::cur);
+
                 _archivo.write((char*)&jugador, sizeof(Jugador));
+
                 _archivo.close();
+
                 return;
             }
         }
@@ -97,53 +100,21 @@ void ArchivoJugadores::ModificarJugador(Jugador jugador)
     _archivo.close();
 }
 
-void ArchivoJugadores::MostrarRanking()
-{
-    _archivo.open("Jugadores.dat", ios::in | ios::binary);
-
-    if (_archivo.is_open())
-    {
-        Jugador cargarDatos;
-
-        while (_archivo.read((char*)&cargarDatos, sizeof(Jugador)))
-        {
-            if (!cargarDatos.getEliminado())
-            {
-                cargarDatos.Mostrar();
-            }
-        }
-    }
-
-    _archivo.close();
-}
-
+//------------------------------------------------------------
+// ELIMINA LOGICAMENTE UN JUGADOR
+//------------------------------------------------------------
 bool ArchivoJugadores::EliminarJugador(const char* nombre)
 {
     if (BuscarJugador(nombre))
     {
-        Jugador jugador = BuscarYLeerJugador(nombre);
+        Jugador jugador;
+
+        jugador = BuscarYLeerJugador(nombre);
 
         if (!jugador.getEliminado())
         {
             jugador.setEliminado(true);
-            ModificarJugador(jugador);
 
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool ArchivoJugadores::ReactivarJugador(const char* nombre)
-{
-    if (BuscarJugador(nombre))
-    {
-        Jugador jugador = BuscarYLeerJugador(nombre);
-
-        if (jugador.getEliminado())
-        {
-            jugador.setEliminado(false);
             ModificarJugador(jugador);
 
             return true;
@@ -154,7 +125,31 @@ bool ArchivoJugadores::ReactivarJugador(const char* nombre)
 }
 
 //------------------------------------------------------------
-// DEVUELVE LA CANTIDAD DE JUGADORES GUARDADOS EN EL ARCHIVO
+// REACTIVA UN JUGADOR ELIMINADO
+//------------------------------------------------------------
+bool ArchivoJugadores::ReactivarJugador(const char* nombre)
+{
+    if (BuscarJugador(nombre))
+    {
+        Jugador jugador;
+
+        jugador = BuscarYLeerJugador(nombre);
+
+        if (jugador.getEliminado())
+        {
+            jugador.setEliminado(false);
+
+            ModificarJugador(jugador);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//------------------------------------------------------------
+// DEVUELVE LA CANTIDAD DE JUGADORES GUARDADOS
 //------------------------------------------------------------
 int ArchivoJugadores::CantidadJugadores()
 {
@@ -167,7 +162,9 @@ int ArchivoJugadores::CantidadJugadores()
 
     _archivo.seekg(0, ios::end);
 
-    int cantidad = _archivo.tellg() / sizeof(Jugador);
+    int cantidad;
+
+    cantidad = _archivo.tellg() / sizeof(Jugador);
 
     _archivo.close();
 
@@ -175,7 +172,7 @@ int ArchivoJugadores::CantidadJugadores()
 }
 
 //------------------------------------------------------------
-// LEE Y DEVUELVE UN JUGADOR SEGUN SU POSICION EN EL ARCHIVO
+// LEE UN JUGADOR SEGUN SU POSICION EN EL ARCHIVO
 //------------------------------------------------------------
 Jugador ArchivoJugadores::LeerJugador(int posicion)
 {
@@ -186,7 +183,9 @@ Jugador ArchivoJugadores::LeerJugador(int posicion)
     if (_archivo.is_open())
     {
         _archivo.seekg(posicion * sizeof(Jugador), ios::beg);
+
         _archivo.read((char*)&jugador, sizeof(Jugador));
+
         _archivo.close();
     }
 
