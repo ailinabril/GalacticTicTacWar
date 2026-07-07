@@ -130,6 +130,11 @@ public:
     // VICTORIA
     void procesarLetraKloster(char letra);
 
+     //selecciona un objeto especial
+    void SeleccionarObjeto(int objeto);
+
     // DESTRUCTOR
     ~TableroGrafico();
+
+
 };

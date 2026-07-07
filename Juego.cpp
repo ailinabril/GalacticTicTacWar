@@ -56,7 +56,7 @@ void Juego::TurnoIA(Tablero &tablero){
     int columna;
 
     //si la IA todavia no coloco sus tres fichas
-    if(_cantidadFichasIA < 3){
+    if(ContarFichas(tablero, 'O') < 3){
 
         //1 intentar realizar una jugada ganadora
         if(BuscarJugadaGanadora(tablero, 'O', fila, columna)){
@@ -97,7 +97,7 @@ void Juego::TurnoIA(Tablero &tablero){
             }
         }
     }
-    else{
+  else{
         int filaOrigen;
         int columnaOrigen;
         int filaDestino;
@@ -108,8 +108,11 @@ void Juego::TurnoIA(Tablero &tablero){
             MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'O');
             return;
         }
+
         //si no encuentras ninguno, movete una ficha al azar
         MoverFichaIA(tablero);
+
+        return;
     }
 
     //5 si no encotro una jugada , jugar al azar
@@ -236,7 +239,7 @@ bool Juego::BuscarMovimientoGanador(Tablero &tablero, int &filaOrigen, int &colu
                                 filaDestino = f;
                                 columnaDestino = c;
 
-                                return false;
+                                return true;
                             }
                              //deshacemos la simulacion
                              tablero.setCasillero(f, c, ' ');
@@ -259,7 +262,7 @@ bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int 
                 //simular la jugada
                 tablero.setCasillero(i, j, simbolo);
 
-                if(tablero.HayGanador(simbolo));
+                if(tablero.HayGanador(simbolo)){
 
                 fila = j;
                 columna = i;
@@ -271,6 +274,7 @@ bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int 
         }
     }
     return false;
+}
 }
 
 bool Juego::VerificarGanador(Tablero &tablero){
@@ -399,11 +403,56 @@ int Juego::getCantidadFichasIA(){
     return _cantidadFichasIA;
 }
 
+bool Juego::getBombaUsadaJugador() // DEVUELVE SI LA BOMBA YA FUE UTILIZADA
+{
+    return _bombaUsadaJugador;
+}
+
+void Juego::setBombaUsadaJugador(bool estado)
+{
+    //guardamos el estado de la bomba
+    _bombaUsadaJugador = estado;
+}
+
+void Juego::RestarEnergiaJugador(int energia) // DESCUENTA ENERGIA AL JUGADOR
+{
+    //descontamos energia
+    _energiaJugador -= energia;
+
+    //evitamos valores negativos
+    if(_energiaJugador < 0)
+    {
+        _energiaJugador = 0;
+    }
+}
+
+int Juego::getEnergiaJugador() // DEVUELVE LA ENERGIA DEL JUGADOR
+{
+    return _energiaJugador;
+}
+
 //------------------------------------------------------------
 // REGISTRA EL RESULTADO DE LA PARTIDA
 //------------------------------------------------------------
 void Juego::RegistrarResultadoPartida(int ganador)
 {
     _partida.setGanador(ganador);
+}
+
+void Juego::RestarFichaJugador() // RESTA UNA FICHA DEL JUGADOR
+{
+    //evitamos valores negativos
+    if(_cantidadFichasJugador > 0)
+    {
+        _cantidadFichasJugador--;
+    }
+}
+
+void Juego::RestarFichaIA() // RESTA UNA FICHA DE LA IA
+{
+    if(_cantidadFichasIA > 0) //evitamos valores negativos
+    {
+        _cantidadFichasIA--;
+    }
 }
 

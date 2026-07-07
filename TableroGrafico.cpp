@@ -319,8 +319,14 @@ void TableroGrafico::actualizar() //actualizar tablero
    }
 }
 
-void TableroGrafico::turnoCPU(){
+void TableroGrafico::turnoCPU()
+{
+    // JUEGA LA IA
     _juego.TurnoIA(_tablero);
+    // ACTUALIZAMOS LOS EFECTOS DEL TABLERO
+    _tablero.ActualizarBloqueo();
+    _tablero.ActualizarDestruccion();
+    // DEVOLVEMOS EL TURNO AL JUGADOR
     _esTurnoHumano = true;
     _turnos.siguienteTurno();
 }
@@ -425,6 +431,32 @@ void TableroGrafico::procesarClickDelMouse(
         static_cast<float>(clickMouse->position.x),
         static_cast<float>(clickMouse->position.y));
 
+
+//------------------------------------------------------------
+// SELECCIONAR BOMBA
+//------------------------------------------------------------
+if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
+{
+    //si la bomba ya fue utilizada
+    if(_juego.getBombaUsadaJugador())
+    {
+        return;
+    }
+
+    //si no alcanza la energia
+    if(_juego.getEnergiaJugador() < 4)
+    {
+        return;
+    }
+
+    //seleccionamos la bomba
+    SeleccionarObjeto(1);
+
+    //marcamos el borde para indicar que esta activa
+    _marcoBombaHumano.setOutlineColor(sf::Color::Green);
+
+    return;
+}
     //------------------------------------------------------------
     // RECORRER TODO EL TABLERO
     //------------------------------------------------------------
@@ -440,10 +472,37 @@ void TableroGrafico::procesarClickDelMouse(
                 continue;
             }
 
+            //------------------------------------------------------------
+            // USAR BOMBA
+            //------------------------------------------------------------
+            if(_objetoSeleccionado == 1)
+            {
+                 char ficha = _tablero.getCasillero(fila, columna); //guardamos que ficha habia antes de la explosion
+
+                if(_tablero.UsarBomba(fila, columna)) //intentamos usar la bomba
+                {
+                    _objetoSeleccionado = 0; //la bomba deja de estar seleccionada
+                    _juego.setBombaUsadaJugador(true); //marcamos la bomba como utilizada
+                    _spriteBombaHumano->setColor(sf::Color(120,120,120,180)); //dejamos la bomba en gris para indicar que ya fue utilizada
+                    _juego.RestarEnergiaJugador(4); //descontamos la energia de la bomba
+                    _marcoBombaHumano.setOutlineColor(sf::Color::Transparent);//apagamos el marco verde
+                    _esTurnoHumano = false; //cambia el turno
+                    _turnos.siguienteTurno();
+                    turnoCPU();
+                }
+
+                return;
+            }
+            //--------------------------------------------------------
+            // SI LA BOMBA ELIMINO UNA FICHA
+            //--------------------------------------------------------
+            // al contar las fichas directamente desde el tablero,
+            // si ahora hay menos de 3 el jugador podra volver a colocar
+            // una ficha en lugar de mover una existente
             //--------------------------------------------------------
             // COLOCAR FICHAS
             //--------------------------------------------------------
-            if (_juego.getCantidadFichasJugador() < 3)
+            if (_juego.ContarFichas(_tablero, 'X') < 3)//verificamos cuantas fichas tiene realmente el jugador en el tablero
             {
                 if (_juego.ColocarFicha(_tablero, fila, columna))
                 {
@@ -551,6 +610,12 @@ void TableroGrafico::procesarClickDelMouse(
 void TableroGrafico::procesarLetraKloster(char letra)
 {
     _klosterCode.ProcesarLetra(letra);
+}
+
+void TableroGrafico::SeleccionarObjeto(int objeto)
+{
+    //guardamos el objeto seleccionado
+    _objetoSeleccionado = objeto;
 }
 
 TableroGrafico::~TableroGrafico()

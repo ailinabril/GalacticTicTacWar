@@ -1,21 +1,31 @@
 #include "Bomba.h"
 
-///constructor///
-Bomba::Bomba() : ObjetoEspecial(4, "Bomba"){
+// CONSTRUCTOR
+Bomba::Bomba() : ObjetoEspecial(4, "Bomba")
+{
 }
 
-///destruye una ficha enemiga///
-bool Bomba::aplicarEfecto(Tablero &tablero, int fila, int columna, char simboloJugador){
+// DESTRUYE UNA FICHA ENEMIGA
+
+bool Bomba::aplicarEfecto(Tablero &tablero, int fila, int columna, char simboloJugador)
+{
+    //obtenemos el contenido de la casilla
     char casilla = tablero.getCasillero(fila, columna);
 
-    ///no se puede usar sobre una ficha propia///
-    if (casilla == simboloJugador)
+    //si la casilla esta vacia
+    if(casilla == ' ')
     {
         return false;
     }
 
-    ///destruye la casilla///
-    tablero.setCasillero(fila, columna, '*');
+    //si la ficha pertenece al jugador
+    if(casilla == simboloJugador)
+    {
+        return false;
+    }
+
+    //destruye la ficha enemiga
+    tablero.setCasillero(fila, columna, ' ');
 
     return true;
 }

@@ -196,19 +196,27 @@ bool Tablero::ColocarMina(int fila, int columna){
 }
 
 bool Tablero::UsarBomba(int fila, int columna){
-    //vemos si la posicion existe
-    if(PosicionValida(fila, columna) == true){
-        //vemos si hay algo en la casilla
-        if(_tablero[fila][columna] != ' '){
-            //eliminamos lo que habia
-            _tablero[fila][columna] = ' ';
-            //marcamos la casilla como destruida
-            _casillaDestruida[fila][columna] = true;
-            //bloqueamos un turno
-            _turnosBloqueados[fila][columna] = 1;
-            return true;
-        }
+    //vemos si hay una ficha
+    if(_tablero[fila][columna] == ' ')
+    {
+        return false;
     }
 
-    return false;
+    //si es una ficha del jugador no hacemos nada
+    if(_tablero[fila][columna] == 'X')
+    {
+        return false;
+    }
+
+    //eliminamos la ficha enemiga
+    _tablero[fila][columna] = ' ';
+
+    //marcamos la casilla como destruida
+    _casillaDestruida[fila][columna] = true;
+
+    //bloqueamos la casilla un turno
+    _turnosBloqueados[fila][columna] = 1;
+
+    return true;
+
 }
