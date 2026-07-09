@@ -45,7 +45,6 @@
 		<Unit filename="ArchivoJugadores.h" />
 		<Unit filename="Bomba.cpp" />
 		<Unit filename="Bomba.h" />
-		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
 		<Unit filename="Juego.cpp" />
 		<Unit filename="Juego.h" />
@@ -57,7 +56,6 @@
 		<Unit filename="Menu.h" />
 		<Unit filename="Mina.cpp" />
 		<Unit filename="Mina.h" />
-		<Unit filename="Movimiento.cpp" />
 		<Unit filename="Movimiento.h" />
 		<Unit filename="ObjetoEspecial.cpp" />
 		<Unit filename="ObjetoEspecial.h" />

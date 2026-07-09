@@ -400,6 +400,7 @@ void TableroGrafico::dibujarTablero(sf::RenderWindow &ventana)
 		}
 	}
 }
+
 void TableroGrafico::procesarClickDelMouse(
     const sf::Event& evento,
     sf::RenderWindow& ventana)

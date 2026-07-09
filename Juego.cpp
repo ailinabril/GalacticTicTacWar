@@ -60,6 +60,7 @@ void Juego::TurnoIA(Tablero &tablero){
 
         //1 intentar realizar una jugada ganadora
         if(BuscarJugadaGanadora(tablero, 'O', fila, columna)){
+            tablero.setCasillero(fila, columna, 'O');
             _cantidadFichasIA++;
             return;
         }
@@ -108,19 +109,10 @@ void Juego::TurnoIA(Tablero &tablero){
             MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'O');
             return;
         }
+
         //si no encuentras ninguno, movete una ficha al azar
         MoverFichaIA(tablero);
     }
-
-    //5 si no encotro una jugada , jugar al azar
-    do{
-        fila = rand() % 3;
-        columna = rand() % 3;
-    }while(tablero.getCasillero(fila, columna) != ' ');
-
-    tablero.setCasillero(fila, columna, 'O');
-    _cantidadFichasIA++;
-
 }
 
 bool Juego::BuscarCasillaLibre(Tablero &tablero, int &fila, int &columna){
@@ -236,7 +228,7 @@ bool Juego::BuscarMovimientoGanador(Tablero &tablero, int &filaOrigen, int &colu
                                 filaDestino = f;
                                 columnaDestino = c;
 
-                                return false;
+                                return true;
                             }
                              //deshacemos la simulacion
                              tablero.setCasillero(f, c, ' ');
@@ -256,18 +248,20 @@ bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int 
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
             if(tablero.getCasillero(i, j) == ' '){
-                //simular la jugada
+                //simular la jugada y colocamos la fihca
                 tablero.setCasillero(i, j, simbolo);
 
-                if(tablero.HayGanador(simbolo));
+                if(tablero.HayGanador(simbolo)){
+                    //dejamos el tablero como estaba
+                    tablero.setCasillero(i,j, ' ');
+                    fila = i;
+                    columna = j;
 
-                fila = j;
-                columna = i;
-
-                return true;
+                    return true;
+                }
+                //deshacer la simulacion
+                tablero.setCasillero(i, j, ' ');
             }
-            //deshacer la simulacion
-            tablero.setCasillero(i, j, ' ');
         }
     }
     return false;
@@ -276,7 +270,7 @@ bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int 
 bool Juego::VerificarGanador(Tablero &tablero){
 
     //gana jugador
-    if(tablero.HayGanador('X')){
+    if(tablero.HayGanador('O')){
 
         _juegoTerminado = true;
         _partida.setGanador(1);
@@ -284,7 +278,7 @@ bool Juego::VerificarGanador(Tablero &tablero){
     }
 
     //gana IA
-    if(tablero.HayGanador('O')){
+    if(tablero.HayGanador('X')){
 
         _juegoTerminado = true;
         _partida.setGanador(2);
