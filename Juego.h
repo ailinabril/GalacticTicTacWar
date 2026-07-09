@@ -19,6 +19,8 @@ private:
     //cantidad de fichas
     int _cantidadFichasJugador;
     int _cantidadFichasIA;
+    void RestarFichaJugador();// RESTA UNA FICHA DEL JUGADOR
+    void RestarFichaIA();// RESTA UNA FICHA DE LA IA
 
     //energia
     int _energiaJugador;
@@ -45,7 +47,7 @@ private:
     //IA
     void MoverFichaIA(Tablero &tablero);
     bool BuscarMovimientoGanador(Tablero &tablero, int &filaOrigen, int &columnaOrigen, int &filaDestino, int &columnaDestino);
-    int ContarFichas(Tablero &tablero, char simbolo);
+
     bool BuscarCasillaLibre(Tablero &tablero, int &fila, int &columna);
 public:
     //constructores
@@ -81,7 +83,11 @@ public:
     //fichas
     bool ColocarFicha(Tablero &tablero, int fila, int comlumna);
     bool MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, char simbolo);
-
+    int ContarFichas(Tablero &tablero, char simbolo);
     int getCantidadFichasJugador();
     int getCantidadFichasIA();
+    bool getBombaUsadaJugador();// DEVUELVE SI LA BOMBA YA FUE UTILIZADA
+    void setBombaUsadaJugador(bool estado);
+    void RestarEnergiaJugador(int energia); // DESCUENTA ENERGIA AL JUGADOR
+    int getEnergiaJugador(); // DEVUELVE LA ENERGIA DEL JUGADOR
 };
