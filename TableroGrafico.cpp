@@ -58,6 +58,9 @@ TableroGrafico::TableroGrafico() //contructor
 	// TABLERO VACIO
 	_tablero.Inicializar();
 
+	//inicializar partida y cargar el jugador
+	_juego.IniciarPartida();
+
 	//POSICION TABLERO
 	const float posicionInicialX = 390.f;
     const float posicionInicialY = 140.f;

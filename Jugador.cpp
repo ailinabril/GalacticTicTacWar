@@ -31,11 +31,11 @@ Jugador::Jugador(const char* nombreJugador)
 ///cargar datos///
     void Jugador::Cargar()
     {
-        cout << "Ingrese el nombre del jugador: ";
+     cout << "Ingrese el nombre del jugador: ";
 
-        cin.ignore();
+     cin.ignore();
 
-        cin.getline(_nombre, 30);
+     cin.getline(_nombre, 30);
     }
 
 ///mostrar datos///

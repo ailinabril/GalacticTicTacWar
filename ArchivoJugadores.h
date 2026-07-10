@@ -1,7 +1,5 @@
 #pragma once
-
 #include <fstream>
-
 #include "Jugador.h"
 
 using namespace std;

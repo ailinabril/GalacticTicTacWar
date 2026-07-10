@@ -254,13 +254,11 @@ bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int 
                 tablero.setCasillero(i, j, simbolo);
 
                 if(tablero.HayGanador(simbolo)){
-<<<<<<< HEAD
+
                     //dejamos el tablero como estaba
                     tablero.setCasillero(i,j, ' ');
                     fila = i;
                     columna = j;
-=======
->>>>>>> 1b674b9acb3ecafe9bb91392965779e9793fdc87
 
                     return true;
                 }
@@ -270,7 +268,6 @@ bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int 
         }
     }
     return false;
-}
 }
 
 bool Juego::VerificarGanador(Tablero &tablero){
