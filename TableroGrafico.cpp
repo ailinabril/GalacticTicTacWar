@@ -59,7 +59,7 @@ TableroGrafico::TableroGrafico() //contructor
 	_tablero.Inicializar();
 
 	//inicializar partida y cargar el jugador
-	_juego.IniciarPartida();
+	//_juego.IniciarPartida();
 
 	//POSICION TABLERO
 	const float posicionInicialX = 390.f;
@@ -644,4 +644,8 @@ TableroGrafico::~TableroGrafico()
 			delete _imagenesAliens[fila][columna];
 		}
 	}
+}
+
+void TableroGrafico::IniciarPartida(const char* nombre){
+    _juego.IniciarPartida(nombre);
 }

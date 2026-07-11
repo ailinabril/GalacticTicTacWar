@@ -27,9 +27,9 @@ Juego::Juego(){
 //------------------------------------------------------------
 // INICIA UNA NUEVA PARTIDA
 //------------------------------------------------------------
-void Juego::IniciarPartida()
+void Juego::IniciarPartida(const char* nombre)
 {
-    _jugador.Cargar();
+    _jugador.setNombre(nombre);
 
     if (_archivoJugadores.BuscarJugador(_jugador.getNombre()))
     {
@@ -47,9 +47,9 @@ void Juego::IniciarPartida()
     _energiaIA = 5;
 }
 
-void Juego::Jugar(){
-    IniciarPartida();
-}
+//void Juego::Jugar(){
+   // IniciarPartida();
+//}
 
 void Juego::TurnoIA(Tablero &tablero){
     int fila;

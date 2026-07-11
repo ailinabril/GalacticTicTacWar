@@ -133,6 +133,10 @@ public:
      //selecciona un objeto especial
     void SeleccionarObjeto(int objeto);
 
+   //algo//
+    void IniciarPartida(const char* nombre);
+
+
     // DESTRUCTOR
     ~TableroGrafico();
 

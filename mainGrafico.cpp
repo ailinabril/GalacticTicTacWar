@@ -161,9 +161,10 @@ int main()
                     posicionMouse.x = clickMouse->position.x;
                     posicionMouse.y = clickMouse->position.y;
 
-                    if (menuPrincipal.PresionoBotonConfirmar(posicionMouse))
-                    {
+                    if (menuPrincipal.PresionoBotonConfirmar(posicionMouse)){
                         menuPrincipal.ConfirmarContrato();
+
+                        tablero.IniciarPartida(menuPrincipal.getNombreJugador());
 
                         pantallaActual = 2;
                     }
