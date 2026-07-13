@@ -58,9 +58,6 @@ TableroGrafico::TableroGrafico() //contructor
 	// TABLERO VACIO
 	_tablero.Inicializar();
 
-	//inicializar partida y cargar el jugador
-	//_juego.IniciarPartida();
-
 	//POSICION TABLERO
 	const float posicionInicialX = 390.f;
     const float posicionInicialY = 140.f;
@@ -560,7 +557,7 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
             //--------------------------------------------------------
             // VERIFICAR GANADOR HUMANO
             //--------------------------------------------------------
-            if (_juego.VerificarGanador(_tablero))
+            if (_tablero.HayGanador('O'))
             {
                 _textoGanador->setString("GANARON HUMANOS");
 
@@ -578,7 +575,7 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
             //--------------------------------------------------------
             // VERIFICAR GANADOR ALIEN
             //--------------------------------------------------------
-            else if (_tablero.HayGanador('O'))
+            else if (_tablero.HayGanador('X'))
             {
                 _textoGanador->setString("GANARON LOS ALIENS");
 

@@ -12,7 +12,7 @@
 
 1777133720 c:\users\bruno\desktop\galactictictacwar\jugador.h
 
-1783723735 source:c:\users\usuario\desktop\galactic\jugador.cpp
+1783725134 source:c:\users\usuario\desktop\galactic\jugador.cpp
 	<iostream>
 	<cstring>
 	"Jugador.h"
@@ -66,7 +66,7 @@
 1783297340 c:\users\usuario\desktop\galactic\turnos.h
 	<SFML/Graphics.hpp>
 
-1783316177 source:c:\users\usuario\desktop\galactic\maingrafico.cpp
+1783948595 source:c:\users\usuario\desktop\galactic\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
 	<ctime>
@@ -610,7 +610,7 @@
 	<string_view>
 	<cstdint>
 
-1783556861 c:\users\usuario\desktop\galactic\tablerografico.h
+1783948595 c:\users\usuario\desktop\galactic\tablerografico.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	"KlosterCode.h"
@@ -618,7 +618,7 @@
 	"Turnos.h"
 	"Juego.h"
 
-1783724146 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
+1783951658 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
@@ -2501,12 +2501,12 @@
 	"Torre.h"
 	<iostream>
 
-1783724532 source:c:\users\usuario\desktop\galactic\juego.cpp
+1783950966 source:c:\users\usuario\desktop\galactic\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
 	<iostream>
 
-1783724181 c:\users\usuario\desktop\galactic\juego.h
+1783948595 c:\users\usuario\desktop\galactic\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"
