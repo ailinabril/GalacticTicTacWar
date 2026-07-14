@@ -46,10 +46,42 @@ void Juego::IniciarPartida(const char* nombre)
     _energiaJugador = 5;
     _energiaIA = 5;
 }
+//------------------------------------------------------------
+// REINICIA EL ESTADO PARA UNA NUEVA PARTIDA
+//------------------------------------------------------------
+void Juego::ReiniciarPartida()
+{
+    //--------------------------------------------------------
+    // CANTIDAD DE FICHAS
+    //--------------------------------------------------------
+    _cantidadFichasJugador = 0;
+    _cantidadFichasIA = 0;
 
-//void Juego::Jugar(){
-   // IniciarPartida();
-//}
+    //--------------------------------------------------------
+    // ENERGIA
+    //--------------------------------------------------------
+    _energiaJugador = 5;
+    _energiaIA = 5;
+
+    //--------------------------------------------------------
+    // OBJETOS ESPECIALES
+    //--------------------------------------------------------
+    _torreUsadaJugador = false;
+    _torreUsadaIA = false;
+
+    _minaUsadaJugador = false;
+    _minaUsadaIA = false;
+
+    _bombaUsadaJugador = false;
+    _bombaUsadaIA = false;
+
+    //--------------------------------------------------------
+    // ESTADO DE LA PARTIDA
+    //--------------------------------------------------------
+    _movimientosTotales = 0;
+    _empate = false;
+    _juegoTerminado = false;
+}
 
 void Juego::TurnoIA(Tablero &tablero){
     int fila;

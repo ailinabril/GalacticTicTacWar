@@ -55,6 +55,8 @@ public:
 
     //funciones principales
     void IniciarPartida(const char* nombre); //inicia una nueva partida, cargando los datos de los jugadores y la fecha
+    // REINICIA UNA PARTIDA SIN PERDER LA SERIE
+    void ReiniciarPartida();
     void Jugar(); //controla el flujo del juego, alternando turnos entre los jugadores hasta que haya un ganador o empate
     // Muestra el ranking de jugadores
     void MostrarRanking();

@@ -78,6 +78,12 @@ private:
     sf::Text *_textoVictoriasHumanos;
     sf::Text *_textoVictoriasAliens;
 
+    //------------------------------------------------------------
+    // SERIE AL MEJOR DE TRES
+    //------------------------------------------------------------
+    int _numeroPartida;
+    bool _serieTerminada;
+
     // SELECCION
     bool _hayFichaSeleccionada;
     int _filaSeleccionada;
@@ -124,8 +130,17 @@ public:
     // DIBUJAR
     void dibujarTablero(sf::RenderWindow &ventana);
 
+    bool SerieTerminada() const;
+
+
+    void ReiniciarSerie();
+
     // CLICK MOUSE
     void procesarClickDelMouse(const sf::Event &evento,sf::RenderWindow &ventana);
+
+    // REINICIA EL TABLERO PARA LA SIGUIENTE PARTIDA
+
+    void reiniciarPartida();
 
     // VICTORIA
     void procesarLetraKloster(char letra);

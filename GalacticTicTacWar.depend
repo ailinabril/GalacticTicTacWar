@@ -3318,17 +3318,16 @@
 	<fstream>
 	"Partida.h"
 
-1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\partida.h
-	"Fecha.h"
+1783974575 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\partida.h
 
 1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\fecha.h
 
-1783376919 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\archivojugadores.cpp
+1783974575 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\archivojugadores.cpp
 	<iostream>
 	<cstring>
 	"ArchivoJugadores.h"
 
-1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\archivojugadores.h
+1783974575 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\archivojugadores.h
 	<fstream>
 	"Jugador.h"
 
@@ -3343,18 +3342,18 @@
 1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\objetoespecial.h
 	"Tablero.h"
 
-1783376921 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablero.h
+1783999758 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablero.h
 
 1783376919 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1783390029 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\juego.cpp
+1784000980 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
 	<iostream>
 
-1783389229 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\juego.h
+1784000980 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"
@@ -3909,7 +3908,7 @@
 1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\mina.h
 	"ObjetoEspecial.h"
 
-1783376919 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\jugador.cpp
+1783974575 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\jugador.cpp
 	<iostream>
 	<cstring>
 	"Jugador.h"
@@ -3921,14 +3920,14 @@
 
 1783376922 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\main.cpp
 
-1783376922 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\maingrafico.cpp
+1784001315 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
 	<ctime>
 	"TableroGrafico.h"
 	"Menu.h"
 
-1783381587 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.h
+1784001563 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	"KlosterCode.h"
@@ -3955,7 +3954,7 @@
 	"ObjetoEspecial.h"
 	<cstring>
 
-1783376919 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\partida.cpp
+1783974575 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\partida.cpp
 	<iostream>
 	"Partida.h"
 
@@ -3963,7 +3962,7 @@
 	"Tablero.h"
 	<iostream>
 
-1783389101 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.cpp
+1784001123 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 

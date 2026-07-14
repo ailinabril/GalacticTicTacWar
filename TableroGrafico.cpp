@@ -5,7 +5,8 @@ using namespace std;
 
 //------------------------------------------------------------
 // FUNCION AUXILIAR
-//------------------------------------------------------------
+//----------------------------------------------------
+
 
     bool cargarTextura(sf::Texture& textura,
                        const std::string& archivo,
@@ -28,9 +29,13 @@ TableroGrafico::TableroGrafico() //contructor
 	_juegoTerminado = false;
 	_cpuPensando = false;
 
-	// VICTORIAS
-	_victoriasHumanos = 0;
-	_victoriasAliens = 0;
+    // MARCADOR DE LA SERIE
+
+    _victoriasHumanos = 0;
+    _victoriasAliens = 0;
+
+    _numeroPartida = 1;
+    _serieTerminada = false;
 
 
 	// SELECCION
@@ -261,6 +266,7 @@ TableroGrafico::TableroGrafico() //contructor
 	}
 }
 
+
 void TableroGrafico::actualizar() //actualizar tablero
 {
 	_posicionNaveX += 0.01f;
@@ -405,6 +411,54 @@ void TableroGrafico::dibujarTablero(sf::RenderWindow &ventana)
 			ventana.draw(*_textoGanador);
 		}
 	}
+}
+
+// REINICIA EL TABLERO PARA JUGAR OTRA PARTIDA
+
+//------------------------------------------------------------
+// REINICIA EL TABLERO PARA LA SIGUIENTE PARTIDA DE LA SERIE
+//------------------------------------------------------------
+void TableroGrafico::reiniciarPartida()
+{
+    //--------------------------------------------------------
+    // REINICIAR TABLERO
+    //--------------------------------------------------------
+    _tablero.Inicializar();
+
+    //--------------------------------------------------------
+    // REINICIAR TURNOS
+    //--------------------------------------------------------
+    _esTurnoHumano = true;
+    _cpuPensando = false;
+    _juegoTerminado = false;
+
+    //--------------------------------------------------------
+    // REINICIAR SELECCION
+    //--------------------------------------------------------
+    _hayFichaSeleccionada = false;
+    _filaSeleccionada = -1;
+    _columnaSeleccionada = -1;
+
+    //--------------------------------------------------------
+    // REINICIAR OBJETO SELECCIONADO
+    //--------------------------------------------------------
+    _objetoSeleccionado = 0;
+
+    //--------------------------------------------------------
+    // LIMPIAR MENSAJE DE GANADOR
+    //--------------------------------------------------------
+    _textoGanador->setString("");
+
+    //--------------------------------------------------------
+    // REINICIAR MARCOS
+    //--------------------------------------------------------
+    _marcoBombaHumano.setOutlineColor(sf::Color::Transparent);
+    _marcoMinaHumano.setOutlineColor(sf::Color::Transparent);
+    _marcoTorreHumano.setOutlineColor(sf::Color::Transparent);
+
+    _marcoBombaAlien.setOutlineColor(sf::Color::Transparent);
+    _marcoMinaAlien.setOutlineColor(sf::Color::Transparent);
+    _marcoTorreAlien.setOutlineColor(sf::Color::Transparent);
 }
 
 void TableroGrafico::procesarClickDelMouse(
@@ -554,15 +608,11 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
                 }
             }
 
-            //--------------------------------------------------------
+           //--------------------------------------------------------
             // VERIFICAR GANADOR HUMANO
             //--------------------------------------------------------
             if (_tablero.HayGanador('O'))
             {
-                _textoGanador->setString("GANARON HUMANOS");
-
-                _juegoTerminado = true;
-
                 _victoriasHumanos++;
 
                 _textoVictoriasHumanos->setString(
@@ -570,17 +620,28 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
 
                 _juego.RegistrarResultadoPartida(1);
                 _juego.FinalizarPartida();
+
+                //----------------------------------------------------
+                // ¿TERMINÓ LA SERIE?
+                //----------------------------------------------------
+                if (_victoriasHumanos >= 2)
+                {
+                    _textoGanador->setString("¡¡ HUMANOS CAMPEONES !!");
+                    _juegoTerminado = true;
+                    _serieTerminada = true;
+                }
+                else
+                {
+                    _numeroPartida++;
+                    reiniciarPartida();
+                }
             }
 
-            //--------------------------------------------------------
+          //--------------------------------------------------------
             // VERIFICAR GANADOR ALIEN
             //--------------------------------------------------------
             else if (_tablero.HayGanador('X'))
             {
-                _textoGanador->setString("GANARON LOS ALIENS");
-
-                _juegoTerminado = true;
-
                 _victoriasAliens++;
 
                 _textoVictoriasAliens->setString(
@@ -588,8 +649,22 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
 
                 _juego.RegistrarResultadoPartida(2);
                 _juego.FinalizarPartida();
-            }
 
+                //----------------------------------------------------
+                // ¿TERMINÓ LA SERIE?
+                //----------------------------------------------------
+                if (_victoriasAliens >= 2)
+                {
+                    _textoGanador->setString("¡¡ ALIENS CAMPEONES !!");
+                    _juegoTerminado = true;
+                    _serieTerminada = true;
+                }
+                else
+                {
+                    _numeroPartida++;
+                    reiniciarPartida();
+                }
+            }
             //--------------------------------------------------------
             // VERIFICAR EMPATE
             //--------------------------------------------------------
@@ -645,4 +720,26 @@ TableroGrafico::~TableroGrafico()
 
 void TableroGrafico::IniciarPartida(const char* nombre){
     _juego.IniciarPartida(nombre);
+}
+
+//------------------------------------------------------------
+// INDICA SI LA SERIE YA FINALIZÓ
+//------------------------------------------------------------
+bool TableroGrafico::SerieTerminada() const
+{
+    return _serieTerminada;
+}
+void TableroGrafico::ReiniciarSerie()
+{
+    _victoriasHumanos = 0;
+    _victoriasAliens = 0;
+
+    _numeroPartida = 1;
+    _serieTerminada = false;
+
+    _textoVictoriasHumanos->setString("0");
+    _textoVictoriasAliens->setString("0");
+
+    _juego.ReiniciarPartida();   // <-- importante
+    reiniciarPartida();
 }

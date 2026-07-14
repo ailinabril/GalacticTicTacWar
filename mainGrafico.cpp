@@ -49,7 +49,7 @@ int main()
             // CODIGO SECRETO KLOSTER
             //------------------------------------------------------------
             if (const auto* teclaPresionada =
-                evento->getIf<sf::Event::KeyPressed>())
+                        evento->getIf<sf::Event::KeyPressed>())
             {
                 switch (teclaPresionada->code)
                 {
@@ -92,14 +92,14 @@ int main()
             if (pantallaActual == 1)
             {
                 if (const auto* texto =
-                    evento->getIf<sf::Event::TextEntered>())
+                            evento->getIf<sf::Event::TextEntered>())
                 {
                     char letra = static_cast<char>(texto->unicode);
 
                     if ((letra >= 'A' && letra <= 'Z') ||
-                        (letra >= 'a' && letra <= 'z') ||
-                        (letra >= '0' && letra <= '9') ||
-                        letra == ' ')
+                            (letra >= 'a' && letra <= 'z') ||
+                            (letra >= '0' && letra <= '9') ||
+                            letra == ' ')
                     {
                         menuPrincipal.AgregarCaracter(letra);
                     }
@@ -117,7 +117,7 @@ int main()
             if (pantallaActual == 0)
             {
                 if (const auto* clickMouse =
-                    evento->getIf<sf::Event::MouseButtonPressed>())
+                            evento->getIf<sf::Event::MouseButtonPressed>())
                 {
                     sf::Vector2i posicionMouse;
 
@@ -154,14 +154,15 @@ int main()
             if (pantallaActual == 1)
             {
                 if (const auto* clickMouse =
-                    evento->getIf<sf::Event::MouseButtonPressed>())
+                            evento->getIf<sf::Event::MouseButtonPressed>())
                 {
                     sf::Vector2i posicionMouse;
 
                     posicionMouse.x = clickMouse->position.x;
                     posicionMouse.y = clickMouse->position.y;
 
-                    if (menuPrincipal.PresionoBotonConfirmar(posicionMouse)){
+                    if (menuPrincipal.PresionoBotonConfirmar(posicionMouse))
+                    {
                         menuPrincipal.ConfirmarContrato();
 
                         tablero.IniciarPartida(menuPrincipal.getNombreJugador());
@@ -185,7 +186,7 @@ int main()
             if (pantallaActual == 3)
             {
                 if (const auto* clickMouse =
-                    evento->getIf<sf::Event::MouseButtonPressed>())
+                            evento->getIf<sf::Event::MouseButtonPressed>())
                 {
                     sf::Vector2i posicionMouse;
 
@@ -205,7 +206,7 @@ int main()
             if (pantallaActual == 4)
             {
                 if (const auto* clickMouse =
-                    evento->getIf<sf::Event::MouseButtonPressed>())
+                            evento->getIf<sf::Event::MouseButtonPressed>())
                 {
                     sf::Vector2i posicionMouse;
 
@@ -219,6 +220,15 @@ int main()
                 }
             }
         }
+            //------------------------------------------------------------
+    // SI TERMINÓ LA SERIE VOLVEMOS AL MENÚ
+    //------------------------------------------------------------
+    if (tablero.SerieTerminada())
+    {
+        tablero.ReiniciarSerie();
+
+        pantallaActual = 0;
+    }
 
         //------------------------------------------------------------
         // DIBUJAR PANTALLA
@@ -236,8 +246,10 @@ int main()
             break;
 
         case 2:
+
             tablero.dibujarTablero(ventana);
             tablero.actualizar();
+
             break;
 
         case 3:
@@ -252,5 +264,7 @@ int main()
         ventana.display();
     }
 
+
     return 0;
 }
+
