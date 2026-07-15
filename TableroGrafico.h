@@ -83,6 +83,7 @@ private:
     //------------------------------------------------------------
     int _numeroPartida;
     bool _serieTerminada;
+    bool _esperandoVolverMenu;
 
     // SELECCION
     bool _hayFichaSeleccionada;

@@ -221,14 +221,16 @@ int main()
             }
         }
             //------------------------------------------------------------
-    // SI TERMINÓ LA SERIE VOLVEMOS AL MENÚ
-    //------------------------------------------------------------
-    if (tablero.SerieTerminada())
-    {
-        tablero.ReiniciarSerie();
+            // SI TERMINÓ LA SERIE VOLVEMOS AL MENÚ
+            //------------------------------------------------------------
+         if (tablero.SerieTerminada())
+        {
+            tablero.ReiniciarSerie();
 
-        pantallaActual = 0;
-    }
+            menuPrincipal.ReiniciarMenu();
+
+            pantallaActual = 0;
+        }
 
         //------------------------------------------------------------
         // DIBUJAR PANTALLA

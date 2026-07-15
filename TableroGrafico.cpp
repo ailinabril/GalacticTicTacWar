@@ -325,15 +325,97 @@ void TableroGrafico::actualizar() //actualizar tablero
    }
 }
 
+//------------------------------------------------------------
+// TURNO DE LA INTELIGENCIA ARTIFICIAL
+//------------------------------------------------------------
 void TableroGrafico::turnoCPU()
 {
-    // JUEGA LA IA
+    //--------------------------------------------------------
+    // LA IA REALIZA SU MOVIMIENTO
+    //--------------------------------------------------------
     _juego.TurnoIA(_tablero);
+
+    //--------------------------------------------------------
     // ACTUALIZAMOS LOS EFECTOS DEL TABLERO
+    //--------------------------------------------------------
     _tablero.ActualizarBloqueo();
     _tablero.ActualizarDestruccion();
-    // DEVOLVEMOS EL TURNO AL JUGADOR
+
+    //--------------------------------------------------------
+    // VERIFICAMOS SI LOS ALIENS GANARON LA PARTIDA
+    //--------------------------------------------------------
+    if (_tablero.HayGanador('O'))
+    {
+        // Incrementamos las victorias de la IA
+        _victoriasAliens++;
+
+        // Actualizamos el marcador en pantalla
+        _textoVictoriasAliens->setString(
+            std::to_string(_victoriasAliens));
+
+        // Registramos el resultado de la partida
+        _juego.RegistrarResultadoPartida(2);
+        _juego.FinalizarPartida();
+
+        //----------------------------------------------------
+        // VERIFICAMOS SI LOS ALIENS GANARON LA SERIE
+        //----------------------------------------------------
+        if (_victoriasAliens >= 2)
+        {
+            _textoGanador->setCharacterSize(34);
+            _textoGanador->setFillColor(sf::Color::Red);
+            _textoGanador->setPosition(sf::Vector2f(260.f,520.f));
+
+            std::string mensaje;
+
+            mensaje = "====================================\n\n";
+            mensaje += "      ALIENS CAMPEONES\n\n";
+            mensaje += "        SERIE ";
+            mensaje += std::to_string(_victoriasAliens);
+            mensaje += " - ";
+            mensaje += std::to_string(_victoriasHumanos);
+            mensaje += "\n\nClick para volver al menu";
+
+            _textoGanador->setString(mensaje);
+
+            _juegoTerminado = true;
+            _serieTerminada = true;
+            _esperandoVolverMenu = true;
+        }
+        else
+        {
+            // Comienza una nueva partida
+            _numeroPartida++;
+            reiniciarPartida();
+        }
+
+        return;
+    }
+
+    //--------------------------------------------------------
+    // VERIFICAMOS SI LA PARTIDA TERMINÓ EN EMPATE
+    //--------------------------------------------------------
+    if (_tablero.HayEmpate())
+    {
+        _textoGanador->setCharacterSize(34);
+        _textoGanador->setFillColor(sf::Color::Yellow);
+        _textoGanador->setPosition(sf::Vector2f(430.f,520.f));
+        _textoGanador->setString("EMPATE");
+
+        _juego.RegistrarResultadoPartida(0);
+        _juego.FinalizarPartida();
+
+        _numeroPartida++;
+        reiniciarPartida();
+
+        return;
+    }
+
+    //--------------------------------------------------------
+    // SI LA IA NO GANÓ, EL TURNO VUELVE AL JUGADOR
+    //--------------------------------------------------------
     _esTurnoHumano = true;
+
     _turnos.siguienteTurno();
 }
 
@@ -461,57 +543,91 @@ void TableroGrafico::reiniciarPartida()
     _marcoTorreAlien.setOutlineColor(sf::Color::Transparent);
 }
 
+//------------------------------------------------------------
+// PROCESAR CLICK DEL MOUSE
+//------------------------------------------------------------
 void TableroGrafico::procesarClickDelMouse(
     const sf::Event& evento,
     sf::RenderWindow& ventana)
 {
+    //------------------------------------------------------------
+    // SI LA SERIE YA TERMINÓ, ESPERAMOS UN CLICK DEL USUARIO
+    // PARA PODER VOLVER AL MENÚ PRINCIPAL.
+    //------------------------------------------------------------
+    if (_esperandoVolverMenu)
+    {
+        // Verificamos si el usuario hizo click con el mouse
+        if (evento.getIf<sf::Event::MouseButtonPressed>())
+        {
+            // Dejamos de esperar el click para que el main
+            // pueda regresar al menú principal
+            _esperandoVolverMenu = false;
+        }
+
+        return;
+    }
+
+    //------------------------------------------------------------
+    // SI LA PARTIDA YA FINALIZÓ NO SE PERMITEN MÁS ACCIONES
+    //------------------------------------------------------------
     if (_juegoTerminado)
     {
         return;
     }
 
+    //------------------------------------------------------------
+    // SI ES EL TURNO DE LA IA, EL JUGADOR NO PUEDE INTERACTUAR
+    //------------------------------------------------------------
     if (!_esTurnoHumano)
     {
         return;
     }
 
-    const auto* clickMouse = evento.getIf<sf::Event::MouseButtonPressed>();
+    //------------------------------------------------------------
+    // OBTENEMOS EL EVENTO DEL CLICK DEL MOUSE
+    //------------------------------------------------------------
+    const auto* clickMouse =
+        evento.getIf<sf::Event::MouseButtonPressed>();
 
+    // Si el evento no corresponde a un click, salimos
     if (clickMouse == nullptr)
     {
         return;
     }
 
+    //------------------------------------------------------------
+    // GUARDAMOS LA POSICIÓN DONDE EL USUARIO HIZO CLICK
+    //------------------------------------------------------------
     sf::Vector2f posicionClick(
         static_cast<float>(clickMouse->position.x),
         static_cast<float>(clickMouse->position.y));
 
-
-//------------------------------------------------------------
-// SELECCIONAR BOMBA
-//------------------------------------------------------------
-if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
-{
-    //si la bomba ya fue utilizada
-    if(_juego.getBombaUsadaJugador())
+    //------------------------------------------------------------
+    // SELECCIÓN DE LA BOMBA
+    //------------------------------------------------------------
+    if (_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
     {
+        // Verificamos si la bomba ya fue utilizada
+        if (_juego.getBombaUsadaJugador())
+        {
+            return;
+        }
+
+        // Verificamos si el jugador posee la energía necesaria
+        if (_juego.getEnergiaJugador() < 4)
+        {
+            return;
+        }
+
+        // Seleccionamos la bomba como objeto activo
+        SeleccionarObjeto(1);
+
+        // Resaltamos el marco para indicar que fue seleccionada
+        _marcoBombaHumano.setOutlineColor(sf::Color::Green);
+
         return;
     }
 
-    //si no alcanza la energia
-    if(_juego.getEnergiaJugador() < 4)
-    {
-        return;
-    }
-
-    //seleccionamos la bomba
-    SeleccionarObjeto(1);
-
-    //marcamos el borde para indicar que esta activa
-    _marcoBombaHumano.setOutlineColor(sf::Color::Green);
-
-    return;
-}
     //------------------------------------------------------------
     // RECORRER TODO EL TABLERO
     //------------------------------------------------------------
@@ -532,8 +648,6 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
             //------------------------------------------------------------
             if(_objetoSeleccionado == 1)
             {
-                 char ficha = _tablero.getCasillero(fila, columna); //guardamos que ficha habia antes de la explosion
-
                 if(_tablero.UsarBomba(fila, columna)) //intentamos usar la bomba
                 {
                     _objetoSeleccionado = 0; //la bomba deja de estar seleccionada
@@ -554,18 +668,97 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
             // al contar las fichas directamente desde el tablero,
             // si ahora hay menos de 3 el jugador podra volver a colocar
             // una ficha en lugar de mover una existente
+
             //--------------------------------------------------------
             // COLOCAR FICHAS
             //--------------------------------------------------------
-            if (_juego.ContarFichas(_tablero, 'X') < 3)//verificamos cuantas fichas tiene realmente el jugador en el tablero
+            if (_juego.ContarFichas(_tablero, 'X') < 3)
             {
+                //----------------------------------------------------
+                // INTENTAMOS COLOCAR UNA NUEVA FICHA
+                //----------------------------------------------------
                 if (_juego.ColocarFicha(_tablero, fila, columna))
                 {
+                    //------------------------------------------------
+                    // VERIFICAMOS SI EL JUGADOR GANÓ LA PARTIDA
+                    //------------------------------------------------
+                    if (_tablero.HayGanador('X'))
+                    {
+                        // Sumamos una victoria al jugador
+                        _victoriasHumanos++;
+
+                        // Actualizamos el marcador en pantalla
+                        _textoVictoriasHumanos->setString(
+                            std::to_string(_victoriasHumanos));
+
+                        // Registramos el resultado de la partida
+                        _juego.RegistrarResultadoPartida(1);
+                        _juego.FinalizarPartida();
+
+                        //--------------------------------------------
+                        // VERIFICAMOS SI GANÓ LA SERIE
+                        //--------------------------------------------
+                        if (_victoriasHumanos >= 2)
+                        {
+                            _textoGanador->setCharacterSize(34);
+                            _textoGanador->setFillColor(sf::Color::Green);
+                            _textoGanador->setPosition(
+                                sf::Vector2f(260.f,520.f));
+
+                            std::string mensaje;
+
+                            mensaje = "====================================\n\n";
+                            mensaje += "      HUMANOS CAMPEONES\n\n";
+                            mensaje += "        SERIE ";
+                            mensaje += std::to_string(_victoriasHumanos);
+                            mensaje += " - ";
+                            mensaje += std::to_string(_victoriasAliens);
+                            mensaje += "\n\nClick para volver al menu";
+
+                            _textoGanador->setString(mensaje);
+
+                            _juegoTerminado = true;
+                            _serieTerminada = true;
+                            _esperandoVolverMenu = true;
+                        }
+                        else
+                        {
+                            //----------------------------------------
+                            // COMIENZA LA SIGUIENTE PARTIDA
+                            //----------------------------------------
+                            _numeroPartida++;
+
+                            reiniciarPartida();
+                        }
+
+                        return;
+                    }
+
+                    //------------------------------------------------
+                    // VERIFICAMOS SI LA PARTIDA TERMINÓ EN EMPATE
+                    //------------------------------------------------
+                    if (_tablero.HayEmpate())
+                    {
+                        _juego.RegistrarResultadoPartida(0);
+
+                        _juego.FinalizarPartida();
+
+                        _numeroPartida++;
+
+                        reiniciarPartida();
+
+                        return;
+                    }
+
+                    //------------------------------------------------
+                    // SI NADIE GANÓ, CONTINÚA EL TURNO DE LA IA
+                    //------------------------------------------------
                     _esTurnoHumano = false;
 
                     _turnos.siguienteTurno();
 
                     _cpuPensando = true;
+
                     _relojCPU.restart();
                 }
             }
@@ -574,17 +767,25 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
             //--------------------------------------------------------
             else
             {
-                // Seleccionar ficha
+                //----------------------------------------------------
+                // SI TODAVÍA NO HAY UNA FICHA SELECCIONADA,
+                // EL JUGADOR DEBE ELEGIR CUÁL DESEA MOVER.
+                //----------------------------------------------------
                 if (!_hayFichaSeleccionada)
                 {
+                    // Verificamos que la ficha pertenezca al jugador
                     if (_tablero.getCasillero(fila, columna) == 'X')
                     {
+                        // Guardamos la posición de la ficha seleccionada
                         _hayFichaSeleccionada = true;
                         _filaSeleccionada = fila;
                         _columnaSeleccionada = columna;
                     }
                 }
-                // Mover ficha
+                //----------------------------------------------------
+                // SI YA HAY UNA FICHA SELECCIONADA,
+                // INTENTAMOS REALIZAR EL MOVIMIENTO.
+                //----------------------------------------------------
                 else
                 {
                     if (_juego.MoverFicha(
@@ -595,93 +796,94 @@ if(_marcoBombaHumano.getGlobalBounds().contains(posicionClick))
                             columna,
                             'X'))
                     {
+                        //------------------------------------------------
+                        // LIMPIAMOS LA SELECCIÓN DE LA FICHA
+                        //------------------------------------------------
                         _hayFichaSeleccionada = false;
                         _filaSeleccionada = -1;
                         _columnaSeleccionada = -1;
 
+                        //------------------------------------------------
+                        // VERIFICAMOS SI EL JUGADOR GANÓ LA PARTIDA
+                        //------------------------------------------------
+                        if (_tablero.HayGanador('X'))
+                        {
+                            _victoriasHumanos++;
+
+                            _textoVictoriasHumanos->setString(
+                                std::to_string(_victoriasHumanos));
+
+                            _juego.RegistrarResultadoPartida(1);
+                            _juego.FinalizarPartida();
+
+                            if (_victoriasHumanos >= 2)
+                            {
+                                _textoGanador->setCharacterSize(34);
+                                _textoGanador->setFillColor(sf::Color::Green);
+                                _textoGanador->setPosition(sf::Vector2f(260.f,520.f));
+
+                                std::string mensaje;
+
+                                mensaje = "====================================";
+                                mensaje += "      HUMANOS CAMPEONES";
+                                mensaje += "        SERIE ";
+                                mensaje += std::to_string(_victoriasHumanos);
+                                mensaje += " - ";
+                                mensaje += std::to_string(_victoriasAliens);
+                                mensaje += "Click para volver al menu";
+
+                                _textoGanador->setString(mensaje);
+
+                                _juegoTerminado = true;
+                                _serieTerminada = true;
+                                _esperandoVolverMenu = true;
+                            }
+                            else
+                            {
+                                _numeroPartida++;
+                                reiniciarPartida();
+                            }
+
+                            return;
+                        }
+
+                        //------------------------------------------------
+                        // VERIFICAMOS SI HUBO EMPATE
+                        //------------------------------------------------
+                        if (_tablero.HayEmpate())
+                        {
+                            _juego.RegistrarResultadoPartida(0);
+                            _juego.FinalizarPartida();
+
+                            _numeroPartida++;
+                            reiniciarPartida();
+
+                            return;
+                        }
+
+                        //------------------------------------------------
+                        // SI EL JUGADOR NO GANÓ,
+                        // COMIENZA EL TURNO DE LA IA
+                        //------------------------------------------------
                         _esTurnoHumano = false;
 
                         _turnos.siguienteTurno();
 
-                        turnoCPU();
+                        _cpuPensando = true;
+
+                        _relojCPU.restart();
                     }
                 }
             }
 
-           //--------------------------------------------------------
-            // VERIFICAR GANADOR HUMANO
             //--------------------------------------------------------
-            if (_tablero.HayGanador('O'))
-            {
-                _victoriasHumanos++;
-
-                _textoVictoriasHumanos->setString(
-                    std::to_string(_victoriasHumanos));
-
-                _juego.RegistrarResultadoPartida(1);
-                _juego.FinalizarPartida();
-
-                //----------------------------------------------------
-                // ¿TERMINÓ LA SERIE?
-                //----------------------------------------------------
-                if (_victoriasHumanos >= 2)
-                {
-                    _textoGanador->setString("¡¡ HUMANOS CAMPEONES !!");
-                    _juegoTerminado = true;
-                    _serieTerminada = true;
-                }
-                else
-                {
-                    _numeroPartida++;
-                    reiniciarPartida();
-                }
-            }
-
-          //--------------------------------------------------------
-            // VERIFICAR GANADOR ALIEN
+            // FINALIZAMOS EL PROCESAMIENTO DEL CLICK
             //--------------------------------------------------------
-            else if (_tablero.HayGanador('X'))
-            {
-                _victoriasAliens++;
-
-                _textoVictoriasAliens->setString(
-                    std::to_string(_victoriasAliens));
-
-                _juego.RegistrarResultadoPartida(2);
-                _juego.FinalizarPartida();
-
-                //----------------------------------------------------
-                // ¿TERMINÓ LA SERIE?
-                //----------------------------------------------------
-                if (_victoriasAliens >= 2)
-                {
-                    _textoGanador->setString("¡¡ ALIENS CAMPEONES !!");
-                    _juegoTerminado = true;
-                    _serieTerminada = true;
-                }
-                else
-                {
-                    _numeroPartida++;
-                    reiniciarPartida();
-                }
-            }
-            //--------------------------------------------------------
-            // VERIFICAR EMPATE
-            //--------------------------------------------------------
-            else if (_tablero.HayEmpate())
-            {
-                _textoGanador->setString("EMPATE");
-
-                _juegoTerminado = true;
-
-                _juego.RegistrarResultadoPartida(0);
-                _juego.FinalizarPartida();
-            }
-
             return;
         }
     }
 }
+
 
 void TableroGrafico::procesarLetraKloster(char letra)
 {
@@ -727,7 +929,7 @@ void TableroGrafico::IniciarPartida(const char* nombre){
 //------------------------------------------------------------
 bool TableroGrafico::SerieTerminada() const
 {
-    return _serieTerminada;
+   return _serieTerminada && !_esperandoVolverMenu;
 }
 void TableroGrafico::ReiniciarSerie()
 {

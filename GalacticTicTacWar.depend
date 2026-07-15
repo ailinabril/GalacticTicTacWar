@@ -3920,14 +3920,14 @@
 
 1783376922 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\main.cpp
 
-1784001315 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\maingrafico.cpp
+1784071214 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\maingrafico.cpp
 	<SFML/Graphics.hpp>
 	<optional>
 	<ctime>
 	"TableroGrafico.h"
 	"Menu.h"
 
-1784001563 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.h
+1784070549 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.h
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	"KlosterCode.h"
@@ -3938,12 +3938,12 @@
 1783376921 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\turnos.h
 	<SFML/Graphics.hpp>
 
-1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\menu.h
+1784071214 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\menu.h
 	<SFML/Graphics.hpp>
 	"Juego.h"
 	"ArchivoJugadores.h"
 
-1783376919 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\menu.cpp
+1784079187 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\menu.cpp
 	"Menu.h"
 
 1783376919 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\mina.cpp
@@ -3962,7 +3962,7 @@
 	"Tablero.h"
 	<iostream>
 
-1784001123 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.cpp
+1784078388 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 

@@ -115,4 +115,7 @@ public:
     //------------------------------------------------------------
     void ConfirmarContrato();
 
+    void ReiniciarMenu(); // REINICIA EL MENU PARA UNA NUEVA SERIE
+
+
 };
