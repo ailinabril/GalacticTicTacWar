@@ -46,6 +46,7 @@ void Juego::IniciarPartida(const char* nombre)
     _energiaJugador = 5;
     _energiaIA = 5;
 }
+
 //------------------------------------------------------------
 // REINICIA EL ESTADO PARA UNA NUEVA PARTIDA
 //------------------------------------------------------------
@@ -439,6 +440,23 @@ void Juego::setBombaUsadaJugador(bool estado)
     _bombaUsadaJugador = estado;
 }
 
+bool Juego::getMinaUsadaJugador(){
+    return _minaUsadaJugador;
+}
+
+void Juego::setMinaUsadaJugador(bool estado){
+    //guardamos el estado de la mina
+    _minaUsadaJugador = estado;
+}
+
+bool Juego::getMinaActivaJugador(){
+    return _minaActivaJugador;
+}
+
+void Juego::setMinaActivaJugador(bool estado){
+    _minaActivaJugador = estado;
+}
+
 void Juego::RestarEnergiaJugador(int energia) // DESCUENTA ENERGIA AL JUGADOR
 {
     //descontamos energia
@@ -448,6 +466,15 @@ void Juego::RestarEnergiaJugador(int energia) // DESCUENTA ENERGIA AL JUGADOR
     if(_energiaJugador < 0)
     {
         _energiaJugador = 0;
+    }
+}
+
+void Juego::SumarEnergiaJugador(int energia){
+    _energiaJugador += energia;
+
+    //para que la energia no sea mayor a 5
+    if(_energiaJugador > 5){
+        _energiaJugador = 5;
     }
 }
 

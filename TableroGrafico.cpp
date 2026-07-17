@@ -276,6 +276,10 @@ void TableroGrafico::actualizar() //actualizar tablero
 		_posicionNaveX = 150.f;
 	}
 
+	//actualizar la barra de energia del jugador
+	float ancho = (_juego.getEnergiaJugador() / 5.0f) * 210.f;
+	_barraEnergiaHumano.setSize(sf::Vector2f(ancho, 14.f));
+
 	if (_klosterCode.EstaActivado())
 	{
 		_spriteRival->setTexture(_texturaBossKloster);
@@ -627,6 +631,55 @@ void TableroGrafico::procesarClickDelMouse(
 
         return;
     }
+
+    //------------------------------------------------------------
+    // SELECCION DE MINA
+    //------------------------------------------------------------
+
+    if (_marcoMinaHumano.getGlobalBounds().contains(posicionClick)){
+
+        //verificamos si la mina ya fue utilizada
+        if(_juego.getMinaUsadaJugador()){
+            return;
+        }
+
+        //verificamos si el jugador posee la energia necesaria
+        if(_juego.getEnergiaJugador() < 4){
+            return;
+        }
+
+        //seleccionamos la mina
+        SeleccionarObjeto(2);
+
+        //resaltamos el marco
+        _marcoMinaHumano.setOutlineColor(sf::Color::Green);
+
+        return;
+    }
+
+    //------------------------------------------------------------
+    // USAR MINA
+    //------------------------------------------------------------
+
+    if(_objetoSeleccionado == 2){
+        //la mina cuesta 2 de energia
+        _juego.RestarEnergiaJugador(2);
+
+        //marcamos la mina como utilizada
+        _juego.setMinaUsadaJugador(true);
+
+        //la mina deja de estar seleccionada
+        _objetoSeleccionado = 0;
+
+        //dejamos la mina en gris para indicar que ya fue utilizada
+        _spriteMinaHumano->setColor(sf::Color(120,120,120,180));
+
+        //quitamos el marco verde de seleccion
+        _marcoMinaHumano.setOutlineColor(sf::Color::Transparent);
+
+        return;
+    }
+
 
     //------------------------------------------------------------
     // RECORRER TODO EL TABLERO

@@ -26,11 +26,13 @@ private:
     int _energiaJugador;
     int _energiaIA;
 
+
     //objetos usados
     bool _torreUsadaJugador;
     bool _torreUsadaIA;
     bool _minaUsadaJugador;
     bool _minaUsadaIA;
+    bool _minaActivaJugador = false;
     bool _bombaUsadaJugador;
     bool _bombaUsadaIA;
     int _movimientosTotales;
@@ -74,6 +76,7 @@ public:
 
     // Guarda la partida y actualiza el ranking
     void FinalizarPartida();
+
     //archivos
     void GuardarPartida(); //guarda los datos de la partida en un archivo
     void ActualizarRanking(); //actualiza el ranking de jugadores basado en sus victorias, derrotas y empates
@@ -92,4 +95,15 @@ public:
     void setBombaUsadaJugador(bool estado);
     void RestarEnergiaJugador(int energia); // DESCUENTA ENERGIA AL JUGADOR
     int getEnergiaJugador(); // DEVUELVE LA ENERGIA DEL JUGADOR
+
+    //energia
+    void SumarEnergiaJugador(int energia);
+
+    bool getMinaUsadaJugador();
+
+    void setMinaUsadaJugador(bool estado);
+
+    //mina
+    bool getMinaActivaJugador();
+    void setMinaActivaJugador(bool estado);
 };
