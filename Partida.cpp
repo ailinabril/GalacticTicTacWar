@@ -16,7 +16,6 @@ Partida::Partida(int idPartida, int idJugador, int ganador){
     _ganador = ganador;
 }
 
-
 //getters
 int Partida::getIdPartida(){
     return _idPartida;
@@ -29,8 +28,6 @@ int Partida::getIdJugador(){
 int Partida::getGanador(){
     return _ganador;
 }
-
-
 
 //setters
 void Partida::setGanador(int ganador){

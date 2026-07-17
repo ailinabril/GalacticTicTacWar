@@ -13,6 +13,7 @@ void ArchivoJugadores::GuardarJugador(Jugador jugador)
 
     if (_archivo.is_open())
     {
+        // Convierte el objeto a bytes para poder guardarlo en el archivo binario
         _archivo.write((char*)&jugador, sizeof(Jugador));
     }
 
@@ -32,6 +33,7 @@ bool ArchivoJugadores::BuscarJugador(const char* nombre)
 
         while (_archivo.read((char*)&cargarDatos, sizeof(Jugador)))
         {
+            //comparamos dos cadenas de texto sin distinguir entre mayúsculas y minúsculas.
             if (stricmp(cargarDatos.getNombre(), nombre) == 0)
             {
                 _archivo.close();
@@ -159,10 +161,12 @@ int ArchivoJugadores::CantidadJugadores()
         return 0;
     }
 
+    //lleva el cursor al final del archivo para conocer su tamaño
     _archivo.seekg(0, ios::end);
 
     int cantidad;
 
+    //devuelve la cantidad de bytes del archivo y la divide por el tamaño de un Jugador
     cantidad = _archivo.tellg() / sizeof(Jugador);
 
     _archivo.close();
