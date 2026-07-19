@@ -329,9 +329,6 @@ void TableroGrafico::actualizar() //actualizar tablero
    }
 }
 
-//------------------------------------------------------------
-// TURNO DE LA INTELIGENCIA ARTIFICIAL
-//------------------------------------------------------------
 void TableroGrafico::turnoCPU()
 {
     //--------------------------------------------------------
@@ -348,7 +345,7 @@ void TableroGrafico::turnoCPU()
     //--------------------------------------------------------
     // VERIFICAMOS SI LOS ALIENS GANARON LA PARTIDA
     //--------------------------------------------------------
-    if (_tablero.HayGanador('O'))
+    if (_tablero.HayGanador('X'))
     {
         // Incrementamos las victorias de la IA
         _victoriasAliens++;
@@ -480,13 +477,13 @@ void TableroGrafico::dibujarTablero(sf::RenderWindow &ventana)
 			}
 
 			// HUMANOS
-			if (_tablero.getCasillero(fila, columna) == 'X')
+			if (_tablero.getCasillero(fila, columna) == 'O')
 			{
 				ventana.draw(*_imagenesHumanos[fila][columna]);
 			}
 
 			// ALIENS
-			if (_tablero.getCasillero(fila, columna) == 'O')  // verifico si la casilla del tablero contiene "O"
+			if (_tablero.getCasillero(fila, columna) == 'X')  // verifico si la casilla del tablero contiene "O"
 			{
 				ventana.draw(*_imagenesAliens[fila][columna]); // si se cumple dibujo la ficha de aliens
 			}
@@ -703,6 +700,7 @@ void TableroGrafico::procesarClickDelMouse(
             {
                 if(_tablero.UsarBomba(fila, columna)) //intentamos usar la bomba
                 {
+
                     _objetoSeleccionado = 0; //la bomba deja de estar seleccionada
                     _juego.setBombaUsadaJugador(true); //marcamos la bomba como utilizada
                     _spriteBombaHumano->setColor(sf::Color(120,120,120,180)); //dejamos la bomba en gris para indicar que ya fue utilizada
@@ -725,7 +723,7 @@ void TableroGrafico::procesarClickDelMouse(
             //--------------------------------------------------------
             // COLOCAR FICHAS
             //--------------------------------------------------------
-            if (_juego.ContarFichas(_tablero, 'X') < 3)
+            if (_juego.ContarFichas(_tablero, 'O') < 3)
             {
                 //----------------------------------------------------
                 // INTENTAMOS COLOCAR UNA NUEVA FICHA
@@ -735,7 +733,7 @@ void TableroGrafico::procesarClickDelMouse(
                     //------------------------------------------------
                     // VERIFICAMOS SI EL JUGADOR GANÓ LA PARTIDA
                     //------------------------------------------------
-                    if (_tablero.HayGanador('X'))
+                    if (_tablero.HayGanador('O'))
                     {
                         // Sumamos una victoria al jugador
                         _victoriasHumanos++;
@@ -827,7 +825,7 @@ void TableroGrafico::procesarClickDelMouse(
                 if (!_hayFichaSeleccionada)
                 {
                     // Verificamos que la ficha pertenezca al jugador
-                    if (_tablero.getCasillero(fila, columna) == 'X')
+                    if (_tablero.getCasillero(fila, columna) == 'O')
                     {
                         // Guardamos la posición de la ficha seleccionada
                         _hayFichaSeleccionada = true;
@@ -847,7 +845,7 @@ void TableroGrafico::procesarClickDelMouse(
                             _columnaSeleccionada,
                             fila,
                             columna,
-                            'X'))
+                            'O'))
                     {
                         //------------------------------------------------
                         // LIMPIAMOS LA SELECCIÓN DE LA FICHA
@@ -859,7 +857,7 @@ void TableroGrafico::procesarClickDelMouse(
                         //------------------------------------------------
                         // VERIFICAMOS SI EL JUGADOR GANÓ LA PARTIDA
                         //------------------------------------------------
-                        if (_tablero.HayGanador('X'))
+                        if (_tablero.HayGanador('O'))
                         {
                             _victoriasHumanos++;
 

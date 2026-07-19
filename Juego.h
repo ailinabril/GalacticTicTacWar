@@ -20,7 +20,7 @@ private:
     int _cantidadFichasJugador;
     int _cantidadFichasIA;
     void RestarFichaJugador();// RESTA UNA FICHA DEL JUGADOR
-    void RestarFichaIA();// RESTA UNA FICHA DE LA IA
+
 
     //energia
     int _energiaJugador;

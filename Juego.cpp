@@ -89,28 +89,30 @@ void Juego::TurnoIA(Tablero &tablero){
     int columna;
 
     //si la IA todavia no coloco sus tres fichas
-    if(ContarFichas(tablero, 'O') < 3){
+    if(ContarFichas(tablero, 'X') < 3){
 
-        //1 intentar realizar una jugada ganadora
-        if(BuscarJugadaGanadora(tablero, 'O', fila, columna)){
-            tablero.setCasillero(fila, columna, 'O');
-            _cantidadFichasIA++;
-            return;
-        }
+        // 1) Intentar realizar una jugada ganadora
+            if (BuscarJugadaGanadora(tablero, 'X', fila, columna))
+            {
+                tablero.setCasillero(fila, columna, 'X');
+                _cantidadFichasIA++;
+                return;
+            }
 
-        //2 si el jugador puede ganar, lo bloquea
-        if(BuscarJugadaGanadora(tablero, 'X', fila, columna)){
-            tablero.setCasillero(fila, columna, 'O');
-            _cantidadFichasIA++;
-            return;
-        }
-
-        //3 si el centro esta libre, lo ocupa
-        if(tablero.getCasillero(1, 1) == ' '){
-            tablero.setCasillero(1, 1, 'O');
-            _cantidadFichasIA++;
-            return;
-        }
+       // 2) Si el jugador (O) puede ganar, la IA lo bloquea
+            if (BuscarJugadaGanadora(tablero, 'O', fila, columna))
+            {
+                tablero.setCasillero(fila, columna, 'X');
+                _cantidadFichasIA++;
+                return;
+            }
+                //3 si el centro esta libre, lo ocupa
+                if(tablero.getCasillero(1, 1) == ' ')
+                {
+                    tablero.setCasillero(1, 1, 'X');
+                    _cantidadFichasIA++;
+                    return;
+                }
 
         //4 intenta ocupar una de las esquinas
         int esquina [4][2] = {
@@ -125,7 +127,7 @@ void Juego::TurnoIA(Tablero &tablero){
             int c = esquina [i][1];
 
             if(tablero.getCasillero(f, c) == ' '){
-                tablero.setCasillero(f, c, 'O');
+                tablero.setCasillero(f, c, 'X');
                 _cantidadFichasIA++;
                 return;
             }
@@ -139,7 +141,7 @@ void Juego::TurnoIA(Tablero &tablero){
 
         //buscamos movimientos para ganar
         if(BuscarMovimientoGanador(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino)){
-            MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'O');
+            MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'X');
             return;
         }
 
@@ -174,7 +176,7 @@ bool Juego::ColocarFicha(Tablero &tablero, int fila, int columna){
         return false;
     }
     //colocamos la ficha del jugador
-    tablero.setCasillero(fila, columna, 'X');
+    tablero.setCasillero(fila, columna, 'O');
 
     //actualizamos la cantidad de fichas colocadas
     _cantidadFichasJugador++;
@@ -196,7 +198,6 @@ int Juego::ContarFichas(Tablero &tablero, char simbolo){
     }
     return contador;
 }
-
 void Juego::MoverFichaIA(Tablero &tablero){
     int filaOrigen;
     int columnaOrigen;
@@ -205,21 +206,22 @@ void Juego::MoverFichaIA(Tablero &tablero){
 
     //buscamos movimiento ganador
     if(BuscarMovimientoGanador(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino)){
-        MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'O');
+        MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'X');
         return;
     }
+
     //si no encuentra uno ganador, mover una ficha al azar
     do{
         filaOrigen = rand() % 3;
         columnaOrigen = rand() % 3;
-    }while(tablero.getCasillero(filaOrigen, columnaOrigen) != 'O');
+    }while(tablero.getCasillero(filaOrigen, columnaOrigen) != 'X');
 
     do{
         filaDestino = rand() % 3;
         columnaDestino = rand() % 3;
     }while(tablero.getCasillero(filaDestino, columnaDestino) != ' ');
 
-    MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'O');
+    MoverFicha(tablero, filaOrigen, columnaOrigen, filaDestino, columnaDestino, 'X');
 }
 
 bool Juego::MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, char simbolo){
@@ -236,26 +238,26 @@ bool Juego::MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int 
 }
 
 bool Juego::BuscarMovimientoGanador(Tablero &tablero, int &filaOrigen, int &columnaOrigen, int &filaDestino, int &columnaDestino){
-   //recorremos todas las casillas del tablero
+    //recorremos todas las casillas del tablero
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
             //buscamos una ficha de la IA
-            if(tablero.getCasillero(i, j) == 'O'){
+            if(tablero.getCasillero(i, j) == 'X'){
                 //la quitamos temporalmente
                 tablero.setCasillero(i, j, ' ');
 
-                //probamos moverlas a todas las casillas libres
+                //probamos moverla a todas las casillas libres
                 for(int f = 0; f < 3; f++){
                     for(int c = 0; c < 3; c++){
                         if(tablero.getCasillero(f, c) == ' '){
                             //simulamos el movimiento
-                            tablero.setCasillero(f, c, 'O');
+                            tablero.setCasillero(f, c, 'X');
 
                             //nos fijamos si con este movimiento ganamos
-                            if(tablero.HayGanador('O')){
+                            if(tablero.HayGanador('X')){
                                 //deshacemos la simulacion
                                 tablero.setCasillero(f, c, ' ');
-                                tablero.setCasillero(i, j, 'O');
+                                tablero.setCasillero(i, j, 'X');
 
                                 //guardamos el movimiento encontrado
                                 filaOrigen = i;
@@ -265,25 +267,26 @@ bool Juego::BuscarMovimientoGanador(Tablero &tablero, int &filaOrigen, int &colu
 
                                 return true;
                             }
-                             //deshacemos la simulacion
-                             tablero.setCasillero(f, c, ' ');
+
+                            //deshacemos la simulacion
+                            tablero.setCasillero(f, c, ' ');
                         }
                     }
-
                 }
+
                 //volvemos a colocar la ficha donde estaba
-                tablero.setCasillero(i, j, 'O');
+                tablero.setCasillero(i, j, 'X');
             }
         }
     }
+
     return false;
 }
-
 bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int &columna){
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
             if(tablero.getCasillero(i, j) == ' '){
-                //simular la jugada y colocamos la fihca
+                //simular la jugada y colocamos la ficha
                 tablero.setCasillero(i, j, simbolo);
 
                 if(tablero.HayGanador(simbolo)){
@@ -295,11 +298,13 @@ bool Juego::BuscarJugadaGanadora(Tablero &tablero, char simbolo, int &fila, int 
 
                     return true;
                 }
+
                 //deshacer la simulacion
                 tablero.setCasillero(i, j, ' ');
             }
         }
     }
+
     return false;
 }
 
@@ -333,33 +338,42 @@ bool Juego::VerificarGanador(Tablero &tablero){
 
     return false;
 }
-
-void Juego::FinalizarPartida(){
-
-    //guardar datos de la partida
+//------------------------------------------------------------
+// FINALIZA LA PARTIDA
+//------------------------------------------------------------
+void Juego::FinalizarPartida()
+{
     GuardarPartida();
-
-    //actualizar ranking
     ActualizarRanking();
-
 }
 
-void Juego::GuardarPartida(){
+//------------------------------------------------------------
+// GUARDA LA PARTIDA
+//------------------------------------------------------------
+void Juego::GuardarPartida()
+{
     _archivo.GuardarPartida(_partida);
 }
 
-void Juego::ActualizarRanking(){
-    if(_partida.getGanador() == 1){
+//------------------------------------------------------------
+// ACTUALIZA EL RANKING DEL JUGADOR
+//------------------------------------------------------------
+void Juego::ActualizarRanking()
+{
+    if (_partida.getGanador() == 1)
+    {
         int victorias = _jugador.getVictorias();
         victorias++;
         _jugador.setVictorias(victorias);
     }
-    else if(_partida.getGanador() == 2){
+    else if (_partida.getGanador() == 2)
+    {
         int derrotas = _jugador.getDerrotas();
         derrotas++;
         _jugador.setDerrotas(derrotas);
     }
-    else if(_partida.getGanador() == 0){
+    else
+    {
         int empates = _jugador.getEmpates();
         empates++;
         _jugador.setEmpates(empates);
@@ -499,12 +513,3 @@ void Juego::RestarFichaJugador() // RESTA UNA FICHA DEL JUGADOR
         _cantidadFichasJugador--;
     }
 }
-
-void Juego::RestarFichaIA() // RESTA UNA FICHA DE LA IA
-{
-    if(_cantidadFichasIA > 0) //evitamos valores negativos
-    {
-        _cantidadFichasIA--;
-    }
-}
-

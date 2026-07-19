@@ -3322,7 +3322,7 @@
 
 1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\fecha.h
 
-1783974575 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\archivojugadores.cpp
+1784392277 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\archivojugadores.cpp
 	<iostream>
 	<cstring>
 	"ArchivoJugadores.h"
@@ -3333,7 +3333,7 @@
 
 1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\jugador.h
 
-1783381587 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\bomba.cpp
+1784393185 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\bomba.cpp
 	"Bomba.h"
 
 1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\bomba.h
@@ -3348,12 +3348,12 @@
 	<iostream>
 	"Fecha.h"
 
-1784000980 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\juego.cpp
+1784418562 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
 	<iostream>
 
-1784000980 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\juego.h
+1784418477 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"
@@ -3905,7 +3905,7 @@
 	<string_view>
 	<cstdint>
 
-1783376919 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\mina.h
+1784392277 c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\mina.h
 	"ObjetoEspecial.h"
 
 1783974575 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\jugador.cpp
@@ -3946,7 +3946,7 @@
 1784079187 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\menu.cpp
 	"Menu.h"
 
-1783376919 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\mina.cpp
+1784392277 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\mina.cpp
 	"Mina.h"
 	<cstring>
 
@@ -3954,15 +3954,15 @@
 	"ObjetoEspecial.h"
 	<cstring>
 
-1783974575 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\partida.cpp
+1784392277 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\partida.cpp
 	<iostream>
 	"Partida.h"
 
-1783389101 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablero.cpp
+1784419194 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablero.cpp
 	"Tablero.h"
 	<iostream>
 
-1784078388 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.cpp
+1784418907 source:c:\users\aldos\onedrive\escritorio\emma\galactictictacwar\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
