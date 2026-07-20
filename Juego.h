@@ -106,4 +106,8 @@ public:
     //mina
     bool getMinaActivaJugador();
     void setMinaActivaJugador(bool estado);
+
+    //enredadera
+    bool getTorreUsadaJugador();
+    void setTorreUsadaJugador(bool usada);
 };

@@ -9,6 +9,9 @@ void Tablero::Inicializar(){
             _tablero[i][j] = ' '; //casillas vacias
             _turnosBloqueados[i][j] = 0; //casilla no bloqueada
             _casillaDestruida[i][j] = false; //casilla no destruida por bomba
+            //enredadera
+            _fichaAtrapada[i][j] = false;
+            _turnosAtrapada[i][j] = 0;
         }
     }
 }
@@ -183,6 +186,48 @@ bool Tablero::ColocarTorre(int fila, int columna){
     }
 
     return false;
+}
+
+//atrapa una ficha por dos turnos
+void Tablero::AtraparFicha(int fila, int columna){
+    //verificamos que la posicion sea valida
+    if(PosicionValida(fila, columna)){
+        //marcamos la ficha como atrapada
+        _fichaAtrapada[fila][columna] = true;
+
+        //la ficha permanece atrapada durante dos turnos
+        _turnosAtrapada[fila][columna] = 1;
+
+    }
+}
+
+//verifica si la ficha esta atrapada
+bool Tablero::EstaAtrapada(int fila, int columna){
+    //si la posicion no es valida, devolvemos false
+    if(!PosicionValida(fila, columna)){
+        return false;
+    }
+    //devolvemos el estado de la ficha
+    return _fichaAtrapada[fila][columna];
+}
+
+//actualizamos los turnos de la enredadera
+void Tablero::ActualizarEnredadera(){
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            //verificamos si existe una ficha atrapada
+            if(_fichaAtrapada[i][j]){
+            //restamos un turno de atrapado
+            _turnosAtrapada[i][j]--;
+
+            //si ya no quedan turnos, liberamos la ficha
+            if(_turnosAtrapada[i][j] <= 0){
+                _fichaAtrapada[i][j] = false;
+                _turnosAtrapada[i][j] = 0;
+               }
+            }
+        }
+    }
 }
 
 bool Tablero::ColocarMina(int fila, int columna){

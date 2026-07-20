@@ -8,6 +8,10 @@ private:
 
     //casilla destruida por la bomba
     bool _casillaDestruida[3][3]; //matriz para marcar las casillas destruidas por la bomba
+
+    //enredadera
+    bool _fichaAtrapada[3][3];
+    int _turnosAtrapada[3][3];
 public:
     //constructores
     Tablero(); //constructor por defecto
@@ -49,4 +53,8 @@ public:
     char getCasillero(int fila, int columna); //obtiene lo que hay en una casilla
     void setCasillero(int fila, int columna, char valor); //sirve para cambiar el contenido
 
+    //para la enredadera
+    void AtraparFicha(int fila, int columna);
+    bool EstaAtrapada(int fila, int columna);
+    void ActualizarEnredadera();
 };

@@ -341,6 +341,7 @@ void TableroGrafico::turnoCPU()
     //--------------------------------------------------------
     _tablero.ActualizarBloqueo();
     _tablero.ActualizarDestruccion();
+    _tablero.ActualizarEnredadera();
 
     //--------------------------------------------------------
     // VERIFICAMOS SI LOS ALIENS GANARON LA PARTIDA
@@ -677,6 +678,28 @@ void TableroGrafico::procesarClickDelMouse(
         return;
     }
 
+    //------------------------------------------------------------
+    // SELECCION DE ENEREDADERA
+    //------------------------------------------------------------
+
+    if(_marcoTorreHumano.getGlobalBounds().contains(posicionClick)){
+        //verificamos si la enredadera ya fue utilizada
+        if(_juego.getTorreUsadaJugador()){
+            return;
+        }
+        //verificamos si el jugador posee la energia necesaria
+        if(_juego.getEnergiaJugador() < 4){
+            return;
+        }
+        //seleccionamos la enredadera
+        SeleccionarObjeto(3);
+
+        //resaltamos el marco
+        _marcoTorreHumano.setOutlineColor(sf::Color::Green);
+
+        return;
+    }
+
 
     //------------------------------------------------------------
     // RECORRER TODO EL TABLERO
@@ -712,6 +735,41 @@ void TableroGrafico::procesarClickDelMouse(
                 }
 
                 return;
+            }
+            //--------------------------------------------------------
+            // USAR ENREDADERA
+            //--------------------------------------------------------
+
+            if(_objetoSeleccionado == 3){
+                //solo puede atrapar fichas enemigas
+               if (_tablero.getCasillero(fila, columna) == 'X'){
+                   //atrapamos la ficha durante dos turnos
+                    _tablero.AtraparFicha(fila, columna);
+
+                    //la enredadera deja de estar seleccionada
+                    _objetoSeleccionado = 0;
+
+                    //marcamos la enredadera como utilizada
+                    _juego.setTorreUsadaJugador(true);
+
+                    //descontamos la energia del jugador
+                    _juego.RestarEnergiaJugador(4);
+
+                    //dejamos el icono en gris para decir que se uso
+                    _spriteTorreHumano->setColor(sf::Color(120,120,120,180));
+
+                    //quitamos el marco verde de seleccion
+                    _marcoTorreHumano.setOutlineColor(sf::Color::Transparent);
+
+                    //finaliza el turno del jugador
+                    _esTurnoHumano = false;
+
+                    //pasamos al siguente turno
+                    _turnos.siguienteTurno();
+                    turnoCPU();
+               }
+               //finalizamos el procesamiento del click
+               return;
             }
             //--------------------------------------------------------
             // SI LA BOMBA ELIMINO UNA FICHA

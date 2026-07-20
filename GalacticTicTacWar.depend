@@ -48,13 +48,13 @@
 1779144764 c:\users\usuario\desktop\galactic\objetoespecial.h
 	"Tablero.h"
 
-1779198087 c:\users\usuario\desktop\galactic\tablero.h
+1784570751 c:\users\usuario\desktop\galactic\tablero.h
 
 1779199645 source:c:\users\usuario\desktop\galactic\objetoespecila.cpp
 	"ObjetoEspecial.h"
 	<cstring>
 
-1783556861 source:c:\users\usuario\desktop\galactic\tablero.cpp
+1784575548 source:c:\users\usuario\desktop\galactic\tablero.cpp
 	"Tablero.h"
 	<iostream>
 
@@ -618,7 +618,7 @@
 	"Turnos.h"
 	"Juego.h"
 
-1784328994 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
+1784575420 source:c:\users\usuario\desktop\galactic\tablerografico.cpp
 	"TableroGrafico.h"
 	<iostream>
 
@@ -2501,12 +2501,12 @@
 	"Torre.h"
 	<iostream>
 
-1784329127 source:c:\users\usuario\desktop\galactic\juego.cpp
+1784573322 source:c:\users\usuario\desktop\galactic\juego.cpp
 	"Juego.h"
 	"ArchivoJugadores.h"
 	<iostream>
 
-1784328994 c:\users\usuario\desktop\galactic\juego.h
+1784573406 c:\users\usuario\desktop\galactic\juego.h
 	"Jugador.h"
 	"Tablero.h"
 	"Partida.h"

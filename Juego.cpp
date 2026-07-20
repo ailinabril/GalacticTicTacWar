@@ -225,6 +225,11 @@ void Juego::MoverFichaIA(Tablero &tablero){
 }
 
 bool Juego::MoverFicha(Tablero &tablero, int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino, char simbolo){
+    //verificamos si la ficha esta atrapada
+    if(tablero.EstaAtrapada(filaOrigen, columnaOrigen)){
+        return false;
+    }
+
     //verificamos si la casilla del destino esta libre
     if(tablero.getCasillero(filaDestino, columnaDestino) != ' '){
         return false;
@@ -469,6 +474,14 @@ bool Juego::getMinaActivaJugador(){
 
 void Juego::setMinaActivaJugador(bool estado){
     _minaActivaJugador = estado;
+}
+
+bool Juego::getTorreUsadaJugador(){
+    return _torreUsadaJugador;
+}
+
+void Juego::setTorreUsadaJugador(bool usada){
+    _torreUsadaJugador = usada;
 }
 
 void Juego::RestarEnergiaJugador(int energia) // DESCUENTA ENERGIA AL JUGADOR
