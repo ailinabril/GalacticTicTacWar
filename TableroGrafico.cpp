@@ -369,9 +369,9 @@ void TableroGrafico::turnoCPU()
 
             std::string mensaje;
 
-            mensaje = "====================================\n\n";
-            mensaje += "      ALIENS CAMPEONES\n\n";
-            mensaje += "        SERIE ";
+            mensaje = "===========================\n\n";
+            mensaje += "ALIENS CAMPEONES\n\n";
+            mensaje += "SERIE ";
             mensaje += std::to_string(_victoriasAliens);
             mensaje += " - ";
             mensaje += std::to_string(_victoriasHumanos);
@@ -415,8 +415,9 @@ void TableroGrafico::turnoCPU()
     //--------------------------------------------------------
     // SI LA IA NO GANÓ, EL TURNO VUELVE AL JUGADOR
     //--------------------------------------------------------
+    _juego.SumarEnergiaJugador(1);
+    _juego.SumarEnergiaIA(1);
     _esTurnoHumano = true;
-
     _turnos.siguienteTurno();
 }
 

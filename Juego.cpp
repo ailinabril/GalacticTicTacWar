@@ -167,6 +167,48 @@ bool Juego::BuscarCasillaLibre(Tablero &tablero, int &fila, int &columna){
     // si no hay casilla libre
     return false;
 }
+void Juego::SumarEnergiaIA(int energia)
+{
+    _energiaIA += energia;
+
+    if(_energiaIA > 10)
+    {
+        _energiaIA = 10;
+    }
+}
+
+void Juego::RestarEnergiaIA(int energia)
+{
+    _energiaIA -= energia;
+
+    if(_energiaIA < 0)
+    {
+        _energiaIA = 0;
+    }
+}
+
+int Juego::getEnergiaIA()
+{
+    return _energiaIA;
+}
+
+bool Juego::BuscarFichaParaBomba(Tablero &tablero, int &fila, int &columna)
+{
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            if(tablero.getCasillero(i, j) == 'O')
+            {
+                fila = i;
+                columna = j;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
 
 bool Juego::ColocarFicha(Tablero &tablero, int fila, int columna){
 
@@ -483,11 +525,12 @@ void Juego::RestarEnergiaJugador(int energia) // DESCUENTA ENERGIA AL JUGADOR
     }
 }
 
-void Juego::SumarEnergiaJugador(int energia){
+void Juego::SumarEnergiaJugador(int energia)
+{
     _energiaJugador += energia;
 
-    //para que la energia no sea mayor a 5
-    if(_energiaJugador > 5){
+    if(_energiaJugador > 5)
+    {
         _energiaJugador = 5;
     }
 }

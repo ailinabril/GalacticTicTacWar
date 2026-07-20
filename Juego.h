@@ -38,6 +38,7 @@ private:
     int _movimientosTotales;
     bool _empate;
     bool _juegoTerminado;
+    bool BuscarFichaParaBomba(Tablero &tablero, int &fila, int &columna);
 
     //partida actual
     Partida _partida;
@@ -95,6 +96,9 @@ public:
     void setBombaUsadaJugador(bool estado);
     void RestarEnergiaJugador(int energia); // DESCUENTA ENERGIA AL JUGADOR
     int getEnergiaJugador(); // DEVUELVE LA ENERGIA DEL JUGADOR
+    void SumarEnergiaIA(int energia);
+    void RestarEnergiaIA(int energia);
+    int getEnergiaIA();
 
     //energia
     void SumarEnergiaJugador(int energia);
