@@ -85,6 +85,7 @@ void ArchivoJugadores::ModificarJugador(Jugador jugador)
     {
         while (_archivo.read((char*)&modificarDatos, sizeof(Jugador)))
         {
+            //comparar dos cadenas de texto sin distinguir mayúsculas y minúsculas y el 0 es para ver si son iguales
             if (stricmp(modificarDatos.getNombre(), jugador.getNombre()) == 0)
             {
                 _archivo.seekp(-sizeof(Jugador), ios::cur);
@@ -185,6 +186,7 @@ Jugador ArchivoJugadores::LeerJugador(int posicion)
 
     if (_archivo.is_open())
     {
+        //mueve el cursor al inicio del registro del jugador
         _archivo.seekg(posicion * sizeof(Jugador), ios::beg);
 
         _archivo.read((char*)&jugador, sizeof(Jugador));

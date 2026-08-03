@@ -167,6 +167,7 @@ bool Juego::BuscarCasillaLibre(Tablero &tablero, int &fila, int &columna){
     // si no hay casilla libre
     return false;
 }
+
 void Juego::SumarEnergiaIA(int energia)
 {
     _energiaIA += energia;
@@ -254,11 +255,13 @@ void Juego::MoverFichaIA(Tablero &tablero){
 
     //si no encuentra uno ganador, mover una ficha al azar
     do{
+        //buscamos una ficha al azar
         filaOrigen = rand() % 3;
         columnaOrigen = rand() % 3;
     }while(tablero.getCasillero(filaOrigen, columnaOrigen) != 'X');
 
     do{
+        //busca una casilla vacia al azar
         filaDestino = rand() % 3;
         columnaDestino = rand() % 3;
     }while(tablero.getCasillero(filaDestino, columnaDestino) != ' ');

@@ -47,6 +47,7 @@ char Turnos::getJugadorActual(){
     return _jugadorActual;
 }
 
+//libera la memoria dinamica, es un destructor
 Turnos::~Turnos()
 {
     delete _textoTurno;
